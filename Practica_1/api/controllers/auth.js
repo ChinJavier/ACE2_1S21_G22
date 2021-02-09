@@ -6,7 +6,6 @@ const logUser = (req, res) => {
 
 }
 
-
 module.exports = {
     createUser,
     logUser
