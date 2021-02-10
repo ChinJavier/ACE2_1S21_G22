@@ -1,14 +1,26 @@
-const { validationResult } = require('express-validator')
+/*
+    Fields validation:
+    Verifies if fields are correctly field by mapping
+    the errors coming from the "validationResult" function
+    form "express-validator"
+*/
 
-const validateFields = (req, res, next) => {
+const { response } = require('express');
+const { validationResult } = require('express-validator');
+
+const validateFields = (req, res = response, next) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-        res.status(400).json({
+        return res.status(400).json({
             ok: false,
-            errors: errors.mapped,
-        });
+            errors: errors.mapped(),
+        })
     }
     next();
 }
 
-module.exports = validateFields
+
+
+module.exports = {
+    validateFields
+}
