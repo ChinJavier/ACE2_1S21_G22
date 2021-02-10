@@ -11,6 +11,10 @@ const userSchema = new Schema({
         type: String,
         required: true,
     },
+    tipo: {
+        type: Boolean,
+        required: true
+    }
 });
 
 module.exports = model('User', userSchema);
