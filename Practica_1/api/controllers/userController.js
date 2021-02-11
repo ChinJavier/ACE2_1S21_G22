@@ -25,3 +25,12 @@ userCtrl.deleteUser =  async (req,res)=> {
     await modelo_user.findByIdAndDelete(req.params.id);
     res.json({message:"Del. user"}) ;
 }
+// SOLO PARA TEST
+userCtrl.createUserTest = async (req,res)=>{
+    const nuevo = new model_user(req.body);
+    await nuevo.save();
+    console.log("NEW USER: ", nuevo);
+    res.send('ok')
+}
+
+module.exports = userCtrl;
