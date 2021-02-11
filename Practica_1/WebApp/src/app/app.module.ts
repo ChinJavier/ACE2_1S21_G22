@@ -14,6 +14,9 @@ import { LoginComponent } from './components/login/login.component';
 import { CoachComponent } from './components/coach/coach.component';
 import { AthleteComponent } from './components/athlete/athlete.component';
 import { routes } from './routes';
+import { SignupComponent } from './components/signup/signup.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { FormsModule } from '@angular/forms';
 
 
 
@@ -26,13 +29,16 @@ import { routes } from './routes';
     HeaderComponent,
     LoginComponent,
     AthleteComponent,
-    CoachComponent
+    CoachComponent,
+    SignupComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     MaterialModule,
+    FormsModule,
     RouterModule.forRoot(routes)
   ],
   providers: [],
