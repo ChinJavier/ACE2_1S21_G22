@@ -1,7 +1,11 @@
-# ACE2_1S21_G22
----
-### Javier Antonio Chin Flores 201801370
-### Pablo Andres Argueta Hernandez 201800464
-### Carlos Ojani NG Valladares   201801434
-### Anthony Fernando Son Mux  201800634
-### Lourdes Mishel Lorenzana Ochoa 201602935
+# ACE2, USAC, grupo 22.
+## INTEGRANTES
+|   201801370                    |   201800464                        |   201801434                    |   201800634                  |   201602935                        |
+|:------------------------------:|:----------------------------------:|:------------------------------:|:----------------------------:|:----------------------------------:|
+|   Javier Antonio Chin Flores   |   Pablo Andres Argueta Hernandez   |   Carlos Ojani NG Valladares   |   Anthony Fernando Son Mux   |   Lourdes Mishel Lorenzana Ochoa   |
+|  [![](https://github.com/ChinJavier.png?size=120)](https://github.com/ChinJavier) |   [![](https://github.com/PabloAndresArg.png?size=120)](https://github.com/PabloAndresArg)   |   [![](https://github.com/carlosngv.png?size=120)](https://github.com/carlosngv)   |   [![](https://github.com/LinkSon-PC.png?size=120)](https://github.com/LinkSon-PC)   |   [![](https://github.com/loumisha96.png?size=120)](https://github.com/loumisha96)   |
+|   <a href="https://github.com/ChinJavier" target="_blank">`github.com/ChinJavier`</a>   | <a href="https://github.com/PabloAndresArg" target="_blank">`github.com/PabloAndresArg`</a>|   <a href="https://github.com/carlosngv" target="_blank">`github.com/carlosngv`</a>   |   <a href="https://github.com/LinkSon-PC" target="_blank">`github.com/LinkSon-PC`</a>   |   <a href="https://github.com/loumisha96" target="_blank">`github.com/loumisha96`</a>   |
+
+***
+## AC2
+El presente repositorio cuenta con proyectos orientados al IOT haciendo uso del framework de trabajo donde se aplica la infraestructura, sensores, conectividad, analítica y aplicaciones.
