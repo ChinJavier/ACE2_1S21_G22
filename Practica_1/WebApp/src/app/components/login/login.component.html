@@ -1,20 +1,28 @@
+<div class="main-container">
+    <mat-card>
+        <mat-card-title>Login</mat-card-title>
+        <mat-card-content>
+            <form>
+                <p>
+                    <mat-form-field>
+                        <input type="text" matInput placeholder="Username" />
+                    </mat-form-field>
+                </p>
+                <p>
+                    <mat-form-field>
+                        <input type="password" matInput placeholder="Password" />
+                    </mat-form-field>
 
-<mat-card>
-    <mat-card-title>Login</mat-card-title>
-    <mat-card-content>
-        <form>
-            <p>
-                <mat-form-field>
-                    <input type="text" matInput placeholder="Username"/>
-                </mat-form-field>
-            </p>
-            <p>
-                <mat-form-field>
-                    <input type="password" matInput placeholder="Password"/>
-                </mat-form-field>
-            </p>
-            <button type="submit" mat-raised-button color="primary">Login</button>
-        </form>
-    </mat-card-content>
+                </p>
+                <button type="submit" mat-raised-button color="primary">Login</button>
+                <p class="nr-container">
+                    Not registered? <a [routerLink]="['/signup']">Sign Up</a>
+                </p>
+            </form>
+        </mat-card-content>
+    </mat-card>
+</div>
 
-</mat-card>
+<div>
+    <input type="text" [(ngModel)]='password' placeholder="Username" />
+</div>
