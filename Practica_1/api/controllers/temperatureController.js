@@ -13,10 +13,12 @@ temperatureCtrl.createTemperature = async (req,res)=>{
 
 temperatureCtrl.getAll_temperature = async(req,res) =>{
     try {
-        const registros =  await model_temperature.find(); // se tiene que hacer un filtro donde coincida el id
+        const registros =  await model_temperature.find({user: req.params.id});
+        console.log('devuelve' , registros)
         res.send(registros);
     } catch (error) {
         console.log('error al recuperar todos los registros de oxigeno');
+        res.send('ID INCORRECTO');
     }
 }
 
