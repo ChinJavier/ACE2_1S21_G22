@@ -6,10 +6,16 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-
+  
+  disableButton: boolean = false;
+  message: string = "Hola";
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  changeMessage = () => {
+    this.message = "ADIOS";
   }
 
 }
