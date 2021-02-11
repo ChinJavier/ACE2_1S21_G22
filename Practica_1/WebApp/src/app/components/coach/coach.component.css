@@ -1,11 +1,12 @@
-
 .example-card {
-    max-width: 100px;
-  }
+  max-width: 200px;
+}
 
 
 .container{
-    text-align: center;
-    display: flex;
-    flex-direction: row;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
 }
+
+
