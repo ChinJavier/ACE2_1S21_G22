@@ -13,10 +13,12 @@ oxygenCtrl.createOxygen = async (req,res)=>{
 
 oxygenCtrl.getAll_oxygen = async(req,res) =>{
     try {
-        const registro_oxigenos =  await modelo_oxygen.find();
+        const registro_oxigenos =  await modelo_oxygen.find({user: req.params.id});
+        console.log('devuelve' , registro_oxigenos)
         res.send(registro_oxigenos);
     } catch (error) {
         console.log('error al recuperar todos los registros de oxigeno');
+        res.send('ID INCORRECTO');
     }
 }
 

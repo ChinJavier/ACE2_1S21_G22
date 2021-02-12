@@ -13,10 +13,12 @@ rhythmCtrl.createRhythm = async (req,res)=>{
 
 rhythmCtrl.getAll_rythem = async(req,res) =>{
     try {
-        const registros =  await model_rhythm.find(); // se tiene que hacer un filtro donde coincida el id
+        const registros =  await model_rhythm.find({user: req.params.id});
+        console.log('devuelve' , registros)
         res.send(registros);
     } catch (error) {
         console.log('error al recuperar todos los registros de oxigeno');
+        res.send('ID INCORRECTO');
     }
 }
 
