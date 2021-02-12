@@ -2,7 +2,7 @@
     <mat-card>
         <mat-card-title>Login</mat-card-title>
         <mat-card-content>
-            <form>
+            <form [formGroup]="loginForm">
                 <p>
                     <mat-form-field>
                         <input type="text" matInput placeholder="Username" />
@@ -21,8 +21,4 @@
             </form>
         </mat-card-content>
     </mat-card>
-</div>
-
-<div>
-    <input type="text" [(ngModel)]='password' placeholder="Username" />
 </div>
