@@ -11,9 +11,10 @@ const userSchema = new Schema({
         type: String,
         required: true,
     },
-    tipo: {
+    coach: {
         type: Boolean,
-        required: true
+        required: true,
+        defaultValue: false,
     }
 });
 

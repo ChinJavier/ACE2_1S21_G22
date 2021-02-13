@@ -1,13 +1,29 @@
-<mat-card>
-    <mat-card-title>
-        Sign Up
-    </mat-card-title>
-    <mat-card-content>
-        <form [formGroup]="signupForm">
-            <p>
-                <mat-form-field>User</mat-form-field>
-                <input type="text" matInput>
-            </p>
-        </form>
-    </mat-card-content>
-</mat-card>
+<div class="main-container">
+    <mat-card>
+        <mat-card-title>Sign Up</mat-card-title>
+        <mat-card-content>
+            <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+                <p>
+                    <mat-form-field>
+                        <input type="text" matInput placeholder="Username" formControlName="username" />
+                    </mat-form-field>
+                </p>
+                <p>
+                    <mat-form-field>
+                        <input type="password" matInput placeholder="Password" formControlName="password" />
+                    </mat-form-field>
+
+                </p>
+                <p>
+                    <mat-checkbox formControlName="coach">
+                        Couch?
+                    </mat-checkbox>
+                </p>
+                <button type="submit" mat-raised-button color="primary">Sign Up</button>
+                <p class="nr-container">
+                    Already registered? <a [routerLink]="['/login']">Sign In</a>
+                </p>
+            </form>
+        </mat-card-content>
+    </mat-card>
+</div>
