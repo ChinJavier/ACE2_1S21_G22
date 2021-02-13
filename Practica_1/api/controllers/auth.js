@@ -6,12 +6,11 @@
 */
 
 const bcrypt = require('bcryptjs');
-const { response } = require('express');
 const User = require('../models/user');
 const { createJWT } = require('../helpers/jwt');
 
 const createUser = async (req, res = express.response) => {
-    const { username, password } = req.body;
+    const { username, password, coach } = req.body;
     try {
 
         let user = await User.findOne({ username: username });
@@ -32,13 +31,14 @@ const createUser = async (req, res = express.response) => {
 
 
         // Gen JWT
-        const token = await createJWT(user.id, user.name);
+        const token = await createJWT(user.id, user.username);
 
 
         res.status(201).json({
             ok: true,
             uid: user.id,
-            name: user.name,
+            username: user.username,
+            coach: user.coach,
             token
         });
 
@@ -83,7 +83,7 @@ const logUser = async (req, res) => {
         res.status(200).json({
             ok: true,
             uid: user.id,
-            name: user.name,
+            username: user.username,
             token,
         });
 

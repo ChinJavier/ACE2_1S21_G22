@@ -19,6 +19,9 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ProfileComponent } from './components/profile/profile.component';
 
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthGuard } from './guards/auth.guard';
+
 
 
 @NgModule({
@@ -42,9 +45,12 @@ import { ProfileComponent } from './components/profile/profile.component';
     MaterialModule,
     FormsModule,
     ReactiveFormsModule,
+    HttpClientModule,
     RouterModule.forRoot(routes)
   ],
-  providers: [],
+  providers: [
+    AuthGuard, 
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
