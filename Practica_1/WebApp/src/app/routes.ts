@@ -10,6 +10,9 @@ import { AboutComponent } from './components/about/about.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { AuthGuard } from './guards/auth.guard';
 import { ChooseComponent } from './components/choose/choose.component';
+import { UiRhythmComponent } from './components/ui-rhythm/ui-rhythm.component';
+import { UiTemperatureComponent } from './components/ui-temperature/ui-temperature.component';
+import { UiOxygenComponent } from './components/ui-oxygen/ui-oxygen.component';
 
 
 export const routes: Routes = [
@@ -22,5 +25,8 @@ export const routes: Routes = [
     { path: 'about', component: AboutComponent},
     { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard]},
     { path: 'profile/:id', component: ProfileComponent, canActivate: [AuthGuard]},
-    { path: 'choose' , component: ChooseComponent , canActivate: [AuthGuard]}
+    { path: 'choose' , component: ChooseComponent , canActivate: [AuthGuard]},
+    { path: 'rhythm' , component: UiRhythmComponent ,  canActivate: [AuthGuard]},
+    { path: 'temperature' , component: UiTemperatureComponent, canActivate: [AuthGuard]},
+    { path: 'oxygen' , component: UiOxygenComponent , canActivate: [AuthGuard]}
 ];

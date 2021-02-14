@@ -22,6 +22,9 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthGuard } from './guards/auth.guard';
 import { ChooseComponent } from './components/choose/choose.component';
+import { UiRhythmComponent } from './components/ui-rhythm/ui-rhythm.component';
+import { UiTemperatureComponent } from './components/ui-temperature/ui-temperature.component';
+import { UiOxygenComponent } from './components/ui-oxygen/ui-oxygen.component';
 
 
 
@@ -38,7 +41,10 @@ import { ChooseComponent } from './components/choose/choose.component';
     SignupComponent,
     DashboardComponent,
     ProfileComponent,
-    ChooseComponent
+    ChooseComponent,
+    UiRhythmComponent,
+    UiTemperatureComponent,
+    UiOxygenComponent
   ],
   imports: [
     BrowserModule,
