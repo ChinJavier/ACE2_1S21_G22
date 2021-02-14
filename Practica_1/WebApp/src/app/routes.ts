@@ -9,8 +9,9 @@ import {SignupComponent} from './components/signup/signup.component';
 import { AboutComponent } from './components/about/about.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { AuthGuard } from './guards/auth.guard';
+import { ChooseComponent } from './components/choose/choose.component';
 
-ProfileComponent
+
 export const routes: Routes = [
     { path: 'home', component: HomeComponent },
     { path: '', redirectTo: '/home', pathMatch: 'full'},
@@ -21,4 +22,5 @@ export const routes: Routes = [
     { path: 'about', component: AboutComponent},
     { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard]},
     { path: 'profile/:id', component: ProfileComponent, canActivate: [AuthGuard]},
+    { path: 'choose' , component: ChooseComponent , canActivate: [AuthGuard]}
 ];

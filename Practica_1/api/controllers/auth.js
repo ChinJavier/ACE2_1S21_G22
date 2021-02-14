@@ -84,6 +84,7 @@ const logUser = async (req, res) => {
             ok: true,
             uid: user.id,
             username: user.username,
+            coach: user.coach,// solo para redirigir a otro lado en el front
             token,
         });
 

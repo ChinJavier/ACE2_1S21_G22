@@ -21,6 +21,7 @@ import { ProfileComponent } from './components/profile/profile.component';
 
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthGuard } from './guards/auth.guard';
+import { ChooseComponent } from './components/choose/choose.component';
 
 
 
@@ -36,7 +37,8 @@ import { AuthGuard } from './guards/auth.guard';
     CoachComponent,
     SignupComponent,
     DashboardComponent,
-    ProfileComponent
+    ProfileComponent,
+    ChooseComponent
   ],
   imports: [
     BrowserModule,

@@ -43,8 +43,13 @@ export class LoginComponent implements OnInit {
       localStorage.setItem('x-token', res['token']);
       localStorage.setItem('username', res['username']);
       localStorage.setItem('uid', res['uid']);
-      this.router.navigate(['/dashboard']);
-    }, err => console.log(err['error'])); 
+      console.log(res.coach);
+      if (res.coach == true){
+        this.router.navigate(['/choose']);
+      }else{
+        this.router.navigate(['/dashboard']);
+      }
+    }, err => console.log(err['error']));
   }
   
 
