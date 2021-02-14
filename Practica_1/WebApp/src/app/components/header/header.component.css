@@ -3,4 +3,11 @@ mat-toolbar {
     color: white;
     height: 70px;
 }
+button {
+    background: black;
+    color: rgb(117, 116, 113);
+}
 
+mat-card {
+    background: black;
+}
