@@ -25,4 +25,4 @@ app.listen(app.get('port'), () => {
 });
 
 // CORRER EL SERVER CON: npm run dev
- // PROBAR RUTA: http://localhost:3000/sensores/
+ // PROBAR RUTA en POST: http://localhost:3000/sensores/
