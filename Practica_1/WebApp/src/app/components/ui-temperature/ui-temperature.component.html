@@ -1,1 +1,36 @@
-<p>ui-temperature works!</p>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootswatch/4.5.2/spacelab/bootstrap.min.css" integrity="sha384-F1AY0h4TrtJ8OCUQYOzhcFzUTxSOxuaaJ4BeagvyQL8N9mE4hrXjdDsNx249NpEc" crossorigin="anonymous">
+
+<div class="container col-xl-10 col-8 col-md-8 sm-col-8 my-4 jumbotron">
+    <hr class="offset-xl-1 my-4 col-xl-8 ">
+    <h1 class="display-3" style="text-align: center;">MEDIDOR DE TEMPERATURA</h1>
+    <hr class="offset-xl-1 my-4 col-xl-8">
+
+
+    <div class="offset-xl-1 alert alert-dismissible alert-danger col-xl-10">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <h4 class="alert-heading">Warning!</h4>
+        <p class="mb-0">
+            La temperatura corporal normal promedio aceptada es generalmente de (37°C).
+            Algunos estudios han mostrado que la temperatura corporal "normal" puede tener un amplio rango que va desde los 97°F (36.1°C) hasta los 99°F (37.2°C).
+        </p>
+      </div>
+    <body class="offset-xl-1  card border-primary mb-3 col-xl-10" style="height: 100%;">
+        <div class="card-header white">
+            <p style="font-size: 4vw">
+                Temperatura
+            </p>
+            <hr class="my-4">
+  
+            <div style="font-size: 15vw">
+                {{this.value}}
+            </div>
+            <hr class="my-4">
+
+        </div>
+
+    </body>
+    <button type="button" class="offset-xl-1  btn btn-outline-danger col-xl-10">BACK</button>
+</div>
+
+
+
