@@ -1,7 +1,7 @@
 const { Router } = require('express');
 const routerTest = Router();
 
-var OXYGEN = 0 , TEMPERATURE = 0 , RHYTHM= 0;
+var OXYGEN =0 , TEMPERATURE = 0 , RHYTHM= 0;
 
 // routerTest.route('/sensores/:valor').post(
 //     async(req,res) => {
@@ -35,16 +35,34 @@ routerTest.route('/sensores/').get(
 
 
 // DEVOLUCION DE DATOS
-routerTest.route('/puntual/oxygen').get(
-    async(req, res) => { res.send(OXYGEN);}
+routerTest.route('/sensores/oxygen').get(
+    async(req, res) => {
+        try {
+            res.status(200).send(OXYGEN);
+        } catch (error) {
+            res.status(500).json({error : "FALLO EN OBTENER LA OXIGENO"});
+        }
+    }
 );
 
-routerTest.route('/puntual/temperature').get(
-    async(req, res) => { res.send(TEMPERATURE);}
+routerTest.route('/sensores/temperature').get(
+    async(req, res) => { 
+            try {
+                res.status(200).send(TEMPERATURE);
+            } catch (error) {
+                res.status(500).json({error : "FALLO EN OBTENER LA TEMPERATURA"});
+            }
+        }
 );
 
-routerTest.route('/puntual/rhythm').get(
-    async(req, res) => { res.send(RHYTHM);}
+routerTest.route('/sensores/rhythm').get(
+    async(req, res) => {
+        try {
+            res.status(200).send(RHYTHM);
+        } catch (error) {
+            res.status(500).json({error : "FALLO EN OBTENER LA OXIGENO"});
+        }
+    }
 );
 
 
