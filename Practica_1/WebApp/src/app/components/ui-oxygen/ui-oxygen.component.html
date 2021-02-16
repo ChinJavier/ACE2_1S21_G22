@@ -8,21 +8,23 @@
         <button type="button" class="close" data-dismiss="alert">&times;</button>
         <h4 class="alert-heading">Warning!</h4>
         <p class="mb-0">las lecturas normales del oxímetro de pulso generalmente oscilan entre el 95 y el 100 por ciento. Los valores inferiores al 90 por ciento se consideran bajos e indican la necesidad de oxígeno suplementario. Esta condición a menudo se conoce como hipoxemia, y sus síntomas incluyen dificultad para respirar severa, aumento de la frecuencia cardíaca y dolor en el pecho.</p>
-      </div>
-    <body class="offset-xl-1 card border-primary mb-3 col-xl-10" style="height: 100%;">
-        <div class="card-header white">
-            <p style="font-size: 4vw">
-                OXIGENO
-            </p>
-            <hr class="my-4">
-  
-            <div style="font-size: 15vw">
-                {{this.value}}
-            </div>
-            <hr class="my-4">
+    </div>
+    <div class="offset-xl-1 card col-xl-10">
+        <canvas id="realtime">{{ char_grafica }}</canvas>
 
+        <div class="card-content">
+        <h3>Realtime</h3>
+        <p>Esta grafica muestra el oxigeno en tiempo real</p>
         </div>
 
+    </div>
+
+    <body class="offset-xl-1 card border-primary mb-3 col-xl-10 col-md-12 col-12 col-sm-12" style="height: 100%;">
+        <div class="card-header white">
+            <p style="font-size: 5vw; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif">
+                OXIGENO: {{this.valorActual}} C°
+            </p>
+        </div>
     </body>
     <button type="button" class="offset-xl-1 btn btn-outline-danger col-xl-5">BACK</button>
     <button type="button" class=" btn btn-outline-success col-xl-5">SAVE</button>

@@ -46,7 +46,7 @@ routerTest.route('/sensores/oxygen').get(
 );
 
 routerTest.route('/sensores/temperature').get(
-    async(req, res) => { 
+    async(req, res) => {
             try {
                 res.status(200).send(TEMPERATURE);
             } catch (error) {
