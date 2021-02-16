@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Chart } from 'chart.js';
+import {MedicionesService} from './../../services/mediciones.service';
 
 @Component({
   selector: 'app-ui-rhythm',
@@ -13,7 +14,7 @@ export class UiRhythmComponent implements OnInit {
 	private hilo: any = null;
 	public chart_ritmo: any = null;
 	public ritmoActual = 0;
-	constructor(private http: HttpClient) {
+	constructor(private service: MedicionesService) {
 	}
 
 	
@@ -69,8 +70,7 @@ export class UiRhythmComponent implements OnInit {
 	}
 
 	private showGraphic(): void {
-		this.getFromAPI().subscribe( res => {
-			// { data: 78 , code: 200, error: false }
+		this.service.getrhythm().subscribe(res => {
 			let chart_ritmoTime: any = new Date();
 			// PONE EL TIEMPO Y SI ES MAYOR A 15 DATOS DA UN SHIFT
 			chart_ritmoTime = chart_ritmoTime.getHours() + ':' + ((chart_ritmoTime.getMinutes() < 10) ? '0' + chart_ritmoTime.getMinutes() : chart_ritmoTime.getMinutes()) + ':' + ((chart_ritmoTime.getSeconds() < 10) ? '0' + chart_ritmoTime.getSeconds() : chart_ritmoTime.getSeconds());
@@ -79,24 +79,12 @@ export class UiRhythmComponent implements OnInit {
 					this.chart_ritmo.data.datasets[0].data.shift();
 			}
 			this.chart_ritmo.data.labels.push(chart_ritmoTime);
-			this.chart_ritmo.data.datasets[0].data.push(res.data); // PONE EL VALOR EN Y , ACA VAN LOS DATOS QUE VIENEN DE MONGO
+			this.chart_ritmo.data.datasets[0].data.push(res); // PONE EL VALOR EN Y , ACA VAN LOS DATOS QUE VIENEN DE MONGO
 			this.chart_ritmo.update();
-			this.ritmoActual = res.data;
-		}, err => {
+			this.ritmoActual = res;
+		} , err => {
 			console.log('error' , err);
 		});
 	}
-  
-	/**
-	* Get the data from the API
-	* @function getFromAPI
-	* @return {Observable<any>}
-	*/
-	private getFromAPI(): Observable<any>{
-	  return this.http.get(
-		'http://localhost:3000',
-		{ responseType: 'json' }
-	  );
-	}
-  
+
 }
