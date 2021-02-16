@@ -6,4 +6,12 @@ import { Injectable } from '@angular/core';
 export class UserService {
 
   constructor() { }
+
+  // TODO: getUser()
+
+  // TODO: getUserByCoach()
+
+  // TODO: getUserStats()
+  
+
 }

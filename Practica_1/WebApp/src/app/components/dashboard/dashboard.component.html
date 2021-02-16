@@ -1,5 +1,82 @@
-<p>
-    <mat-toolbar>
-        <span>Dashboard | Welcome, {{username}}</span>
-    </mat-toolbar>
-</p>
+<app-header></app-header>
+<div class="stats-container" fxLayout.md="column">
+    <mat-card class="card">
+        <mat-card-header>
+            <div fxFlex="100" fxLayout="column">
+                <p class="card-title">
+                    Ritmo Cardiaco
+                </p>
+                <p class="card-date">
+                    Ultima medición
+                </p>
+            </div>
+        </mat-card-header>
+        <mat-card-content>
+            <img mat-card-image src="assets/ritmoC.jpg">
+            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Provident blanditiis tenetur molestiae ducimus
+                similique, sapiente perspiciatis dolorum hic magnam nisi error quia eius explicabo expedita dignissimos
+                est magni. Accusamus, iusto.</p>
+        </mat-card-content>
+        <mat-card-actions>
+            <button mat-button>Reportes</button>
+            <a mat-button [routerLink]="['/rythm']">Info</a>
+        </mat-card-actions>
+    </mat-card>
+    <mat-card class="card">
+        <mat-card-header>
+            <div fxFlex="100" fxLayout="column">
+                <p class="card-title">
+                    Orxigeno en la Sangre
+                </p>
+                <p class="card-date">
+                    Ultima medición
+                </p>
+            </div>
+        </mat-card-header>
+        <mat-card-content>
+            <img mat-card-image src="assets/oxigenoSangre.jpg">
+            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Provident blanditiis tenetur molestiae ducimus
+                similique, sapiente perspiciatis dolorum hic magnam nisi error quia eius explicabo expedita dignissimos
+                est magni. Accusamus, iusto.</p>
+        </mat-card-content>
+        <mat-card-actions>
+            <button mat-button>Reportes</button>
+            <button mat-button [routerLink]="['/oxygen']">Info</button>
+        </mat-card-actions>
+    </mat-card>
+    <mat-card class="card">
+        <mat-card-header>
+            <div fxFlex="100" fxLayout="column">
+                <p class="card-title">
+                    Temperatura
+                </p>
+                <p class="card-date">
+                    Ultima medición
+                </p>
+            </div>
+        </mat-card-header>
+        <mat-card-content>
+            <img mat-card-image src="assets/temperatura.jpg">
+            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Provident blanditiis tenetur molestiae ducimus
+                similique, sapiente perspiciatis dolorum hic magnam nisi error quia eius explicabo expedita dignissimos
+                est magni. Accusamus, iusto.</p>
+        </mat-card-content>
+        <mat-card-actions>
+            <button mat-button>Reportes</button>
+            <button mat-button [routerLink]="['/temperature']">Info</button>
+        </mat-card-actions>
+    </mat-card>
+</div>
+
+<div class="historial-container">
+    <h1 class="h-title">Historial de mediciones</h1>
+    <div class="medition-card">
+        <span class="material-icons">
+            done_all
+        </span>
+        <span class="flex-spacer"></span>
+        <a class="material-icons">
+            remove_red_eye
+        </a>
+    </div>
+</div>
