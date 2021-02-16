@@ -3,7 +3,7 @@ const express = require('express');
 require('dotenv').config();
 const { dbConnection } = require('./db/config');
 const { router } = require('./routes/routes');
-const {routerTest} = require('./routes/routesMux.js')
+const {routerTest} = require('./routes/routesMux.js');
 const app = express();
 
 // DB Connection
