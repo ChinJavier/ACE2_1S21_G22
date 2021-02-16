@@ -8,6 +8,14 @@ import { baseURL } from '../shared/URL';
 })
 export class UserService {
 
+  constructor() { }
+
+  // TODO: getUser()
+
+  // TODO: getUserByCoach()
+
+  // TODO: getUserStats()
+  
   constructor(private http: HttpClient) { }
 
 

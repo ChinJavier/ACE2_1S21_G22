@@ -15,6 +15,11 @@ const userSchema = new Schema({
         type: Boolean,
         required: true,
         defaultValue: false,
+    },
+    coach: {
+        type: String,
+        required: false,
+        defaltValue: "none"
     }
 });
 
