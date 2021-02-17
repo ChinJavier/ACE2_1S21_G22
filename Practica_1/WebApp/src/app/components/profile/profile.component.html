@@ -1,1 +1,20 @@
-<p>profile works!</p>
+    
+<div class="container">
+    
+     <mat-list *ngFor="let dato of datos">
+        <img mat-card-image src="./assets/graoh.jpg" class='imgRedonda' alt="Photo of a Shiba Inu">
+        <h2 >{{dato["name"]}}{{dato["apellido"]}}</h2>
+        <h3>Atleta</h3>
+        <mat-list-item>NOMBRE: {{dato["name"]}}</mat-list-item>
+        <mat-list-item>APELLIDO: {{dato["apellido"]}}</mat-list-item>
+        <mat-list-item>EDAD: {{dato["age"]}}</mat-list-item>
+        <mat-list-item>SEXO: {{dato["sexo"]}}</mat-list-item>
+        <mat-list-item>PESO: {{dato["peso"]}}</mat-list-item>
+        <mat-list-item>ESTATURA: {{dato["estatura"]}}</mat-list-item>
+    
+    </mat-list>
+    
+    
+</div>
+
+

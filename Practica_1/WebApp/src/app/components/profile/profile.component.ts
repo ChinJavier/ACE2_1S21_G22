@@ -6,6 +6,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
+  datos = [{name: 'Lourdes', 
+            apellido: 'Lorenzana',
+            age: '32',
+            sexo: 'M',
+            peso: '176 lbs',
+            estatura: '180 cms'}];
 
   constructor() { }
 
@@ -13,3 +19,4 @@ export class ProfileComponent implements OnInit {
   }
 
 }
+
