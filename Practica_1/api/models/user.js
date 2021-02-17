@@ -11,7 +11,7 @@ const userSchema = new Schema({
         type: String,
         required: true,
     },
-    coach: {
+    isCoach: {
         type: Boolean,
         required: true,
         defaultValue: false,
@@ -33,6 +33,11 @@ const userSchema = new Schema({
     },
     peso:{
         type: String
+    },
+    coach: {
+        type: String,
+        required: false,
+        defaltValue: "none"
     }
 });
 
