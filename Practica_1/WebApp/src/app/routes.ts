@@ -17,8 +17,8 @@ import { ListProfileComponent} from './components/list-profile/list-profile.comp
 
 
 export const routes: Routes = [
-    { path: 'home', component: HomeComponent },
     { path: '', redirectTo: '/home', pathMatch: 'full'},
+    { path: 'home', component: HomeComponent },
     { path: 'login', component: LoginComponent},
     { path: 'coach', component: CoachComponent, canActivate: [AuthGuard]},
     { path: 'athlete', component: AthleteComponent, canActivate: [AuthGuard]},
