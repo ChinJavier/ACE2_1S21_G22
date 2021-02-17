@@ -15,6 +15,15 @@ const userSchema = new Schema({
         type: Boolean,
         required: true,
         defaultValue: false,
+    },
+    nombre:{
+        type: String
+    },
+    apellido:{
+        type: String
+    },
+    sexo:{
+        type: String
     }
 });
 
