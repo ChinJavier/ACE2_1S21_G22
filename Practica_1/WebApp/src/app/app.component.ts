@@ -7,10 +7,7 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-<<<<<<< HEAD
-  athletess = ['uno', 'dos', ' tres', 'cuatro'];
-  title = 'webApp';
-=======
+
   title = 'TVE';
   mediaSub: Subscription = {} as Subscription;
   deviceXS: boolean = false;
@@ -25,5 +22,4 @@ export class AppComponent {
   ngOnDestroy(){
     this.mediaSub.unsubscribe();
   }
->>>>>>> 575ba91f04b5ce6c1c3e3fac20a20696dc873dd2
 }
