@@ -11,7 +11,7 @@ const userSchema = new Schema({
         type: String,
         required: true,
     },
-    coach: {
+    isCoach: {
         type: Boolean,
         required: true,
         defaultValue: false,

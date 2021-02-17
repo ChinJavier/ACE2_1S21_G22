@@ -12,14 +12,8 @@ export class DashboardComponent implements OnInit {
   constructor(
     private authService: AuthService,
   ) { }
-
   ngOnInit(): void {
     this.username = localStorage.getItem('username');
     this.uid = localStorage.getItem('uid');
   }
-
-  
-
-
-
 }

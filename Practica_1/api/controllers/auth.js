@@ -104,7 +104,7 @@ const revalidateToken = async () => {
     res.json({
         uid,
         username,
-        token
+        token,
     });
 }
 
