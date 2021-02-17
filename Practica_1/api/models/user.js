@@ -24,6 +24,15 @@ const userSchema = new Schema({
     },
     sexo:{
         type: String
+    },
+    edad:{
+        type: String
+    },
+    estatura:{
+        type: String
+    },
+    peso:{
+        type: String
     }
 });
 
