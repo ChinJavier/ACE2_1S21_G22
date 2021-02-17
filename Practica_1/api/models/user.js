@@ -11,10 +11,28 @@ const userSchema = new Schema({
         type: String,
         required: true,
     },
-    coach: {
+    isCoach: {
         type: Boolean,
         required: true,
         defaultValue: false,
+    },
+    nombre:{
+        type: String
+    },
+    apellido:{
+        type: String
+    },
+    sexo:{
+        type: String
+    },
+    edad:{
+        type: String
+    },
+    estatura:{
+        type: String
+    },
+    peso:{
+        type: String
     },
     coach: {
         type: String,

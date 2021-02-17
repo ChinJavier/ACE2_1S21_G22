@@ -4,6 +4,7 @@ require('dotenv').config();
 const { dbConnection } = require('./db/config');
 const { router } = require('./routes/routes');
 const {routerTest} = require('./routes/routesMux.js');
+const {routerUpdate} = require('./routes/routesUpdate')
 const app = express();
 
 // DB Connection
@@ -19,7 +20,7 @@ app.use(express.json());
 
 app.use('/api/v1/auth', router);
 app.use('/',routerTest);
-
+app.use('/asignacion' ,routerUpdate);
 app.listen(app.get('port'), () => {
     console.log(`Server running on port ${app.get('port')}`);
 });
