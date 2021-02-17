@@ -6,5 +6,6 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+  athletess = ['uno', 'dos', ' tres', 'cuatro'];
   title = 'webApp';
 }

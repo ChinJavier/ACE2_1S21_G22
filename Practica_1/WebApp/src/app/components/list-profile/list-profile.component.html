@@ -1,0 +1,16 @@
+
+<div class="title">
+    <mat-toolbar > 
+      <span> ATLETAS </span > 
+    </mat-toolbar >
+  </div>
+<mat-action-list>
+    <ul>
+        <mat-list-item  *ngFor="let coachit of coachito" >
+            <button mat-list-item  [routerLink]="['/profile/:id']"> {{coachit}}  </button> 
+        </mat-list-item>
+        
+    </ul>
+    
+</mat-action-list>
+
