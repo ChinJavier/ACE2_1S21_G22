@@ -3,9 +3,9 @@ const { check } = require('express-validator');
 const { validateFields } = require('../middlewares/fiel-validators');
 const { logUser, createUser, revalidateToken } = require('../controllers/auth');
 const { validateJWT } = require('../middlewares/jwt-valiadtion');
-const {createOxygen , getAll_oxygen , getOxygen} = require('../controllers/oxygenController');
-const {createTemperature , getAll_temperature, getTemperature} = require('../controllers/temperatureController');
-const {createRhythm , getRhythm , getAll_rythem} = require('../controllers/rhythmController');
+const { createOxygen, getAll_oxygen, getOxygen } = require('../controllers/oxygenController');
+const { createTemperature, getAll_temperature, getTemperature } = require('../controllers/temperatureController');
+const { createRhythm, getRhythm, getAll_rythem } = require('../controllers/rhythmController');
 const { createUserTest } = require('../controllers/userController');
 const router = Router();
 
@@ -23,9 +23,14 @@ router.post('/new', [
     check('password', 'Password should be at least 6 characters long').isLength({ min: 6 }),
     validateFields
 ], createUser);
+router.post('/meditions', [
+    check('type', 'Type is required').not().isEmpty(),
+    validateFields
+], createUser);
 
 
-router.post('/renew', validateJWT, revalidateToken);
+//router.post();
+
 
 
 
@@ -43,6 +48,8 @@ router.route('/all/rhythm/:id').get(getAll_rythem);
 router.route('/oxygen/:id').get(getOxygen);
 router.route('/temperature/:id').get(getTemperature);
 router.route('/rhythm/:id').get(getRhythm);
+
+router.post('/renew', validateJWT, revalidateToken);
 
 
 module.exports = {
