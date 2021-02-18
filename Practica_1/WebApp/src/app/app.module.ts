@@ -27,6 +27,7 @@ import { UiTemperatureComponent } from './components/ui-temperature/ui-temperatu
 import { UiOxygenComponent } from './components/ui-oxygen/ui-oxygen.component';
 //import { ListProfile2Component } from './components/list-profile2/list-profile2.component';
 import { ListProfileComponent } from './components/list-profile/list-profile.component';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 
 
@@ -48,7 +49,7 @@ import { ListProfileComponent } from './components/list-profile/list-profile.com
     UiTemperatureComponent,
     UiOxygenComponent,
    // ListProfile2Component,
-    ListProfileComponent
+    ListProfileComponent,
   ],
   imports: [
     BrowserModule,
@@ -58,6 +59,7 @@ import { ListProfileComponent } from './components/list-profile/list-profile.com
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    FlexLayoutModule,
     RouterModule.forRoot(routes)
   ],
   providers: [

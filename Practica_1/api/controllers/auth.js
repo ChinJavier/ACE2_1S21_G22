@@ -10,7 +10,7 @@ const User = require('../models/user');
 const { createJWT } = require('../helpers/jwt');
 
 const createUser = async (req, res = express.response) => {
-    const { username, password, coach } = req.body;
+    const { username, password } = req.body;
     try {
 
         let user = await User.findOne({ username: username });
@@ -38,7 +38,12 @@ const createUser = async (req, res = express.response) => {
             ok: true,
             uid: user.id,
             username: user.username,
-            coach: user.coach,
+            name: user.name,
+            gender: user.gender,
+            age: user.age,
+            height: user.height,
+            weight: user.weight,
+            isCoach: user.isCoach,
             token
         });
 
@@ -84,7 +89,7 @@ const logUser = async (req, res) => {
             ok: true,
             uid: user.id,
             username: user.username,
-            coach: user.coach,// solo para redirigir a otro lado en el front
+            isCoach: user.isCoach,// solo para redirigir a otro lado en el front
             token,
         });
 

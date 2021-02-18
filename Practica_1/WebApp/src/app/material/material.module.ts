@@ -18,6 +18,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {ScrollingModule} from '@angular/cdk/scrolling';
 import { MatTableModule } from '@angular/material/table';
+import {MatSelectModule} from '@angular/material/select';
 
 const MaterialComponents = [
   MatButtonModule,
@@ -38,7 +39,8 @@ const MaterialComponents = [
   MatInputModule,
   MatCheckboxModule,
   MatDatepickerModule,
-  MatTableModule
+  MatTableModule,
+  MatSelectModule
 ];
 
 @NgModule({
