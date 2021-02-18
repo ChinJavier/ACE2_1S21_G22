@@ -9,11 +9,16 @@ import { AuthService } from 'src/app/services/auth.service';
 export class DashboardComponent implements OnInit {
   username: string | null = '' ;
   uid: string | null = '';
+
   constructor(
     private authService: AuthService,
+
   ) { }
   ngOnInit(): void {
     this.username = localStorage.getItem('username');
     this.uid = localStorage.getItem('uid');
+
   }
+
+
 }

@@ -7,7 +7,7 @@
 <mat-action-list>
     <ul>
         <mat-list-item  *ngFor="let coachit of coachito" >
-            <button mat-list-item  [routerLink]="['/profile/:id']"> {{coachit}}  </button> 
+            <button mat-list-item (click) = "goto_profile(coachit)"> {{coachit}}  </button>
         </mat-list-item>
         
     </ul>

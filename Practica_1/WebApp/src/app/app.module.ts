@@ -25,8 +25,9 @@ import { ChooseComponent } from './components/choose/choose.component';
 import { UiRhythmComponent } from './components/ui-rhythm/ui-rhythm.component';
 import { UiTemperatureComponent } from './components/ui-temperature/ui-temperature.component';
 import { UiOxygenComponent } from './components/ui-oxygen/ui-oxygen.component';
-//import { ListProfile2Component } from './components/list-profile2/list-profile2.component';
 import { ListProfileComponent } from './components/list-profile/list-profile.component';
+import { ReportsComponent } from './components/reports/reports.component';
+
 
 
 
@@ -47,8 +48,8 @@ import { ListProfileComponent } from './components/list-profile/list-profile.com
     UiRhythmComponent,
     UiTemperatureComponent,
     UiOxygenComponent,
-   // ListProfile2Component,
-    ListProfileComponent
+    ListProfileComponent,
+    ReportsComponent,
   ],
   imports: [
     BrowserModule,
@@ -61,7 +62,7 @@ import { ListProfileComponent } from './components/list-profile/list-profile.com
     RouterModule.forRoot(routes)
   ],
   providers: [
-    AuthGuard, 
+    AuthGuard,
   ],
   bootstrap: [AppComponent]
 })

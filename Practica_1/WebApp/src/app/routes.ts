@@ -14,7 +14,7 @@ import { UiRhythmComponent } from './components/ui-rhythm/ui-rhythm.component';
 import { UiTemperatureComponent } from './components/ui-temperature/ui-temperature.component';
 import { UiOxygenComponent } from './components/ui-oxygen/ui-oxygen.component';
 import { ListProfileComponent} from './components/list-profile/list-profile.component';
-
+import {ReportsComponent} from './components/reports/reports.component'
 
 export const routes: Routes = [
     { path: '', redirectTo: '/home', pathMatch: 'full'},
@@ -30,5 +30,6 @@ export const routes: Routes = [
     { path: 'rhythm' , component: UiRhythmComponent ,  canActivate: [AuthGuard]},
     { path: 'temperature' , component: UiTemperatureComponent, canActivate: [AuthGuard]},
     { path: 'oxygen' , component: UiOxygenComponent , canActivate: [AuthGuard]},
-    { path: 'list-profile', component: ListProfileComponent, canActivate: [AuthGuard]}
+    { path: 'list-profile', component: ListProfileComponent, canActivate: [AuthGuard]},
+    { path: 'reports' , component: ReportsComponent}
 ];
