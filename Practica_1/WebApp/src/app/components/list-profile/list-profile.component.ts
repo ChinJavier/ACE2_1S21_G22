@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+import {Router, ActivatedRoute} from '@angular/router';
 @Component({
   selector: 'app-list-profile',
   templateUrl: './list-profile.component.html',
@@ -7,9 +7,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ListProfileComponent implements OnInit {
   coachito= ['uno', 'dos',' tres', 'cuatro'];
-  constructor() { }
+  constructor(private router: Router) {
+  }
 
   ngOnInit(): void {
+  }
+
+  goto_profile(username: any): void{
+    this.router.navigate(['/profile/' , username]);
   }
 
 }

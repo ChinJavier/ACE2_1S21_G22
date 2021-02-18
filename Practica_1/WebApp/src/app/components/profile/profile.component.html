@@ -1,20 +1,31 @@
-    
-<div class="container">
-    
-     <mat-list *ngFor="let dato of datos">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootswatch/4.5.2/cosmo/bootstrap.min.css" integrity="sha384-5QFXyVb+lrCzdN228VS3HmzpiE7ZVwLQtkt+0d9W43LQMzz4HBnnqvVxKg6O+04d" crossorigin="anonymous">
+<div class="jumbotron">
+    <div class="container">
+        <mat-list *ngFor="let dato of datos">
         <img mat-card-image src="./assets/graoh.jpg" class='imgRedonda' alt="Photo of a Shiba Inu">
-        <h2 >{{dato["name"]}}{{dato["apellido"]}}</h2>
+        <h2 >{{username}}</h2>
         <h3>Atleta</h3>
-        <mat-list-item>NOMBRE: {{dato["name"]}}</mat-list-item>
-        <mat-list-item>APELLIDO: {{dato["apellido"]}}</mat-list-item>
-        <mat-list-item>EDAD: {{dato["age"]}}</mat-list-item>
-        <mat-list-item>SEXO: {{dato["sexo"]}}</mat-list-item>
-        <mat-list-item>PESO: {{dato["peso"]}}</mat-list-item>
-        <mat-list-item>ESTATURA: {{dato["estatura"]}}</mat-list-item>
-    
-    </mat-list>
-    
-    
+        <mat-list-item>NOMBRE: {{name}}</mat-list-item>
+        <mat-list-item>APELLIDO: {{lastname}}</mat-list-item>
+        <mat-list-item>EDAD: {{age}}</mat-list-item>
+        <mat-list-item>SEXO: {{sex}}</mat-list-item>
+        <mat-list-item>PESO: {{weight}}</mat-list-item>
+        <mat-list-item>ESTATURA: {{height}}</mat-list-item>
+        <p class="my-5">
+
+        </p>
+        <p class="lead">
+            <button [routerLink]="['/dashboard']" class="btn btn-primary btn-lg col-12 col-xl-12">
+                BACK
+            </button>
+        </p>
+
+        </mat-list>
 </div>
+
+
+</div>
+
+
 
 

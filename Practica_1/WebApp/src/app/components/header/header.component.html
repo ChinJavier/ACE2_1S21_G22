@@ -1,25 +1,15 @@
-<<<<<<< HEAD
-<mat-card>
-    <button mat-button [matMenuTriggerFor]="aboveMenu">MENU</button>
-    <mat-menu #aboveMenu="matMenu" yPosition="above">
-    <button mat-menu-item>HOME</button>
-    <button mat-menu-item>ATLETAS</button>
-    <button mat-menu-item>ABOUT</button>
-    </mat-menu>
-
-</mat-card>
-
-
-=======
 <p>
     <mat-toolbar>
         <span>Dashboard | Welcome, {{username}}</span>
         <span class="flex-spacer">
         </span>
-        <a mat-button><span class="material-icons">
+
+        <a (click) = "goTo_coachMenu()" mat-button *ngIf="isCoach"><span class="material-icons">
+            logout
+        </span> back</a>
+        <a mat-button (click)= "goto_profile()"><span class="material-icons">
                 face
             </span> Profile</a>
-        <a mat-button (click)="logout()">Logout</a>
+        <a mat-button (click)="logout()" >Logout</a>
     </mat-toolbar>
 </p>
->>>>>>> 575ba91f04b5ce6c1c3e3fac20a20696dc873dd2
