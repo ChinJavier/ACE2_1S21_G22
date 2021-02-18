@@ -27,7 +27,7 @@ import { UiTemperatureComponent } from './components/ui-temperature/ui-temperatu
 import { UiOxygenComponent } from './components/ui-oxygen/ui-oxygen.component';
 import { ListProfileComponent } from './components/list-profile/list-profile.component';
 import { ReportsComponent } from './components/reports/reports.component';
-
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 
 
@@ -59,6 +59,7 @@ import { ReportsComponent } from './components/reports/reports.component';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    FlexLayoutModule,
     RouterModule.forRoot(routes)
   ],
   providers: [

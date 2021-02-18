@@ -19,7 +19,12 @@ export class SignupComponent implements OnInit {
       Validators.required,
       Validators.minLength(6),
     ]),
-    coach: new FormControl('', [
+    name: new FormControl('', [Validators.required]),
+    gender: new FormControl('', [Validators.required]),
+    age: new FormControl('', [Validators.required]),
+    height: new FormControl('', [Validators.required]),
+    weight: new FormControl('', [Validators.required]),
+    isCoach: new FormControl('', [
       Validators.required,
     ]),
   }); 
@@ -41,16 +46,10 @@ export class SignupComponent implements OnInit {
   }
 
   onSubmit() {
-    let { username, password, coach } = this.signupForm.value;
-    this.user = {
-      username,
-      password,
-      coach,
-    }
-
+    this.user = this.signupForm.value;
     console.log(this.user);
 
-    this.authService.createUser(this.user).subscribe(res => {
+    /* this.authService.createUser(this.user).subscribe(res => {
       console.log(res);
       localStorage.setItem('x-token', res['token']);
       localStorage.setItem('username', res['username']);
@@ -58,7 +57,7 @@ export class SignupComponent implements OnInit {
       this.router.navigate(['/profile/' + res['uid']]);
     }, err => {
       console.log(err);
-    });
+    }); */
     
   }
 
