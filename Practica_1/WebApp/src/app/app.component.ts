@@ -7,7 +7,6 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-
   title = 'TVE';
   mediaSub: Subscription = {} as Subscription;
   deviceXS: boolean = false;

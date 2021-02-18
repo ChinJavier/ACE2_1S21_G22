@@ -15,9 +15,39 @@
 
                 </p>
                 <p>
-                    <mat-checkbox formControlName="coach">
+                    <mat-form-field>
+                        <input type="text" matInput placeholder="Name" formControlName="name" />
+                    </mat-form-field>
+
+                </p>
+                <p>
+                    <mat-form-field>
+                        <mat-label>Gender</mat-label>
+                        <mat-select formControlName="gender">
+                            <mat-option value="M">M</mat-option>
+                            <mat-option value="F">F</mat-option>
+                        </mat-select>
+
+                    </mat-form-field>
+                </p>
+                <p>
+                    <mat-checkbox formControlName="isCoach">
                         Couch?
                     </mat-checkbox>
+                </p>
+                <p fxLayout="col" fxLayoutGap="20px">
+                    <mat-form-field>
+                        <input type="number" matInput placeholder="Age" formControlName="age" />
+                    </mat-form-field>
+
+                </p>
+                <p fxLayout="col" fxLayoutGap="20px">
+                    <mat-form-field>
+                        <input type="number" matInput placeholder="Height (m)" formControlName="height" />
+                    </mat-form-field>
+                    <mat-form-field>
+                        <input type="number" matInput placeholder="Weight (lb)" formControlName="weight" />
+                    </mat-form-field>
                 </p>
                 <button type="submit" mat-raised-button color="primary">Sign Up</button>
                 <p class="nr-container">

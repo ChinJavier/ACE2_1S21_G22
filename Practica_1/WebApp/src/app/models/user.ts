@@ -1,6 +1,11 @@
 export interface User {
-    username: String;
-    password: String;
+    username: string;
+    password: string;
+    name?: string;
+    gender?: string;
+    age?: number;
+    height?: number;
+    weight?: number;
     isCoach?: boolean;
-    coach?: String;
+    coach?: string;
 }
