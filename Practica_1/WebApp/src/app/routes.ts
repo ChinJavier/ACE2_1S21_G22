@@ -15,6 +15,8 @@ import { UiTemperatureComponent } from './components/ui-temperature/ui-temperatu
 import { UiOxygenComponent } from './components/ui-oxygen/ui-oxygen.component';
 import { ListProfileComponent} from './components/list-profile/list-profile.component';
 import {ReportsComponent} from './components/reports/reports.component'
+import { ReportOxigenoComponent} from './components/report-oxigeno/report-oxigeno.component';
+import { ReportTempComponent} from './components/report-temp/report-temp.component';
 
 export const routes: Routes = [
     { path: '', redirectTo: '/home', pathMatch: 'full'},
@@ -31,5 +33,7 @@ export const routes: Routes = [
     { path: 'temperature' , component: UiTemperatureComponent, canActivate: [AuthGuard]},
     { path: 'oxygen' , component: UiOxygenComponent , canActivate: [AuthGuard]},
     { path: 'list-profile', component: ListProfileComponent, canActivate: [AuthGuard]},
-    { path: 'reports' , component: ReportsComponent}
+    { path: 'reports' , component: ReportsComponent},
+    { path: 'report-oxigen', component:ReportOxigenoComponent },
+    {path: 'report-temp', component:ReportTempComponent}
 ];
