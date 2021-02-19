@@ -42,8 +42,10 @@ userCtrl.asignarUser = async (req,res)=> { // NO FUNCIONA HAY QUE USAR OTRA
     console.log(req.params.user);
     console.log(req.body);
     try {
-        await model_user.findOneAndUpdate(req.params.user, req.body.coach);
-        res.status(200).json({message:"TODO BIEN"}) ;
+        const cuerpo = {coach} = req.body;
+        console.log(req.body);
+        await model_user.findByIdAndUpdate( { _id: req.params.user }, {$set: cuerpo});
+        res.status(200).json({message:"TODO BIEN" , USUARIO: req.body.user , coach : cuerpo.coach }) ;
     } catch (error) {
         console.log('error' , error);
         res.status(500).json({message: error }) ;

@@ -17,7 +17,7 @@
             {{coachit.username}} 
           </p>
             <button mat-list-item (click) = "goto_profile(coachit.username)"> VER PERFIL </button>
-            <button mat-list-item (click) = "goto_profile(coachit.username)"> ASIGNAR </button>
+            <button mat-list-item (click) = "asignarUser(coachit._id)"> ASIGNAR </button>
         </mat-list-item>
     </ul>
 
@@ -30,7 +30,7 @@
     </mat-list-item>
         <mat-list-item  *ngFor="let coachit of misUsuarios" >
             <button mat-list-item (click) = "goto_profile(coachit.username)"> {{coachit.username}}  </button>
-            <button mat-list-item (click) = "goto_profile(coachit.username)"> VER HISTORIAL </button>
+            <button mat-list-item (click) = "verHistorial(coachit._id)"> VER HISTORIAL </button>
         </mat-list-item>
     </ul>
     
