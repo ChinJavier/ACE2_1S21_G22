@@ -48,7 +48,10 @@ export class SignupComponent implements OnInit {
   onSubmit() {
     this.user = this.signupForm.value;
     console.log(this.user);
-
+    if (this.user.isCoach != true ){
+      this.user.isCoach = false;
+    }
+    this.user.coach = "SIN_ASIGNAR";
     this.authService.createUser(this.user).subscribe(res => {
       console.log(res);
       localStorage.setItem('x-token', res['token']);
