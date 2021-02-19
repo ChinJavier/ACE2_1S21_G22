@@ -21,7 +21,9 @@ export class HeaderComponent implements OnInit {
     this.isCoach = localStorage.getItem('isCoach');
     this.uid = localStorage.getItem('uid');
     if (this.isCoach == null || this.isCoach == undefined  || this.isCoach != true ){ // daba clavo porque el isCoach regresaba como string
-      this.isCoach = false;
+      if (this.isCoach != 'true'){
+        this.isCoach = false;
+      }
     }
 
   }

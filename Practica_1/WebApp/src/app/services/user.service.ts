@@ -20,4 +20,10 @@ export class UserService {
     return this.http.get(`${this.url_api}search/getMyUsers/${username}`);
   }
 
+  public asignar(_idUserMongo: any , coachNew:any ):Observable<any>{
+    let cuerpo = {coach: coachNew };
+    console.log();
+    return this.http.put(`${this.url_api}${_idUserMongo}`, cuerpo);
+  }
+
 }

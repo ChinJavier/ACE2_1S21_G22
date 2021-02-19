@@ -29,4 +29,15 @@ export class ListProfileComponent implements OnInit {
     this.s.getMyUsers(localStorage.getItem('username')).subscribe(res => {this.misUsuarios = res; console.log(res);} , err => console.log(err));
   }
 
+  asignarUser(_idMongo: any):void{
+     console.log(_idMongo);
+    this.s.asignar(_idMongo  ,localStorage.getItem('username')).subscribe(
+      res => {this.getMyUsers(); console.log(res); this.getUsersAvailable();} , err => console.log(err)
+    );
+  }
+
+  verHistorial(_idMongo:any):void{
+    console.log(_idMongo);
+  }
+
 }
