@@ -1,15 +1,37 @@
-
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootswatch/4.5.2/sketchy/bootstrap.min.css" integrity="sha384-RxqHG2ilm4r6aFRpGmBbGTjsqwfqHOKy1ArsMhHusnRO47jcGqpIQqlQK/kmGy9R" crossorigin="anonymous">
 <div class="title">
     <mat-toolbar > 
       <span> ATLETAS </span > 
     </mat-toolbar >
   </div>
-<mat-action-list>
-    <ul>
-        <mat-list-item  *ngFor="let coachit of coachito" >
-            <button mat-list-item (click) = "goto_profile(coachit)"> {{coachit}}  </button>
+<mat-action-list class="row">
+    <ul class="col-xl-6">
+      <mat-list-item style="  text-align: center; align-content: flex-end;">
+
+        <mat-toolbar style="background-color: deepskyblue;"> 
+          <span>          USUARIOS DISPONIBLES  </span>
+        </mat-toolbar>
+      </mat-list-item>
+        <mat-list-item  *ngFor="let coachit of usuariosDisponibles" >
+          <p>
+            {{coachit.username}} 
+          </p>
+            <button mat-list-item (click) = "goto_profile(coachit.username)"> VER PERFIL </button>
+            <button mat-list-item (click) = "goto_profile(coachit.username)"> ASIGNAR </button>
         </mat-list-item>
-        
+    </ul>
+
+
+    <ul class="col-xl-6">
+      <mat-list-item>
+      <mat-toolbar style="background-color: deepskyblue;"> 
+        <span>       ENTRENANDO  </span>
+      </mat-toolbar>
+    </mat-list-item>
+        <mat-list-item  *ngFor="let coachit of misUsuarios" >
+            <button mat-list-item (click) = "goto_profile(coachit.username)"> {{coachit.username}}  </button>
+            <button mat-list-item (click) = "goto_profile(coachit.username)"> VER HISTORIAL </button>
+        </mat-list-item>
     </ul>
     
 </mat-action-list>

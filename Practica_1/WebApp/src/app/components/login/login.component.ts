@@ -44,7 +44,7 @@ export class LoginComponent implements OnInit {
       localStorage.setItem('username', res['username']);
       localStorage.setItem('uid', res['uid']);
       console.log("________");
-      console.log(res.uid);
+      console.log(res);
       console.log("________");
       localStorage.setItem('isCoach',res['isCoach']);
       // revisar los nombres que puse en RES :v no se si asi estan en el backend

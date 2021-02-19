@@ -4,9 +4,9 @@ const { getUSER , getUsersAvailable , getMyUsers,asignarUser } = require('../con
 
 
 
-routerQueries.route('/:user').get(getUSER);
-routerQueries.route('/getUsersAvailable').get(getUsersAvailable);
-routerQueries.route('/getMyUsers').get(getMyUsers);
+routerQueries.route('/:user').get(getUSER).put(asignarUser);
+routerQueries.route('/search/getUsersAvailable').get(getUsersAvailable);
+routerQueries.route('/search/getMyUsers/:user').get(getMyUsers);
 
 
 module.exports = {

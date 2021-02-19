@@ -20,9 +20,10 @@ export class HeaderComponent implements OnInit {
     this.username = localStorage.getItem('username');
     this.isCoach = localStorage.getItem('isCoach');
     this.uid = localStorage.getItem('uid');
-    if (this.isCoach == null ){
+    if (this.isCoach == null || this.isCoach == undefined  || this.isCoach != true ){ // daba clavo porque el isCoach regresaba como string
       this.isCoach = false;
     }
+
   }
 
   logout() {

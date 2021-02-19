@@ -12,4 +12,12 @@ export class UserService {
     return this.http.get(`${this.url_api}${username}`);
   }
 
+  public getUsersAvailable():Observable<any>{
+    return this.http.get(`${this.url_api}search/getUsersAvailable`);
+  }
+
+  public getMyUsers(username:any):Observable<any>{
+    return this.http.get(`${this.url_api}search/getMyUsers/${username}`);
+  }
+
 }
