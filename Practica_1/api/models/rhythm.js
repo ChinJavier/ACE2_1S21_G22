@@ -14,6 +14,6 @@ const rhythmSchema = new Schema({
         type: Schema.ObjectId,
         ref: "User",
         require: true
-    }
+    },
 });
 module.exports = model('Rhythm',rhythmSchema);

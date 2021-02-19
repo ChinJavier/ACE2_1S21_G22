@@ -25,7 +25,7 @@ export const routes: Routes = [
     { path: 'signup', component: SignupComponent},
     { path: 'about', component: AboutComponent},
     { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard]},
-    { path: 'profile/:id', component: ProfileComponent, canActivate: [AuthGuard]},
+    { path: 'profile/:username', component: ProfileComponent, canActivate: [AuthGuard]},
     { path: 'choose' , component: ChooseComponent , canActivate: [AuthGuard]},
     { path: 'rhythm' , component: UiRhythmComponent ,  canActivate: [AuthGuard]},
     { path: 'temperature' , component: UiTemperatureComponent, canActivate: [AuthGuard]},

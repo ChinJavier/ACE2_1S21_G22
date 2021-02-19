@@ -17,7 +17,7 @@ export class UiOxygenComponent implements OnInit {
 	
 	 ngOnInit(): void {
 		this.char_grafica = new Chart('realtime', {
-			type: 'bar',
+			type: 'line',
 			data: {
 				labels: [],
 				datasets: [
@@ -25,8 +25,8 @@ export class UiOxygenComponent implements OnInit {
 					label: 'Oxigeno',
 					fill: false,
 					data: [],
-					backgroundColor: '#088A68',
-					borderColor: '#FF0C00'
+					backgroundColor: 'blue',
+					borderColor: 'blue'
 				  }
 				]
 			  },
@@ -37,17 +37,24 @@ export class UiOxygenComponent implements OnInit {
 				legend: {
 					display: true,
 					position: 'bottom',
+					align:'center',
 					labels: {
 						fontColor: 'black'
 					}
 				},
 				scales: {
 				  yAxes: [{
+					  
+					  stacked: true,
 					  ticks: {
-						  fontColor: "black"
+						  fontColor: "black",
+							suggestedMin: 40,
+							suggestedMax: 110
 					  }
 				  }],
 				  xAxes: [{
+
+					stacked: true,
 					ticks: {
 						fontColor: "black",
 						beginAtZero: true
@@ -84,5 +91,16 @@ export class UiOxygenComponent implements OnInit {
 		});
 	}
 
+
+	public saveOxygen():void{
+		const objetoModelo = {oxygen: this.valorActual , user: localStorage.getItem('uid')};
+		console.log(objetoModelo);
+		this.service.saveMedicion(objetoModelo,"oxygen").subscribe(res => {
+			alert('Medicion registrada');
+			console.log(res);
+		} , err => {
+			console.log('**error**' , err);
+		});
+	}
 
 }

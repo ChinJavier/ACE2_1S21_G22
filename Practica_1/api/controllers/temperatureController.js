@@ -4,10 +4,12 @@ const temperatureCtrl= {};
 const model_temperature = require('../models/temperature')
 temperatureCtrl.createTemperature = async (req,res)=>{
     const nuevo = new model_temperature(req.body);
-    await nuevo.save();
-
-    console.log(nuevo);
-    res.send('TEMPERATURA REGISTRADA');
+    try {
+        await nuevo.save();
+        res.status(200).json({text: 'TEMPERATURA REGISTRADO'});
+    } catch (error) {
+        res.status(500).json({text: 'CHIPILIN'});
+    }
 }
 
 

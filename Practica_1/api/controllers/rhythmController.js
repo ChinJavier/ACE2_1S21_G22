@@ -4,10 +4,12 @@ const  model_rhythm = require('../models/rhythm');
 
 rhythmCtrl.createRhythm = async (req,res)=>{
     const nuevo = new model_rhythm(req.body);
-    await nuevo.save();
-
-    console.log(nuevo);
-    res.send('RITMO REGISTRADA');
+    try {
+        await nuevo.save();
+        res.status(200).json({text: 'RITMO REGISTRADO'});
+    } catch (error) {
+        res.status(500).json({text: 'CHIPILIN'});
+    }
 }
 
 

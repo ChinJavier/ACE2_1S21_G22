@@ -43,6 +43,9 @@ export class LoginComponent implements OnInit {
       localStorage.setItem('x-token', res['token']);
       localStorage.setItem('username', res['username']);
       localStorage.setItem('uid', res['uid']);
+      console.log("________");
+      console.log(res.uid);
+      console.log("________");
       localStorage.setItem('isCoach',res['isCoach']);
       // revisar los nombres que puse en RES :v no se si asi estan en el backend
       localStorage.setItem('sex' , res['sex']);
@@ -51,8 +54,7 @@ export class LoginComponent implements OnInit {
       localStorage.setItem('name' , res['name']);
       localStorage.setItem('lastname' , res['name']);
       localStorage.setItem('age' , res['age']);
-      console.log(res.coach);
-      if (res.coach == true){
+      if (res.isCoach == true){
         this.router.navigate(['/choose']);
       }else{
         this.router.navigate(['/dashboard']);
