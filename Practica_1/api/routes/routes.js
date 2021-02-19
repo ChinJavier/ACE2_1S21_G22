@@ -6,7 +6,7 @@ const { validateJWT } = require('../middlewares/jwt-valiadtion');
 const { createOxygen, getAll_oxygen, getOxygen } = require('../controllers/oxygenController');
 const { createTemperature, getAll_temperature, getTemperature } = require('../controllers/temperatureController');
 const { createRhythm, getRhythm, getAll_rythem } = require('../controllers/rhythmController');
-const { createUserTest } = require('../controllers/userController');
+const { createUserTest} = require('../controllers/userController');
 const router = Router();
 
 // Log in
@@ -50,6 +50,9 @@ router.route('/temperature/:id').get(getTemperature);
 router.route('/rhythm/:id').get(getRhythm);
 
 router.post('/renew', validateJWT, revalidateToken);
+
+
+// recovery
 
 
 module.exports = {

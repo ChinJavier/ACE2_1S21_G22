@@ -14,9 +14,9 @@ export class ChooseComponent implements OnInit {
   }
 
   goto_userMode():void{
-    //this.router.navigate(['']);
+    this.router.navigate(['dashboard']);
   }
   goto_coachMode():void{
-    this.router.navigate(['/coach']);
+    this.router.navigate(['/list-profile']);
   }
 }

@@ -12,4 +12,4 @@ const meditionSchema = new Schema({
 },
     { timestamps: true }
 );
-module.exports = model('Medition', meditionSchema); 
+module.exports = model('Medition', meditionSchema);

@@ -1,22 +1,15 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { baseURL_sensores } from '../shared/URL';
-import { baseURL } from '../shared/URL';
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
+  private url_api: string = "http://localhost:3000/logic/";
+  constructor(private http: HttpClient) {}
 
-  constructor() { }
-
-  // TODO: getUser()
-
-  // TODO: getUserByCoach()
-
-  // TODO: getUserStats()
-  
-  constructor(private http: HttpClient) { }
-
+  public getInfoUser(username: string | null):Observable<any>{
+    return this.http.get(`${this.url_api}${username}`);
+  }
 
 }

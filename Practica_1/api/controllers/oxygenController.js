@@ -4,10 +4,12 @@ const  modelo_oxygen = require('../models/oxygen');
 
 oxygenCtrl.createOxygen = async (req,res)=>{
     const nuevo = new modelo_oxygen(req.body);
-    await nuevo.save();
-
-    console.log(nuevo);
-    res.send('OXIGENO REGISTRADO');
+    try {
+        await nuevo.save();
+        res.status(200).json({text: 'OXIGENO REGISTRADO'});
+    } catch (error) {
+        res.status(500).json({text: 'CHIPILIN'});
+    }
 }
 
 

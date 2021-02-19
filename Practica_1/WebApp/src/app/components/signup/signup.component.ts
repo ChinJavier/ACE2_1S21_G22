@@ -49,15 +49,15 @@ export class SignupComponent implements OnInit {
     this.user = this.signupForm.value;
     console.log(this.user);
 
-    /* this.authService.createUser(this.user).subscribe(res => {
+    this.authService.createUser(this.user).subscribe(res => {
       console.log(res);
       localStorage.setItem('x-token', res['token']);
       localStorage.setItem('username', res['username']);
       localStorage.setItem('uid', res['uid']);
-      this.router.navigate(['/profile/' + res['uid']]);
+      this.router.navigate(['/login/']);
     }, err => {
       console.log(err);
-    }); */
+    }); 
     
   }
 

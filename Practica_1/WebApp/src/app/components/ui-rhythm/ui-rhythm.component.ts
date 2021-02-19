@@ -47,7 +47,9 @@ export class UiRhythmComponent implements OnInit {
 				scales: {
 				  yAxes: [{
 					  ticks: {
-						  fontColor: "black"
+						  fontColor: "black",
+						  suggestedMin: 70,
+						  suggestedMax: 200
 					  }
 				  }],
 				  xAxes: [{
@@ -82,6 +84,17 @@ export class UiRhythmComponent implements OnInit {
 			this.chart_ritmo.data.datasets[0].data.push(res); // PONE EL VALOR EN Y , ACA VAN LOS DATOS QUE VIENEN DE MONGO
 			this.chart_ritmo.update();
 			this.ritmoActual = res;
+		} , err => {
+			console.log('error' , err);
+		});
+	}
+
+	public saveRitmo():void{
+		const objetoModelo = {rhythm: this.ritmoActual , user: localStorage.getItem('uid')};
+		console.log(objetoModelo);
+		this.service.saveMedicion(objetoModelo,"rhythm").subscribe(res => {
+			alert('Medicion Registrada');
+			console.log(res);
 		} , err => {
 			console.log('error' , err);
 		});

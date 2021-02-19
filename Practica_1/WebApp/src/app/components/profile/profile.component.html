@@ -3,14 +3,13 @@
     <div class="container">
         <mat-list *ngFor="let dato of datos">
         <img mat-card-image src="./assets/graoh.jpg" class='imgRedonda' alt="Photo of a Shiba Inu">
-        <h2 >{{username}}</h2>
+        <h2 >{{ this.PROFILE.username }}</h2>
         <h3>Atleta</h3>
-        <mat-list-item>NOMBRE: {{name}}</mat-list-item>
-        <mat-list-item>APELLIDO: {{lastname}}</mat-list-item>
-        <mat-list-item>EDAD: {{age}}</mat-list-item>
-        <mat-list-item>SEXO: {{sex}}</mat-list-item>
-        <mat-list-item>PESO: {{weight}}</mat-list-item>
-        <mat-list-item>ESTATURA: {{height}}</mat-list-item>
+        <mat-list-item>NOMBRE: {{ this.PROFILE.name}}</mat-list-item>
+        <mat-list-item>EDAD: {{this.PROFILE.age}}</mat-list-item>
+        <mat-list-item>SEXO: {{this.PROFILE.gender}}</mat-list-item>
+        <mat-list-item>PESO: {{this.PROFILE.weight}}</mat-list-item>
+        <mat-list-item>ESTATURA: {{this.PROFILE.height}}</mat-list-item>
         <p class="my-5">
 
         </p>

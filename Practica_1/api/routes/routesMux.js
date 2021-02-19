@@ -4,12 +4,14 @@ const routerTest = Router();
 var OXYGEN =0 , TEMPERATURE = 0 , RHYTHM= 0;
 
 // SUPONGO QUE ESTE USAREMOS
-routerTest.route('/sensores/:oxigeno/:temperatura/:ritmo').post(
+routerTest.route('/sensores/:temperatura/:oxigeno/:ritmo').post(
     async(req,res) => {
     const {ritmo , temperatura , oxigeno} = req.params;
     RHYTHM = ritmo;
     TEMPERATURE = temperatura;
-    OXYGEN = oxigeno;
+    if (oxigeno != 0 ){
+        OXYGEN = oxigeno;
+    }
     console.log("POST 3 parametros" , '->' , req.params);
     res.send({text:'PETICION DE TEST DE SENSORES REALIZADA'});
 });
