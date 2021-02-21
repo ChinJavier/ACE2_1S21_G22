@@ -1,0 +1,87 @@
+<mat-toolbar >
+    <span> Historial </span >
+</mat-toolbar >
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootswatch/4.5.2/lux/bootstrap.min.css" integrity="sha384-9+PGKSqjRdkeAU7Eu4nkJU8RFaH8ace8HGXnkiKMP9I9Te0GJ4/km3L1Z8tXigpG" crossorigin="anonymous">   
+
+
+
+<div class="row">
+    <table class="table table-hover col-xl-4">
+        <thead>
+          <tr>
+            <th scope="col">
+                <mat-toolbar >
+                <span> RITMO</span >
+            </mat-toolbar >
+        </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="table-active" *ngFor="let h of history_ritmo">
+            <td>
+                <div class="card-header text-black-50" style="background-color: azure;">
+
+                </div>
+                <div class="card-body" >
+                    <p class="card-text" style="color: black;">VALOR: {{ h.valor }}</p>
+                    <p class="card-text" style="color: black;">FECHA: {{ h.fecha | date: "dd/MM/yyyy" }}</p>
+                    <p class="card-text" style="color: black;">HORA: {{ h.fecha | date: "hh:mm:ss" }}</p>
+                </div>
+            </td>
+          </tr>
+        </tbody>
+    </table>
+
+    <table class="table table-hover col-xl-4">
+        <thead>
+          <tr>
+            <th scope="col">
+                <mat-toolbar >
+                <span> TEMPERATURA</span >
+            </mat-toolbar >
+        </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="table-active" *ngFor="let h of history_temperatura">
+            <td>
+                <div class="card-header text-black-50" style="background-color: azure;">
+                </div>
+                <div class="card-body" >
+                    <p class="card-text" style="color: black;">VALOR: {{ h.valor }}</p>
+                    <p class="card-text" style="color: black;">FECHA: {{ h.fecha | date: "dd/MM/yyyy" }}</p>
+                    <p class="card-text" style="color: black;">HORA: {{ h.fecha | date: "hh:mm:ss" }}</p>
+                </div>
+            </td>
+          </tr>
+        </tbody>
+    </table>
+
+    <table class="table table-hover col-xl-4">
+        <thead>
+          <tr>
+            <th scope="col">                    
+                <mat-toolbar >
+                <span> OXIGENO</span >
+            </mat-toolbar >
+        </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="table-active" *ngFor="let h of history_oxigeno">
+            <td>
+                <div class="card-header text-black-50" style="background-color: azure;">
+
+                </div>
+                <div class="card-body" >
+                    <p class="card-text" style="color: black;">VALOR: {{ h.valor }}</p>
+                    <p class="card-text" style="color: black;">FECHA: {{ h.fecha | date: "dd/MM/yyyy" }}</p>
+                    <p class="card-text" style="color: black;">HORA: {{ h.fecha | date: "hh:mm:ss" }}</p>
+                </div>
+            </td>
+          </tr>
+        </tbody>
+    </table>
+
+
+

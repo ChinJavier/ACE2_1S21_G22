@@ -38,6 +38,7 @@ export class ListProfileComponent implements OnInit {
 
   verHistorial(_idMongo:any):void{
     console.log(_idMongo);
+    this.router.navigate(['/history',_idMongo]);
   }
 
 }
