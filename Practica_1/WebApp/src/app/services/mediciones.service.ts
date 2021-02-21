@@ -25,7 +25,7 @@ export class MedicionesService {
   }
 
   public getOxygen(): Observable<any>{
-    return this.http.get(`${this.backend}oxygen`);
+    return this.http.get(`${this.backend}oxygen`); //sensores/  + 'oxygen'
   }
 
   public getrhythm(): Observable<any>{

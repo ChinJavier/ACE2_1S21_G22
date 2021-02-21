@@ -17,7 +17,7 @@ import { ListProfileComponent} from './components/list-profile/list-profile.comp
 import {ReportsComponent} from './components/reports/reports.component'
 import { ReportOxigenoComponent} from './components/report-oxigeno/report-oxigeno.component';
 import { ReportTempComponent} from './components/report-temp/report-temp.component';
-
+import {HistoryComponent} from './components/history/history.component';
 export const routes: Routes = [
     { path: '', redirectTo: '/home', pathMatch: 'full'},
     { path: 'home', component: HomeComponent },
@@ -34,6 +34,7 @@ export const routes: Routes = [
     { path: 'oxygen' , component: UiOxygenComponent , canActivate: [AuthGuard]},
     { path: 'list-profile', component: ListProfileComponent, canActivate: [AuthGuard]},
     { path: 'reports' , component: ReportsComponent},
+    { path: 'history/:id' , component: HistoryComponent},
     { path: 'report-oxigen', component:ReportOxigenoComponent },
     {path: 'report-temp', component:ReportTempComponent}
 ];

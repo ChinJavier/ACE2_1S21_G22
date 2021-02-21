@@ -18,7 +18,7 @@ import { SignupComponent } from './components/signup/signup.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ProfileComponent } from './components/profile/profile.component';
-
+import { HistoryComponent } from './components/history/history.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthGuard } from './guards/auth.guard';
 import { ChooseComponent } from './components/choose/choose.component';
@@ -54,6 +54,7 @@ import { ReportOxigenoComponent } from './components/report-oxigeno/report-oxige
     ReportsComponent,
     ReportTempComponent,
     ReportOxigenoComponent,
+    HistoryComponent,
   ],
   imports: [
     BrowserModule,
