@@ -6,7 +6,8 @@ const { validateJWT } = require('../middlewares/jwt-valiadtion');
 const { createOxygen, getAll_oxygen, getOxygen } = require('../controllers/oxygenController');
 const { createTemperature, getAll_temperature, getTemperature } = require('../controllers/temperatureController');
 const { createRhythm, getRhythm, getAll_rythem } = require('../controllers/rhythmController');
-const { createUserTest} = require('../controllers/userController');
+const { createUserTest } = require('../controllers/userController');
+const { createMedition, getMeditionsByUsername } = require('../controllers/meditions');
 const router = Router();
 
 // Log in
@@ -23,10 +24,13 @@ router.post('/new', [
     check('password', 'Password should be at least 6 characters long').isLength({ min: 6 }),
     validateFields
 ], createUser);
+
 router.post('/meditions', [
     check('type', 'Type is required').not().isEmpty(),
+    check('username', 'Username is required').not().isEmpty(),
     validateFields
-], createUser);
+], createMedition);
+router.get('/meditions', getMeditionsByUsername);
 
 
 //router.post();
