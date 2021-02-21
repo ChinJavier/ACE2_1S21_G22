@@ -28,6 +28,8 @@ import { UiOxygenComponent } from './components/ui-oxygen/ui-oxygen.component';
 import { ListProfileComponent } from './components/list-profile/list-profile.component';
 import { ReportsComponent } from './components/reports/reports.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { ReportTempComponent } from './components/report-temp/report-temp.component';
+import { ReportOxigenoComponent } from './components/report-oxigeno/report-oxigeno.component';
 
 
 
@@ -50,6 +52,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     UiOxygenComponent,
     ListProfileComponent,
     ReportsComponent,
+    ReportTempComponent,
+    ReportOxigenoComponent,
   ],
   imports: [
     BrowserModule,

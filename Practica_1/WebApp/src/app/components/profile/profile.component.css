@@ -2,7 +2,7 @@ mat-list-item {
     justify-content:right;
 }
 .example-card {
-    max-width: 300px;
+    max-width: 10px;
   }
 .container{
     display: flex;
