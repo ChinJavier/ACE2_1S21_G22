@@ -1,6 +1,6 @@
-const { Medition } = require('../models/medition');
+const Medition = require('../models/medition');
 
-const createMedition = (req, res) => {
+const createMedition = async (req, res) => {
     let medition = "Medition";
     try {
         medition = new Medition(req.body);
@@ -12,18 +12,29 @@ const createMedition = (req, res) => {
             medition,
         });
     }
-    res.status(201).json({
+    return res.status(201).json({
         ok: true,
         medition,
     });
 }
 
-const getMeditionsByUser = (req, res) => {
-
+const getMeditionsByUsername = async (req, res) => {
+    const { username } = req.body;
+    let medition = await Medition.findOne({ username: username });
+    if (!medition) {
+        return res.status(400).json({
+            ok: false,
+            msg: "There are no meditions for this user yet.",
+        });
+    };
+    return res.status(200).json({
+        type: medition.type,
+        timestamsp: timestamps
+    });
 }
 
 
 module.exports = {
     createMedition,
-    getMeditionsByUser
+    getMeditionsByUsername,
 }
