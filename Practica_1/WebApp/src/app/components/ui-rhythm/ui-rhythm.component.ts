@@ -29,7 +29,7 @@ export class UiRhythmComponent implements OnInit {
 				labels: [],
 				datasets: [
 				  {
-					label: 'RITMO CARDAICO',
+					label: 'ritmo cardiaco vs tiempo',
 					fill: false,
 					data: [],
 					backgroundColor: '#168ede',

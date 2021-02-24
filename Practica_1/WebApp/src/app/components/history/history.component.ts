@@ -12,12 +12,15 @@ export class HistoryComponent implements OnInit {
   history_temperatura:any = [];
   history_oxigeno:any = [];
   _id : any ;
+  username : any;
   constructor(private s: MedicionesService ,private activatedRoute: ActivatedRoute , private sUser:UserService) {
     
   }
 
   ngOnInit(): void {
+  this.inicializar();
   this._id = this.activatedRoute.snapshot.params.id;
+  this.username = this.activatedRoute.snapshot.params.username;
   this.getMediciones();
   }
 
@@ -67,4 +70,34 @@ export class HistoryComponent implements OnInit {
   getInfoUsuario():void{
     
   }
+
+
+    // VARIABLES PARA EL RELOJ
+    time = new Date();
+    history:any = [];
+    hours = new Date().getHours();
+    msg: string = "";
+  
+    inicializar(){
+      this.getDate();
+      this.displayMsg();
+      }
+      
+      getDate(){
+      setInterval(() => {
+        this.time = new Date();
+      }, 1000);
+      }
+      
+      displayMsg() {
+      this.hours = new Date().getHours();
+      
+      if(this.hours < 10) {
+        this.msg = "Good Morning!"
+      } else if(this.hours < 16) {
+        this.msg = "Good Afternoon!";
+      } else {
+        this.msg = "Good Night!"
+      }
+      }
 }

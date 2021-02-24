@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+import { AuthService } from 'src/app/services/auth.service';
 @Component({
   selector: 'app-showtime',
   templateUrl: './showtime.component.html',
@@ -17,7 +17,9 @@ export class ShowtimeComponent implements OnInit {
 	hours = new Date().getHours();
 	msg: string = "";
 
-  constructor() { }
+  constructor(
+	private authService: AuthService,
+  ) { }
 
   ngOnInit(): void {
     this.inicializar();
@@ -25,7 +27,9 @@ export class ShowtimeComponent implements OnInit {
 
 
 
-
+  logout() {
+    this.authService.logout();
+  }
 
 	inicializar(){
 	this.getDate();

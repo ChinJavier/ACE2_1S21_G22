@@ -29,7 +29,7 @@ export class UiOxygenComponent implements OnInit {
 				labels: [],
 				datasets: [
 				  {
-					label: 'Oxigeno',
+					label: 'Oxigeno vs tiempo',
 					fill: false,
 					data: [],
 					backgroundColor: 'blue',

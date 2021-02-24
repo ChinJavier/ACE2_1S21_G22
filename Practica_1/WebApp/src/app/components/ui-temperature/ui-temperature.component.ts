@@ -33,7 +33,7 @@ export class UiTemperatureComponent implements OnInit {
 				labels: [],
 				datasets: [
 				  {
-					label: 'temperatura',
+					label: 'temperatura vs tiempo',
 					fill: false,
 					data: [],
 					backgroundColor: '#168ede',

@@ -37,9 +37,24 @@ export class ListProfileComponent implements OnInit {
     );
   }
 
-  verHistorial(_idMongo:any):void{
-    console.log(_idMongo);
-    this.router.navigate(['/history',_idMongo]);
+  verHistorial(_id:any , username: any):void{
+    this.router.navigate(['/history',_id , username]);
+  }
+
+  enter_with_how_user(_id:any , username:any):void{
+    alert('estas entrando con el usuario de tu atleta...');
+    const id_coach:any = localStorage.getItem('uid');
+    const user_coach:any = localStorage.getItem('username');
+    localStorage.setItem('username' ,username);
+    localStorage.setItem('uid' , _id);
+    localStorage.setItem('username_coach' ,user_coach);
+    localStorage.setItem('uid_coach' , id_coach);
+    console.log("____ CHANGE USER ______");
+    console.log(localStorage.getItem('uid'));
+    console.log(localStorage.getItem('username'));
+    console.log("______________________");
+    this.router.navigate(['/dashboard']);
+
   }
 
 

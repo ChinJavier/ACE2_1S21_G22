@@ -32,8 +32,8 @@ export class MedicionesService {
     return this.http.get(`${this.backend}rhythm`);
   }
 
-  public getMediciones(typeMedition: string , uidUser: string | null): Observable<any>{
-    return this.http.get(`${this.backCreate}all/${typeMedition}/${uidUser}`);
+  public getMediciones(typeMedition: string , username: string | null): Observable<any>{
+    return this.http.get(`${this.backCreate}all/${typeMedition}/${username}`);
   }
 
   public saveMedicion(objeto_body: any ,ruta: string): Observable<any>{ // FUNCION GENERICA

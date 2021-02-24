@@ -34,7 +34,7 @@ export const routes: Routes = [
     { path: 'oxygen' , component: UiOxygenComponent , canActivate: [AuthGuard]},
     { path: 'list-profile', component: ListProfileComponent, canActivate: [AuthGuard]},
     { path: 'reports' , component: ReportsComponent},
-    { path: 'history/:id' , component: HistoryComponent},
+    { path: 'history/:id/:username' , component: HistoryComponent},
     { path: 'report-oxigen', component:ReportOxigenoComponent },
     {path: 'report-temp', component:ReportTempComponent}
 ];

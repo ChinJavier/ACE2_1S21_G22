@@ -18,7 +18,7 @@ export class ProfileComponent implements OnInit {
             peso: '176 lbs',
             estatura: '180 cms'}];
 
-  constructor(private activatedRoute: ActivatedRoute  , private sUser: UserService) { }
+  constructor(private activatedRoute: ActivatedRoute  , private sUser: UserService , private router: Router) { }
 
   ngOnInit(): void {
     this.inicializar();
@@ -30,6 +30,19 @@ export class ProfileComponent implements OnInit {
     
     }, err => console.log(err));
     
+  }
+
+  goBack() {
+	let usernameVisit = this.activatedRoute.snapshot.params.username;
+	// console.log("........... regresando del perfil ..........");
+	// console.log(usernameVisit);
+	// console.log(localStorage.getItem('username'));
+	// console.log(".......................");
+	if (usernameVisit == localStorage.getItem('username')){
+		this.router.navigate(['/dashboard']);
+	}else{
+		this.router.navigate(['/list-profile']);
+	}
   }
 
 
