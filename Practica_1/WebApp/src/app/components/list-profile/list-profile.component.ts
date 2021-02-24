@@ -14,6 +14,7 @@ export class ListProfileComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.inicializar();
     this.getUsersAvailable();
     this.getMyUsers();
   }
@@ -40,5 +41,35 @@ export class ListProfileComponent implements OnInit {
     console.log(_idMongo);
     this.router.navigate(['/history',_idMongo]);
   }
+
+
+  // VARIABLES PARA EL RELOJ
+  time = new Date();
+	history:any = [];
+	hours = new Date().getHours();
+	msg: string = "";
+
+  inicializar(){
+    this.getDate();
+    this.displayMsg();
+    }
+    
+    getDate(){
+    setInterval(() => {
+      this.time = new Date();
+    }, 1000);
+    }
+    
+    displayMsg() {
+    this.hours = new Date().getHours();
+    
+    if(this.hours < 10) {
+      this.msg = "Good Morning!"
+    } else if(this.hours < 16) {
+      this.msg = "Good Afternoon!";
+    } else {
+      this.msg = "Good Night!"
+    }
+    }
 
 }
