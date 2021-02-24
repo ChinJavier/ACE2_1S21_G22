@@ -14,6 +14,7 @@ export class ListProfileComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.inicializar();
     this.getUsersAvailable();
     this.getMyUsers();
   }
@@ -36,9 +37,54 @@ export class ListProfileComponent implements OnInit {
     );
   }
 
-  verHistorial(_idMongo:any):void{
-    console.log(_idMongo);
-    this.router.navigate(['/history',_idMongo]);
+  verHistorial(_id:any , username: any):void{
+    this.router.navigate(['/history',_id , username]);
   }
+
+  enter_with_how_user(_id:any , username:any):void{
+    alert('estas entrando con el usuario de tu atleta...');
+    const id_coach:any = localStorage.getItem('uid');
+    const user_coach:any = localStorage.getItem('username');
+    localStorage.setItem('username' ,username);
+    localStorage.setItem('uid' , _id);
+    localStorage.setItem('username_coach' ,user_coach);
+    localStorage.setItem('uid_coach' , id_coach);
+    console.log("____ CHANGE USER ______");
+    console.log(localStorage.getItem('uid'));
+    console.log(localStorage.getItem('username'));
+    console.log("______________________");
+    this.router.navigate(['/dashboard']);
+
+  }
+
+
+  // VARIABLES PARA EL RELOJ
+  time = new Date();
+	history:any = [];
+	hours = new Date().getHours();
+	msg: string = "";
+
+  inicializar(){
+    this.getDate();
+    this.displayMsg();
+    }
+    
+    getDate(){
+    setInterval(() => {
+      this.time = new Date();
+    }, 1000);
+    }
+    
+    displayMsg() {
+    this.hours = new Date().getHours();
+    
+    if(this.hours < 10) {
+      this.msg = "Good Morning!"
+    } else if(this.hours < 16) {
+      this.msg = "Good Afternoon!";
+    } else {
+      this.msg = "Good Night!"
+    }
+    }
 
 }

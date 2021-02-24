@@ -39,6 +39,16 @@ export class HeaderComponent implements OnInit {
   }
 
   goTo_coachMenu():void{
+    let id:any = localStorage.getItem('uid_coach');
+    let user :any= localStorage.getItem('username_coach');
+    console.log(id);
+    console.log(user);
+
+    if ((id != undefined && id != null  && id.length != 0 ) && (user !== undefined && user != null && user.length != 0 )){
+      localStorage.setItem('uid',id );
+      localStorage.setItem('username',user);
+      console.log('COMEBACK COACH MODE');
+    }
     this.router.navigate(['/choose']);
   }
 

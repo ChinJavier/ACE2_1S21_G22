@@ -58,3 +58,7 @@ button {
     background-color: #ccc;
     width: 100%;
 }
+
+.title {
+    font-size: smaller;
+}

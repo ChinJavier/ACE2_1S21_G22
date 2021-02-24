@@ -54,12 +54,14 @@ export class LoginComponent implements OnInit {
       localStorage.setItem('name' , res['name']);
       localStorage.setItem('lastname' , res['name']);
       localStorage.setItem('age' , res['age']);
+      localStorage.setItem('uid_coach' , '');
+      localStorage.setItem('username_coach' ,'');//
       if (res.isCoach == true){
         this.router.navigate(['/choose']);
       }else{
         this.router.navigate(['/dashboard']);
       }
-    }, err => console.log(err['error']));
+    }, err => {console.log(err['error']); alert('credenciales incorrectas o error en el server')});
   }
   
 
