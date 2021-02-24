@@ -8,7 +8,7 @@ import { baseURL_sensores } from '../shared/URL';
 })
 export class MedicionesService {
   private backend: string = "";
-  private backCreate: string = "http://localhost:3000/api/v1/auth/";
+  private backCreate: string = "https://tve-app-g22.herokuapp.com/api/v1/auth/";
   constructor(private http: HttpClient) {
     this.backend = baseURL_sensores;// redundante :v
   }

@@ -10,6 +10,10 @@ export class HeaderComponent implements OnInit {
   username: String | null = '';
   isCoach: any = false;
   uid:any;
+  time = new Date();
+  history:any = [];
+  hours = new Date().getHours();
+  msg: string = "";
   constructor(
     private authService: AuthService,
     private router: Router,
@@ -17,6 +21,8 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.getDate();
+    this.displayMsg();
     this.username = localStorage.getItem('username');
     this.isCoach = localStorage.getItem('isCoach');
     this.uid = localStorage.getItem('uid');
@@ -39,5 +45,23 @@ export class HeaderComponent implements OnInit {
 
   goto_profile(): void{
     this.router.navigate(['/profile/' , this.username]);
+  }
+
+  getDate(){
+    setInterval(() => {
+      this.time = new Date();
+    }, 1000);
+  }
+
+  displayMsg() {
+    this.hours = new Date().getHours();
+    
+    if(this.hours < 10) {
+      this.msg = "Good Morning!"
+    } else if(this.hours < 16) {
+      this.msg = "Good Afternoon!";
+    } else {
+      this.msg = "Good Night!"
+    }
   }
 }

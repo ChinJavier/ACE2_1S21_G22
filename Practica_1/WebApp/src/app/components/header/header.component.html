@@ -1,16 +1,32 @@
-<p>
-    <mat-toolbar>
-        <span>Dashboard | Welcome, {{username}}</span>
-        <span class="flex-spacer">
-        </span>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="#">TVE G22</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
 
-        <a (click) = "goTo_coachMenu()" mat-button *ngIf="isCoach"><span class="material-icons">
-            logout
-        </span> back
-    </a>
-        <a mat-button (click)= "goto_profile()"><span class="material-icons">
-                face
-            </span> Profile</a>
-        <a mat-button (click)="logout()" >Logout</a>
-    </mat-toolbar>
-</p>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+            <li class="nav-item active">
+                <a (click)="goTo_coachMenu()" mat-button *ngIf="isCoach"><span class="material-icons">
+                        logout
+                    </span> back
+                </a>
+            </li>
+            <li class="nav-item">
+                <a mat-button (click)="goto_profile()"><span class="material-icons">
+                        face
+                    </span> Perfil</a>
+            </li>
+            <li class="nav-item">
+                <a mat-button (click)="logout()">Cerrar Sesión</a>
+            </li>
+        </ul>
+
+    </div>
+    <span class="flex-spacer">
+    </span>
+    <div class="counter-container">
+        <p class="txt-time">{{time | date:'mediumTime'}}</p>
+    </div>
+</nav>

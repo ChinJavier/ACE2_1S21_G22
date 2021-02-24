@@ -1,6 +1,8 @@
 <app-header></app-header>
-<div class="stats-container" fxLayout.md="column">
-  <mat-card class="card">
+
+<div class="stats-container" fxLayout.sm="column" fxLayout.md="column" fxLayout.xs="column"
+  fxLayoutAlign="center center">
+  <mat-card class="card card1 animate__animated animate__backInLeft">
     <mat-card-header>
       <div fxFlex="100" fxLayout="column">
         <p class="card-title">Ritmo Cardiaco</p>
@@ -21,7 +23,7 @@
       <a mat-button [routerLink]="['/rhythm']">Info</a>
     </mat-card-actions>
   </mat-card>
-  <mat-card class="card">
+  <mat-card class="card card2 animate__animated animate__backInDown">
     <mat-card-header>
       <div fxFlex="100" fxLayout="column">
         <p class="card-title">Orxigeno en la Sangre</p>
@@ -42,7 +44,7 @@
       <button mat-button [routerLink]="['/oxygen']">Info</button>
     </mat-card-actions>
   </mat-card>
-  <mat-card class="card">
+  <mat-card class="card card3 animate__animated animate__backInRight">
     <mat-card-header>
       <div fxFlex="100" fxLayout="column">
         <p class="card-title">Temperatura</p>
@@ -64,71 +66,27 @@
     </mat-card-actions>
   </mat-card>
 </div>
-<link
-rel="stylesheet"
-href="https://stackpath.bootstrapcdn.com/bootswatch/4.5.2/lux/bootstrap.min.css"
-integrity="sha384-9+PGKSqjRdkeAU7Eu4nkJU8RFaH8ace8HGXnkiKMP9I9Te0GJ4/km3L1Z8tXigpG"
-crossorigin="anonymous"
-/>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootswatch/4.5.2/lux/bootstrap.min.css"
+  integrity="sha384-9+PGKSqjRdkeAU7Eu4nkJU8RFaH8ace8HGXnkiKMP9I9Te0GJ4/km3L1Z8tXigpG" crossorigin="anonymous" />
 <div class="historial-container">
 
 
-   <div class="medition-card">
-
-    <div class="row">
-        <h1 class="h-title justify-content-between col-xl-5" style="font-family: 'Times New Roman', Times, serif; font-style: italic">Historial de mediciones</h1>
-        <a class="material-icons"> remove_red_eye </a>
-        <span class="material-icons"> done_all </span>
-    </div>
 
 
-    <div class="list-group">
-      <a
-        class="list-group-item list-group-item-action active col-xl-6"
-        *ngFor="let h of history"
-      >
-        <div class="row container">
-          <div class="">
-            <BR />
-            <small> </small>
-          </div>
 
-          <BR />
-          <div class="offset-6"></div>
-        </div>
+  <mat-list class="h-list" class="animate__animated animate__fadeInLeft">
+    <h1>Historial de mediciones <span class="material-icons"> remove_red_eye </span>
+    </h1>
+    <mat-list-item *ngFor="let h of history">
+      <mat-icon mat-list-icon>folder</mat-icon>
+      <div mat-line><strong>{{h.type}}</strong></div>
+      <div mat-line>Resultado: {{ h.valor }}</div>
+      <div mat-line>{{ h.fecha | date: "dd/MM/yyyy" }} </div>
+      <div mat-line>{{ h.fecha | date: "hh:mm:ss" }} </div>
+    </mat-list-item>
 
-        <div class="d-flex w-100 justify-content-between my-0">
-          <div class="card-title">
-            <p
-              class="display-4"
-              style="
-                font-family: 'Times New Roman', Times, serif;
-                font-style: italic;
-              "
-            >
-              {{ h.type }}
-            </p>
-            <br />
-            <p
-              class="display"
-              style="
-                font-family: 'Times New Roman', Times, serif;
-                font-style: italic;
-              "
-            >
-              VALOR: {{ h.valor }}
-            </p>
-          </div>
+    <mat-divider></mat-divider>
 
-          <small>
-            FECHA: {{ h.fecha | date: "dd/MM/yyyy" }}
-            <BR />
-            HORA: {{ h.fecha | date: "hh:mm:ss" }}
-          </small>
-        </div>
-      </a>
-    </div>
-  </div>
-</div>
+  </mat-list>
 
-<!-- NO IMPORTA QUE EL HISTORY ESTE VACIO , cuando en las peticiones se llene el ngFor lo va recargar-->
+  <!-- NO IMPORTA QUE EL HISTORY ESTE VACIO , cuando en las peticiones se llene el ngFor lo va recargar-->
