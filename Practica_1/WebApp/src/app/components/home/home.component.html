@@ -1,19 +1,44 @@
 <div class="main-container">
-    <nav>
+    <nav fxHide.lg class="animate__animated animate__bounceInDown">
+        <ul xs.fxLayout="column" sm.fxLayout="column" md.fxLayout="column" xs.fxLayoutAlign="center center"
+            sm.fxLayoutAlign="space-between center">
+            <div class="menu-cont">
+                <li>
+                    <a [routerLink]="['/home']">Inicio</a>
+                </li>
+                <li>
+                    <a [routerLink]="['/login']">Iniciar Sesión</a>
+                </li>
+            </div>
+            <div class="menu-cont">
+                <li>
+                    <a [routerLink]="['/signup']">Registrarse</a>
+                </li>
+                <li>
+                    <a [routerLink]="['/about']">Acerca de</a>
+                </li>
+            </div>
+        </ul>
+        <div class="text-container">
+            <p class="animate__animated  animate__backInRight">
+                Tecnología Vestible para Ejercicio
+            </p>
+        </div>
+    </nav>
+    <nav fxHide.sm fxHide.xs class="animate__animated animate__bounceInDown">
         <ul>
             <li>
-                <a [routerLink]="['/home']">Home</a>
+                <a [routerLink]="['/home']">Inicio</a>
             </li>
             <li>
-                <a [routerLink]="['/login']">Sign In</a>
+                <a [routerLink]="['/login']">Iniciar Sesión</a>
             </li>
             <li>
-                <a [routerLink]="['/signup']">Sign Up</a>
+                <a [routerLink]="['/signup']">Registrarse</a>
             </li>
             <li>
-                <a [routerLink]="['/about']">About</a>
+                <a [routerLink]="['/about']">Acerca de</a>
             </li>
-
         </ul>
         <div class="text-container">
             <p>
@@ -23,7 +48,7 @@
     </nav>
 </div>
 
-<div class="info-container">
+<div class="info-container" xs.fxLayout="column">
     <h1>
         ¿Qué es TVE?
     </h1>

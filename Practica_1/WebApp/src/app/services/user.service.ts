@@ -5,7 +5,7 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class UserService {
-  private url_api: string = "http://localhost:3000/logic/";
+  private url_api: string = "https://tve-app-g22.herokuapp.com/logic/";
   constructor(private http: HttpClient) {}
 
   public getInfoUser(username: string | null):Observable<any>{

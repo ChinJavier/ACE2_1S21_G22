@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router'; // PARA CAMBIAR DE UNA PESTAÑA A OTRA
 import {MedicionesService} from './../../services/mediciones.service';
 import { Chart } from 'chart.js';
+import { MatDialog } from "@angular/material/dialog";
+import { SuccessComponent } from '../dialogs/success/success.component';
+
 @Component({
   selector: 'app-ui-temperature',
   templateUrl: './ui-temperature.component.html',
@@ -11,9 +14,17 @@ export class UiTemperatureComponent implements OnInit {
 	private hilo: any = null;
 	public char_grafica: any = null;
 	public valorActual = 0;
-	constructor(private service: MedicionesService) {
+	constructor(private service: MedicionesService,
+		public dialog: MatDialog,
+		) {
 	}
 
+	openDialog() {
+		this.dialog.open(SuccessComponent, {
+			width: "350px",
+			height: "220px",
+		  });
+	}
 	
 	 ngOnInit(): void {
 		this.char_grafica = new Chart('realtime', {
@@ -87,6 +98,8 @@ export class UiTemperatureComponent implements OnInit {
 	}
 
 	public saveTemperatura():void{
+		this.openDialog();
+
 		const objetoModelo = {temperature: this.valorActual , user: localStorage.getItem('uid')};
 		console.log(objetoModelo);
 		this.service.saveMedicion(objetoModelo,"temperature").subscribe(res => {

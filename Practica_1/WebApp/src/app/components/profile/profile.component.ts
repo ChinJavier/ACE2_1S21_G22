@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Router, ActivatedRoute} from '@angular/router';
 import {UserService} from './../../services/user.service';
+import { User } from "../../models/user";
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
@@ -8,7 +9,7 @@ import {UserService} from './../../services/user.service';
 })
 export class ProfileComponent implements OnInit {
 
-  PROFILE: any ;
+  user: User = {} as User;
 
   datos = [{name: 'Lourdes',
             apellido: 'Lorenzana',
@@ -23,8 +24,8 @@ export class ProfileComponent implements OnInit {
     console.log(this.activatedRoute.snapshot.params.username); // aca recibimos el usuario y luego obtenemos los datos
     let username: any = this.activatedRoute.snapshot.params.username; 
     this.sUser.getInfoUser(username).subscribe(res => {
-      this.PROFILE = res;
-      console.log(res);
+      this.user = res;
+      console.log(this.user);
     
     }, err => console.log(err));
     

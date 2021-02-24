@@ -1,21 +1,21 @@
-<p>report-temp works!</p>
 <div class="container">
-    <mat-card class="example-card" >
+    <mat-card class="card">
         <mat-card-header>
-        <div mat-card-avatar class="example-header-image"></div>
-        <mat-card-title>TEMPERATURA DEL ATLETA</mat-card-title>
+            <div mat-card-avatar class="example-header-image"></div>
+            <mat-card-title>TEMPERATURA DEL ATLETA</mat-card-title>
         </mat-card-header>
         <img mat-card-image src="./assets/temperatura.jpg" alt="Photo of a Shiba Inu">
         <mat-card-content>
         </mat-card-content>
+        <div class="prom-content">
+            <b>Temperatura corporal promedio:10 </b>
+            <b>Máx:20</b>
+            <b>Mín:30</b>
+        </div>
         <mat-card-actions>
-            <div>
-                <b>TEMPERATURA CORPORAL PROMEDIO:10 </b>
-                <b>MÁXIMA:20</b>
-                <b>MÍNIMA:30</b>
-            </div>
-            <button mat-button>HISTORIAL </button>
-            <button mat-button>TEMPERATURA CORPORAL EN TIEMPO REAL</button>
+            <button mat-button>Historial</button>
+            <button mat-button>Tiempo Real</button>
+            <button mat-button [routerLink]="['/dashboard']">Back</button>
         </mat-card-actions>
     </mat-card>
 </div>

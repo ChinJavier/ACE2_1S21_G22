@@ -1,20 +1,19 @@
-
 <div class="container">
-    <mat-card class="example-card" >
+    <mat-card class="card">
         <mat-card-header>
-        <div mat-card-avatar class="example-header-image"></div>
-        <mat-card-title>MEDICIÓN DE RITMO CARDIACO DEL ATLETA</mat-card-title>
+            <div mat-card-avatar class="example-header-image"></div>
+            <mat-card-title>MEDICIÓN DE RITMO CARDIACO DEL ATLETA</mat-card-title>
         </mat-card-header>
         <img mat-card-image src="./assets/ritmo.jpg" alt="Photo of a Shiba Inu">
         <mat-card-content>
         </mat-card-content>
+        <div class="prom-content">
+            <b>Promedio de ritmo cardiaco: 15</b>
+        </div>
         <mat-card-actions>
-            <div>
-                <b>RITMO CARDIACO PROMEDIO: 5</b>
-            </div>
-            <button mat-button>HISTORIAL DE RITMO CARDIACO</button>
-            <button mat-button>RITMO CARDIACO EN TIEMPO REAL</button>
+            <button mat-button>Historial</button>
+            <button mat-button>Tiempo Real</button>
+            <button mat-button [routerLink]="['/dashboard']">Back</button>
         </mat-card-actions>
     </mat-card>
 </div>
-

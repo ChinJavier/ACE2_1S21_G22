@@ -4,6 +4,8 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Chart } from 'chart.js';
 import {MedicionesService} from './../../services/mediciones.service';
+import { MatDialog } from "@angular/material/dialog";
+import { SuccessComponent } from '../dialogs/success/success.component';
 
 @Component({
   selector: 'app-ui-rhythm',
@@ -14,7 +16,9 @@ export class UiRhythmComponent implements OnInit {
 	private hilo: any = null;
 	public chart_ritmo: any = null;
 	public ritmoActual = 0;
-	constructor(private service: MedicionesService) {
+	constructor(private service: MedicionesService,
+		public dialog: MatDialog,
+		) {
 	}
 
 	
@@ -88,8 +92,15 @@ export class UiRhythmComponent implements OnInit {
 			console.log('error' , err);
 		});
 	}
+	openDialog() {
+		this.dialog.open(SuccessComponent, {
+			width: "350px",
+			height: "220px",
+		  });
+	}
 
 	public saveRitmo():void{
+		this.openDialog();
 		const objetoModelo = {rhythm: this.ritmoActual , user: localStorage.getItem('uid')};
 		console.log(objetoModelo);
 		this.service.saveMedicion(objetoModelo,"rhythm").subscribe(res => {

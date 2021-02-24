@@ -30,6 +30,7 @@ import { ReportsComponent } from './components/reports/reports.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { ReportTempComponent } from './components/report-temp/report-temp.component';
 import { ReportOxigenoComponent } from './components/report-oxigeno/report-oxigeno.component';
+import { SuccessComponent } from './components/dialogs/success/success.component';
 
 
 
@@ -39,7 +40,6 @@ import { ReportOxigenoComponent } from './components/report-oxigeno/report-oxige
     HomeComponent,
     AboutComponent,
     FooterComponent,
-    HeaderComponent,
     LoginComponent,
     AthleteComponent,
     CoachComponent,
@@ -55,6 +55,8 @@ import { ReportOxigenoComponent } from './components/report-oxigeno/report-oxige
     ReportTempComponent,
     ReportOxigenoComponent,
     HistoryComponent,
+    HeaderComponent,
+    SuccessComponent,
   ],
   imports: [
     BrowserModule,
