@@ -1,18 +1,60 @@
-mat-list-item {
-    justify-content:right;
+.card{
+    margin-top: 60px;
+    width: 300px;
+    max-width: 500px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    
 }
-.example-card {
-    max-width: 10px;
-  }
+
+
 .container{
     display: flex;
     flex-direction: row;
     justify-content: space-around;
 }
-.imgRedonda {
-    width:70px;
-    height:70px;
-    border-radius:150px;
+
+@media only screen and (max-width: 600px) {
+    .card {
+        max-width: 300px;
+    }
+}
+
+mat-card-actions {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.prom-content {
+    text-align: center;
+}
+
+mat-card-header {
+    width: 100%;
+    background: #ccc;
+    height: 50px;
+    font-size: 20px;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center
 }
 
 
+mat-card-content {
+    display: flex;
+    justify-content: center
+}
+
+mat-toolbar {
+    display: flex;
+    justify-content: center;
+    text-align: center
+}
+
+button {
+    background-color: #ccc;
+    width: 100%;
+}

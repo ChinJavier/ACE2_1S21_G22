@@ -1,7 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router'; // PARA CAMBIAR DE UNA PESTAÑA A OTRA
 import {MedicionesService} from './../../services/mediciones.service';
 import { Chart } from 'chart.js';
+
+import { MatDialog } from "@angular/material/dialog";
+import { SuccessComponent } from '../dialogs/success/success.component';
+
+
 @Component({
   selector: 'app-ui-oxygen',
   templateUrl: './ui-oxygen.component.html',
@@ -11,7 +15,10 @@ export class UiOxygenComponent implements OnInit {
 	private hilo: any = null;
 	public char_grafica: any = null;
 	public valorActual = 0;
-	constructor(private service: MedicionesService) {
+	constructor(
+		private service: MedicionesService,
+		public dialog: MatDialog,
+	) {
 	}
 
 	
@@ -73,6 +80,13 @@ export class UiOxygenComponent implements OnInit {
 		clearInterval(this.hilo);
 	}
 
+	openDialog() {
+		this.dialog.open(SuccessComponent, {
+			width: "350px",
+			height: "220px",
+		  });
+	}
+
 	private showGraphic(): void {
 		this.service.getOxygen().subscribe(res => {
 			let char_graficaTime: any = new Date();
@@ -93,10 +107,11 @@ export class UiOxygenComponent implements OnInit {
 
 
 	public saveOxygen():void{
+		this.openDialog();
 		const objetoModelo = {oxygen: this.valorActual , user: localStorage.getItem('uid')};
 		console.log(objetoModelo);
 		this.service.saveMedicion(objetoModelo,"oxygen").subscribe(res => {
-			alert('Medicion registrada');
+			//alert('Medicion registrada');
 			console.log(res);
 		} , err => {
 			console.log('**error**' , err);
