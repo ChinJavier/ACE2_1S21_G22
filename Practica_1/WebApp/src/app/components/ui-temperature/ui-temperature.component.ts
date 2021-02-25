@@ -103,7 +103,7 @@ export class UiTemperatureComponent implements OnInit {
 		const objetoModelo = {temperature: this.valorActual , user: localStorage.getItem('uid')};
 		console.log(objetoModelo);
 		this.service.saveMedicion(objetoModelo,"temperature").subscribe(res => {
-			alert('Medicion registrada');
+			//alert('Medicion registrada');
 			console.log(res);
 		} , err => {
 			console.log('error' , err);
