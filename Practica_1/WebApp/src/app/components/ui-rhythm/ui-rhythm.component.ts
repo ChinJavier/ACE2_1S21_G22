@@ -104,7 +104,6 @@ export class UiRhythmComponent implements OnInit {
 		const objetoModelo = {rhythm: this.ritmoActual , user: localStorage.getItem('uid')};
 		console.log(objetoModelo);
 		this.service.saveMedicion(objetoModelo,"rhythm").subscribe(res => {
-			alert('Medicion Registrada');
 			console.log(res);
 		} , err => {
 			console.log('error' , err);
