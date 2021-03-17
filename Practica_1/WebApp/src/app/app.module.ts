@@ -32,6 +32,7 @@ import { ReportTempComponent } from './components/report-temp/report-temp.compon
 import { ReportOxigenoComponent } from './components/report-oxigeno/report-oxigeno.component';
 import { SuccessComponent } from './components/dialogs/success/success.component';
 import { ShowtimeComponent } from './components/showtime/showtime.component';
+import { ReportTestComponent } from './components/report-test/report-test.component';
 
 
 
@@ -59,6 +60,7 @@ import { ShowtimeComponent } from './components/showtime/showtime.component';
     HeaderComponent,
     SuccessComponent,
     ShowtimeComponent,
+    ReportTestComponent
   ],
   imports: [
     BrowserModule,

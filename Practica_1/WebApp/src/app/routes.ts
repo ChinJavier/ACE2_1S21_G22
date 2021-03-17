@@ -18,6 +18,7 @@ import {ReportsComponent} from './components/reports/reports.component'
 import { ReportOxigenoComponent} from './components/report-oxigeno/report-oxigeno.component';
 import { ReportTempComponent} from './components/report-temp/report-temp.component';
 import {HistoryComponent} from './components/history/history.component';
+import { ReportTestComponent } from './components/report-test/report-test.component';
 export const routes: Routes = [
     { path: '', redirectTo: '/home', pathMatch: 'full'},
     { path: 'home', component: HomeComponent },
@@ -36,5 +37,6 @@ export const routes: Routes = [
     { path: 'reports' , component: ReportsComponent},
     { path: 'history/:id/:username' , component: HistoryComponent},
     { path: 'report-oxigen', component:ReportOxigenoComponent },
-    {path: 'report-temp', component:ReportTempComponent}
+    { path: 'report-temp', component:ReportTempComponent},
+    { path: 'report-test', component: ReportTestComponent}
 ];
