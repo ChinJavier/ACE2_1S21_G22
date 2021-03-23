@@ -15,6 +15,7 @@ export class ReportOxigenoComponent implements OnInit {
 	public char_grafica: any = null;
 
   ngOnInit(): void {
+    
     this.getMediciones();
 
     // OBJETO QUE CONTROLA LA GRAFICA

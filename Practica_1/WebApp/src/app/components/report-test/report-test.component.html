@@ -2,25 +2,25 @@
   <div class="container">
     <mat-selection-list  >
           <mat-card-title>METRICS</mat-card-title>
-          <mat-card>Speed AVG:--</mat-card>
-          <mat-card>Total Distance:--</mat-card>
+          <mat-card>Speed AVG: {{promedioVelocity}}</mat-card>
+          <mat-card>Total Distance: {{TotalDistance}}</mat-card>
           <mat-card>Sessions:--</mat-card>
-          <mat-card>Repetitions Count:--</mat-card>
+          <mat-card>Repetitions Count: {{RepetitionsCount}}</mat-card>
           
     </mat-selection-list>
     <mat-selection-list>
       <mat-card-title>REAL TIME</mat-card-title>
-      <mat-card>Speed: </mat-card>
-      <mat-card>Heart Rate: </mat-card>
-      <mat-card>Distance: </mat-card>
-      <mat-card>Repetitions Count: </mat-card>
+      <mat-card>Speed: {{RealVelocity}} </mat-card>
+      <mat-card>Heart Rate: {{RealRythm}}</mat-card>
+      <mat-card>Distance: {{RealDistance}}</mat-card>
+      <mat-card>Repetitions Count: {{RepetitionsCount}} </mat-card>
       
     </mat-selection-list>
     <mat-selection-list>
       <mat-card-title>SPEED REPORT</mat-card-title>
-      <mat-card>Max: </mat-card>
+      <mat-card>Max: {{maxVelocity}} </mat-card>
       <mat-card>AVG: </mat-card>
-      <mat-card>Min: </mat-card>
+      <mat-card>Min:{{minVelocity}} </mat-card>
     </mat-selection-list>
     
   </div>
