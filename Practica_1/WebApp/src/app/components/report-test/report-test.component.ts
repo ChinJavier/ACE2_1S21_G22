@@ -12,7 +12,7 @@ export class ReportTestComponent implements OnInit {
   medicionesRitmo:any=[];
   meditionsVelocity:any=[];
   meditionsDistance:any=[];
-
+  lista:string[]=["hola","que","tal","estas"];
   promedioVelocity:any=0;
   maxVelocity:any=0;
   minVelocity:any=0;
@@ -63,7 +63,8 @@ export class ReportTestComponent implements OnInit {
     this.medicionesService.getMediciones('velocity',user).subscribe(res=>{
       for (let i = 0 ; i < res.length; i++){
         const objetoVelocity = {
-          valor: res[i].valor
+          valor: res[i].valor,
+          fecha: res[i].fecha
         };
         this.meditionsVelocity.push(objetoVelocity);
       }
