@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MedicionesService } from 'src/app/services/mediciones.service';
-
+import { Chart } from 'chart.js';
 @Component({
   selector: 'app-report-test',
   templateUrl:'./report-test.component.html',
@@ -21,6 +21,13 @@ export class ReportTestComponent implements OnInit {
   RealVelocity:any=0;
   RealRythm:any=0;
   RealDistance:any=0;
+   // PARA LA GRAFICA DE RITMO
+   private hilo: any = null;
+   public chart_ritmo: any = null;
+   public ritmoActual = 0;
+   //--------------------- fin
+
+
   constructor(private medicionesService: MedicionesService) { 
     this.getMedicionesRitmoC();
     this.getMeditionsVelocity();
@@ -156,7 +163,80 @@ export class ReportTestComponent implements OnInit {
       console.log("Error en getRealDistance")
     })
   }
-  ngOnInit(): void {
-  }
+
+
+  // constructor cuanado esta todo montado
+ngOnInit(): void {
+  //------------------------------------------- GRAFICA DE RITMO
+  this.chart_ritmo = new Chart('realtime', {
+    type: 'line',
+    data: {
+      labels: [],
+      datasets: [
+        {
+        label: 'ritmo cardiaco vs tiempo',
+        fill: false,
+        data: [7,7],
+        backgroundColor: '#168ede',
+        borderColor: '#FF0C00'
+        }
+      ]
+      },
+      options: {
+      tooltips: {
+        enabled: false
+      },
+      legend: {
+        display: true,
+        position: 'bottom',
+        labels: {
+          fontColor: 'black'
+        }
+      },
+      scales: {
+        yAxes: [{
+          ticks: {
+            fontColor: "black",
+            suggestedMin: 70,
+            suggestedMax: 200
+          }
+        }],
+        xAxes: [{
+        ticks: {
+          fontColor: "black",
+          beginAtZero: true
+        }
+        }]
+      }
+      }
+  });
+  this.showGraphic();
+  this.hilo = setInterval(() =>{this.showGraphic();},1000);
+  //----------------------------------------- FIN DE LA GRAFICA DE RITMO
+
+
+}
+//Called once, before the instance is destroyed.
+ngOnDestroy(): void {
+  clearInterval(this.hilo);// deja de llamar a las peticiones
+}
+
+private showGraphic(): void {
+  this.medicionesService.getrhythm().subscribe(res => {
+    let chart_ritmoTime: any = new Date();
+    // PONE EL TIEMPO Y SI ES MAYOR A 15 DATOS DA UN SHIFT
+    chart_ritmoTime = chart_ritmoTime.getHours() + ':' + ((chart_ritmoTime.getMinutes() < 10) ? '0' + chart_ritmoTime.getMinutes() : chart_ritmoTime.getMinutes()) + ':' + ((chart_ritmoTime.getSeconds() < 10) ? '0' + chart_ritmoTime.getSeconds() : chart_ritmoTime.getSeconds());
+    if(this.chart_ritmo.data.labels.length > 15) {
+        this.chart_ritmo.data.labels.shift();
+        this.chart_ritmo.data.datasets[0].data.shift();
+    }
+    this.chart_ritmo.data.labels.push(chart_ritmoTime);
+    this.chart_ritmo.data.datasets[0].data.push(res); // PONE EL VALOR EN Y , ACA VAN LOS DATOS QUE VIENEN DE MONGO
+    this.chart_ritmo.update();
+    this.ritmoActual = res;
+  } , err => {
+    console.log('error' , err);
+  });
+}
 
 }
