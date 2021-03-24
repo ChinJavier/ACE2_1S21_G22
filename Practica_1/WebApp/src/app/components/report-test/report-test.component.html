@@ -1,0 +1,55 @@
+<div class="container2">
+  <div class="container">
+    <mat-selection-list  >
+          <mat-card-title>METRICS</mat-card-title>
+          <mat-card>Speed AVG: {{promedioVelocity}}</mat-card>
+          <mat-card>Total Distance: {{TotalDistance}}</mat-card>
+          <mat-card>Sessions:--</mat-card>
+          <mat-card>Repetitions Count: {{RepetitionsCount}}</mat-card>
+          
+    </mat-selection-list>
+    <mat-selection-list>
+      <mat-card-title>REAL TIME</mat-card-title>
+      <mat-card>Speed: {{RealVelocity}} </mat-card>
+      <mat-card>Heart Rate: {{RealRythm}}</mat-card>
+      <mat-card>Distance: {{RealDistance}}</mat-card>
+      <mat-card>Repetitions Count: {{RepetitionsCount}} </mat-card>
+      
+    </mat-selection-list>
+    <mat-selection-list>
+      <mat-card-title>SPEED REPORT</mat-card-title>
+      <mat-card>Max: {{maxVelocity}} </mat-card>
+      <mat-card>AVG: </mat-card>
+      <mat-card>Min:{{minVelocity}} </mat-card>
+      
+    </mat-selection-list>
+    
+  </div>
+
+  <div class="container">
+    <mat-selection-list >
+      <!--dirigirlas a las gráficas-->
+      <mat-card-title class="colors" >REPORTS</mat-card-title>
+      <mat-card-subtitle class="colors">Athlete</mat-card-subtitle>
+      <mat-card-actions class="colors">
+        <button mat-button [routerLink]="['/report-test']">Speed</button></mat-card-actions>
+      <mat-card-actions class="colors">Repetitions</mat-card-actions>
+      <mat-card-actions class="colors">Distance</mat-card-actions>
+      <mat-card-actions class="colors">Heart Rate</mat-card-actions>
+      <mat-card-actions class="colors">Failed Record</mat-card-actions>
+    </mat-selection-list>
+    <mat-selection-list>
+      <mat-card-title>RECORD</mat-card-title>
+      <mat-card *ngFor="let vel of meditionsVelocity">
+        {{vel.fecha}} <br>
+        {{vel.valor}}
+      </mat-card>
+    </mat-selection-list>
+    
+  </div>
+</div>
+
+
+  
+  
+  

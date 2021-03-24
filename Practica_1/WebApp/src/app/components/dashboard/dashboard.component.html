@@ -26,7 +26,7 @@
   <mat-card class="card card2 animate__animated animate__backInDown">
     <mat-card-header>
       <div fxFlex="100" fxLayout="column">
-        <p class="card-title">Oxigeno en la Sangre</p>
+        <p class="card-title">Oxígeno en la Sangre</p>
         <p class="card-date">Ultima medición</p>
       </div>
     </mat-card-header>
@@ -65,16 +65,32 @@
       <button mat-button [routerLink]="['/temperature']">Info</button>
     </mat-card-actions>
   </mat-card>
+  <mat-card class="card card3 animate__animated animate__backInRight">
+    <mat-card-header>
+      <div fxFlex="100" fxLayout="column">
+        <p class="card-title">Test Course-Navetee</p>
+        <p class="card-date">Ultima medición</p>
+      </div>
+    </mat-card-header>
+    <mat-card-content>
+      <img mat-card-image src="assets/course.jpg" />
+      <p>
+        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Provident
+        blanditiis tenetur molestiae ducimus similique, sapiente perspiciatis
+        dolorum hic magnam nisi error quia eius explicabo expedita dignissimos
+        est magni. Accusamus, iusto.
+      </p>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-button [routerLink]="['/report-test']">Reportes</button>
+      <button mat-button [routerLink]="['/temperature']">Info</button>
+    </mat-card-actions>
+  </mat-card>
 </div>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootswatch/4.5.2/lux/bootstrap.min.css"
   integrity="sha384-9+PGKSqjRdkeAU7Eu4nkJU8RFaH8ace8HGXnkiKMP9I9Te0GJ4/km3L1Z8tXigpG" crossorigin="anonymous" />
 <div class="historial-container">
-
-
-
-
-
-  <mat-list class="h-list" class="animate__animated animate__fadeInLeft">
+<mat-list class="h-list" class="animate__animated animate__fadeInLeft">
     <h1>Historial de mediciones <span class="material-icons"> remove_red_eye </span>
     </h1>
     <mat-list-item *ngFor="let h of history">
