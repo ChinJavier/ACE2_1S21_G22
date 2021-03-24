@@ -22,9 +22,7 @@ export class ReportTestComponent implements OnInit {
   RealRythm:any=0;
   RealDistance:any=0;
   constructor(private medicionesService: MedicionesService) { 
-    this.getMedicionesOxygen();
     this.getMedicionesRitmoC();
-    this.getMedicionesTemperatura();
     this.getMeditionsVelocity();
     this.getMeditionsDistance();
     this.getRepetition();
@@ -33,29 +31,17 @@ export class ReportTestComponent implements OnInit {
     this.getRealDistance();
   }
 
-  getMedicionesOxygen(){
-    let user=localStorage.getItem('uid');
-    this.medicionesService.getMediciones('oxygen',user).subscribe(res=>{
-      this.medicionesOxigeno =res;
-      console.log(this.medicionesOxigeno);
-    })
-  }
-  getMedicionesTemperatura(){
-    let user=localStorage.getItem('uid');
-    this.medicionesService.getMediciones('temperature',user).subscribe(res=>{
-      this.medicionesTemperatura =res;
-    })
-  }
   getMedicionesRitmoC(){
     let user=localStorage.getItem('uid');
-    this.medicionesService.getMediciones('rythm',user).subscribe(res=>{
-      this.medicionesRitmo =res;
+    this.medicionesService.getMediciones('rhythm',user).subscribe(res=>{
       for( let i=0; i<res.length; i++){
         const objectRythm={
           valor : res[i].valor
         };
         this.medicionesRitmo.push(objectRythm);
       }
+    }, err =>{
+      console.log("Error en getMedicionesRitmoC")
     })
   }
   getMeditionsVelocity(){
@@ -73,6 +59,8 @@ export class ReportTestComponent implements OnInit {
         this.getVelocityMax();
         this.getVelocityMin();
       }
+    }, err =>{
+      console.log("Error en getMeditionsVelocity")
     })
   }
   AVGVelocity(){
@@ -118,6 +106,8 @@ export class ReportTestComponent implements OnInit {
       }
       this.TotalDistance = this.getTotalDistance();
       
+    }, err =>{
+      console.log("Error en getMeditionsDistance")
     })
   }
   getTotalDistance(){
@@ -136,24 +126,34 @@ export class ReportTestComponent implements OnInit {
     let user=localStorage.getItem('username');
     this.medicionesService.getMediciones('Repetition',user).subscribe(res=>{
       this.RepetitionsCount =res;
+    }
+    , err =>{
+      console.log("Error en getRepetition")
     })
   }
   getRealVelocity(){
     let user=localStorage.getItem('username');
     this.medicionesService.getMediciones('Repetition',user).subscribe(res=>{
       this.RealVelocity =res;
+    }
+    , err =>{
+      console.log("Error en getRealVelocity")
     })
   }
   getRealRythm(){
     let user=localStorage.getItem('username');
     this.medicionesService.getMediciones('Ryhtm',user).subscribe(res=>{
       this.RealRythm =res;
+    }, err =>{
+      console.log("Error en getRealRythm")
     })
   }
   getRealDistance(){
     let user=localStorage.getItem('username');
     this.medicionesService.getMediciones('Distance',user).subscribe(res=>{
       this.RealDistance =res;
+    }, err =>{
+      console.log("Error en getRealDistance")
     })
   }
   ngOnInit(): void {

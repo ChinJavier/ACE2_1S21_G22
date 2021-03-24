@@ -4,6 +4,12 @@
     justify-content: space-around;
     height: 300px;
 }
+.container2{
+    flex-direction: row;
+    justify-content: space-around;
+    margin-left: 300px;
+    width: 800px;
+}
 
 .card-date {
     padding: 5px;
