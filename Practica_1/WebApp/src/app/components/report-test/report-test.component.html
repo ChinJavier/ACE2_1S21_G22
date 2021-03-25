@@ -5,115 +5,177 @@
   integrity="sha384-B4morbeopVCSpzeC1c4nyV0d0cqvlSAfyXVfrPJa25im5p+yEN/YmhlgQP/OyMZD"
   crossorigin="anonymous"
 />
-<div>
-  <div class="container">
-    <mat-selection-list>
-      <mat-card-title>METRICS</mat-card-title>
-      <mat-card>Speed AVG: {{ promedioVelocity }}</mat-card>
-      <mat-card>Total Distance: {{ TotalDistance }}</mat-card>
-      <mat-card>Sessions:--</mat-card>
-      <mat-card>Repetitions Count: {{ RepetitionsCount }}</mat-card>
-    </mat-selection-list>
-    <mat-selection-list>
-      <mat-card-title>REAL TIME</mat-card-title>
-      <mat-card>Speed: {{ RealVelocity }} </mat-card>
-      <mat-card>Heart Rate: {{ RealRythm }}</mat-card>
-      <mat-card>Distance: {{ RealDistance }}</mat-card>
-      <mat-card>Repetitions Count: {{ RepetitionsCount }} </mat-card>
-    </mat-selection-list>
-    <mat-selection-list>
-      <mat-card-title>SPEED REPORT</mat-card-title>
-      <mat-card>Max: {{ maxVelocity }} </mat-card>
-      <mat-card>AVG: </mat-card>
-      <mat-card>Min:{{ minVelocity }} </mat-card>
-    </mat-selection-list>
+
+<div class="container">
+
+  <button mat-button mat-raised-button color="primary" [routerLink]="['/dashboard']">Atrás</button>
+
+    <div class="row">
+      <div class="col-12">
+        <mat-selection-list>
+          <mat-card>
+            <mat-card-header>
+              <mat-card-title>Métricas</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+              <mat-card-subtitle>Velicidad promedio: {{ promedioVelocity  }}</mat-card-subtitle>
+              <mat-card-subtitle>Distancia total: {{ TotalDistance }}</mat-card-subtitle>
+              <mat-card-subtitle>Num. Repetición: {{ RepetitionsCount | json}} </mat-card-subtitle>
+            </mat-card-content>
+          </mat-card>
+        </mat-selection-list>
+      </div>
+    </div>
+
+  <div class="row">
+    <div class="col">
+      <mat-selection-list>
+        <mat-card>
+          <mat-card-header>
+            <mat-card-title>Tiempo Real</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <mat-card-subtitle>Velocidad: {{ RealVelocity |json}} </mat-card-subtitle>
+            <mat-card-subtitle>Ritmo Cardíaco: {{ RealRythm }}</mat-card-subtitle>
+            <mat-card-subtitle>Distancia: {{ RealDistance }}</mat-card-subtitle>
+            <mat-card-subtitle>Num. Repetición: {{ RepetitionsCount }} </mat-card-subtitle>
+          </mat-card-content>
+        </mat-card>
+      </mat-selection-list>
+    </div>
   </div>
 
-  <div class="container">
-    <mat-selection-list>
-      <mat-card-title>RECORD</mat-card-title>
-      <mat-card *ngFor="let vel of meditionsVelocity">
-        {{ vel.fecha }} <br />
-        {{ vel.valor }}
-      </mat-card>
-    </mat-selection-list>
-  </div>
-  <!--graficas y lista-->
-  <div class="container">
-    <h1>GRÁFICAS VELOCIDAD</h1>
-  </div>
-
-  <div class="container2">
-    <mat-selection-list>
-      <mat-card-title>INFORME DE VELOCIDAD</mat-card-title>
-      <mat-card *ngFor="let vel of lista">
-        24.3.2021 <br />
-        {{ vel }}
-      </mat-card>
-    </mat-selection-list>
+  <div class="row">
+    <div class="col">
+      <mat-selection-list>
+        <mat-card>
+          <mat-card-header>
+            <mat-card-title>Reporte de Velocidad</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <mat-card-subtitle>Máx: {{ maxVelocity }} </mat-card-subtitle>
+            <mat-card-subtitle>Promedio: </mat-card-subtitle>
+            <mat-card-subtitle>Mín:{{ minVelocity }} </mat-card-subtitle>
+          </mat-card-content>
+        </mat-card>
+      </mat-selection-list>
+    </div>
   </div>
 
-  <div class="container">
-    <h1>GRÁFICAS REPETICIONES</h1>
+  <div class="row">
+    <div class="col">
+      <mat-selection-list>
+        <mat-card>
+          <mat-card-header>
+            <mat-card-title>Record</mat-card-title>
+          </mat-card-header>
+          <mat-card-subtitle *ngFor="let vel of meditionsVelocity">
+            {{ vel.fecha }} <br />
+            {{ vel.valor }}
+          </mat-card-subtitle>
+        </mat-card>
+      </mat-selection-list>
+    </div>
   </div>
 
-  <div class="container2">
-    <mat-selection-list>
-      <mat-card-title>INFORME DE REPETICIONES</mat-card-title>
-      <mat-card *ngFor="let vel of lista">
-        24.3.2021 <br />
-        {{ vel }}
-      </mat-card>
-    </mat-selection-list>
-  </div>
-  <div class="container">
-    <h1>GRÁFICAS DISTANCE</h1>
+  <div class="row">
+    <div class="col-6">
+      <mat-selection-list>
+        <mat-card>
+          <mat-card-header>
+            <mat-card-title>Informe de Velocidad </mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <mat-card-subtitle *ngFor="let vel of lista">
+              24.3.2021 <br />
+              {{ vel }}
+            </mat-card-subtitle>
+          </mat-card-content>
+        </mat-card>
+      </mat-selection-list>
+    </div>
+
   </div>
 
-  <div class="container2">
-    <mat-selection-list>
-      <mat-card-title>INFORME DE DISTANCIA</mat-card-title>
-      <mat-card *ngFor="let vel of lista">
-        24.3.2021 <br />
-        {{ vel }}
-      </mat-card>
-    </mat-selection-list>
+  <div class="row">
+    <div class="col-6">
+      <mat-selection-list>
+        <mat-card>
+          <mat-card-title>Informe the repeticiones</mat-card-title>
+          <mat-card-subtitle *ngFor="let vel of lista">
+            24.3.2021 <br />
+            {{vel}}
+          </mat-card-subtitle>
+        </mat-card>
+      </mat-selection-list>
+    </div>
+    <div class="col-6">
+      <h1>Gráfica de Repeticiones</h1>
+
+      <div style="display: block">
+        <canvas baseChart
+          [datasets]="barChartData"
+          [labels]="barChartLabels"
+          [options]="barChartOptions"
+          [legend]="barChartLegend"
+          [chartType]="barChartType">
+        </canvas>
+      </div>
+
+
+    </div>
   </div>
 
-  <!-- GRAFICA DE RITMO  -->
-  <div
-    class="offset-xl-1 card col-xl-10 col-10 col-md-10 mb-5 mt-5"
-    style="border-radius: 50px"
-  >
-    <h1>GRÁFICAS HEART RATE</h1>
-    <canvas
-      id="realtime"
-      class="offset-xl-1 card-content card col-xl-10 col-10 col-md-10"
-      >{{ chart_ritmo }}</canvas
-    >
-  </div>
-  <!-- FIN GRAFICA DE RITMO  -->
-
-  <div class="container2">
-    <mat-selection-list>
-      <mat-card-title>INFORME DE RITMO CARDIACO</mat-card-title>
-      <mat-card *ngFor="let vel of lista">
-        24.3.2021 <br />
-        {{ vel }}
-      </mat-card>
-    </mat-selection-list>
-  </div>
-  <div class="container">
-    <h1>GRÁFICA FAILED RECORD</h1>
+  <div class="row">
+    <div class="col-6">
+      <mat-selection-list>
+        <mat-card>
+          <mat-card-title>Informe Distancia</mat-card-title>
+          <mat-card-subtitle *ngFor="let vel of lista">
+            24.3.2021 <br />
+            {{ vel }}
+          </mat-card-subtitle>
+        </mat-card>
+      </mat-selection-list>
+    </div>
+    <div class="col-6">
+      <h1>Gráfica Distancia</h1>
+    </div>
   </div>
 
-  <div class="container2">
-    <mat-selection-list>
-      <mat-card-title>INFORME DE FALLOS</mat-card-title>
-      <mat-card *ngFor="let vel of lista">
-        24.3.2021 <br />
-        {{ vel }}
-      </mat-card>
-    </mat-selection-list>
+  <div class="row">
+    <div class="col-6">
+      <mat-selection-list>
+        <mat-card>
+          <mat-card-title>Informe de Ritmo Cárdiaco</mat-card-title>
+          <mat-card-subtitle *ngFor="let vel of lista">
+            24.3.2021 <br />
+            {{ vel }}
+          </mat-card-subtitle>
+        </mat-card>
+      </mat-selection-list>
+    </div>
+    <div class="col-6">
+      <h1>Ritmo Cárdiaco Gráfica</h1>
+    </div>
   </div>
+
+  <div class="row">
+    <div class="col-6">
+      <mat-selection-list>
+        <mat-card>
+          <mat-card-title>Informe de Fallos</mat-card-title>
+          <mat-card-subtitle *ngFor="let vel of lista">
+            24.3.2021 <br />
+            {{ vel }}
+          </mat-card-subtitle>
+        </mat-card>
+      </mat-selection-list>
+    </div>
+    <div class="col-6">
+      <h1> Gráfica de Fallos</h1>
+    </div>
+  </div>
+
+
 </div>

@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { MedicionesService } from 'src/app/services/mediciones.service';
+import Swal from 'sweetalert2'
+import { ChartDataSets, ChartOptions, ChartType } from 'chart.js';
+import { Label } from 'ng2-charts';
+
 import { Chart } from 'chart.js';
 @Component({
   selector: 'app-report-test',
@@ -7,12 +11,13 @@ import { Chart } from 'chart.js';
   styleUrls: ['./report-test.component.css']
 })
 export class ReportTestComponent implements OnInit {
+  ok: boolean = false;
   medicionesOxigeno=[];
   medicionesTemperatura=[];
   medicionesRitmo:any=[];
   meditionsVelocity:any=[];
   meditionsDistance:any=[];
-  lista:string[]=["hola","que","tal","estas"];
+  lista:string[]=["hola","que","tal","estas","tal","estas","tal","estas","tal","estas"];
   promedioVelocity:any=0;
   maxVelocity:any=0;
   minVelocity:any=0;
@@ -28,7 +33,7 @@ export class ReportTestComponent implements OnInit {
    //--------------------- fin
 
 
-  constructor(private medicionesService: MedicionesService) { 
+  constructor(private medicionesService: MedicionesService) {
     this.getMedicionesRitmoC();
     this.getMeditionsVelocity();
     this.getMeditionsDistance();
@@ -76,8 +81,8 @@ export class ReportTestComponent implements OnInit {
       suma += this.meditionsVelocity[i].valor;
     }
     if (this.meditionsVelocity.length == 0){
-      alert('por el momento no tienes registros');
-      return 0
+      Swal.fire('Error', 'El usuario no tiene mediciones.', 'error')
+      return
     }
     return suma/this.meditionsVelocity.length;
   }
@@ -99,7 +104,7 @@ export class ReportTestComponent implements OnInit {
     }
     this.minVelocity=min;
   }
-  
+
   getMeditionsDistance(){
     let user = localStorage.getItem('username');
     this.medicionesService.getMediciones('Distance', user).subscribe(res =>{
@@ -112,7 +117,7 @@ export class ReportTestComponent implements OnInit {
         this.meditionsDistance.push(objectDistance);
       }
       this.TotalDistance = this.getTotalDistance();
-      
+
     }, err =>{
       console.log("Error en getMeditionsDistance")
     })
@@ -123,12 +128,12 @@ export class ReportTestComponent implements OnInit {
       totalDistance += this.meditionsDistance[i].valor;
     }
     if(this.meditionsDistance.length==0){
-      alert('Por el momento no hay registros');
+      Swal.fire('Error', 'No hay medidas de distancia!', 'error')
       return 0
     }
     return totalDistance;
   }
-  
+
   getRepetition(){
     let user=localStorage.getItem('username');
     this.medicionesService.getMediciones('Repetition',user).subscribe(res=>{
@@ -217,26 +222,43 @@ ngOnInit(): void {
 
 }
 //Called once, before the instance is destroyed.
-ngOnDestroy(): void {
-  clearInterval(this.hilo);// deja de llamar a las peticiones
-}
+  ngOnDestroy(): void {
+    clearInterval(this.hilo);// deja de llamar a las peticiones
+  }
 
-private showGraphic(): void {
-  this.medicionesService.getrhythm().subscribe(res => {
-    let chart_ritmoTime: any = new Date();
-    // PONE EL TIEMPO Y SI ES MAYOR A 15 DATOS DA UN SHIFT
-    chart_ritmoTime = chart_ritmoTime.getHours() + ':' + ((chart_ritmoTime.getMinutes() < 10) ? '0' + chart_ritmoTime.getMinutes() : chart_ritmoTime.getMinutes()) + ':' + ((chart_ritmoTime.getSeconds() < 10) ? '0' + chart_ritmoTime.getSeconds() : chart_ritmoTime.getSeconds());
-    if(this.chart_ritmo.data.labels.length > 15) {
-        this.chart_ritmo.data.labels.shift();
-        this.chart_ritmo.data.datasets[0].data.shift();
-    }
-    this.chart_ritmo.data.labels.push(chart_ritmoTime);
-    this.chart_ritmo.data.datasets[0].data.push(res); // PONE EL VALOR EN Y , ACA VAN LOS DATOS QUE VIENEN DE MONGO
-    this.chart_ritmo.update();
-    this.ritmoActual = res;
-  } , err => {
-    console.log('error' , err);
-  });
-}
+  private showGraphic(): void {
+    this.medicionesService.getrhythm().subscribe(res => {
+      let chart_ritmoTime: any = new Date();
+      // PONE EL TIEMPO Y SI ES MAYOR A 15 DATOS DA UN SHIFT
+      chart_ritmoTime = chart_ritmoTime.getHours() + ':' + ((chart_ritmoTime.getMinutes() < 10) ? '0' + chart_ritmoTime.getMinutes() : chart_ritmoTime.getMinutes()) + ':' + ((chart_ritmoTime.getSeconds() < 10) ? '0' + chart_ritmoTime.getSeconds() : chart_ritmoTime.getSeconds());
+      if(this.chart_ritmo.data.labels.length > 15) {
+          this.chart_ritmo.data.labels.shift();
+          this.chart_ritmo.data.datasets[0].data.shift();
+      }
+      this.chart_ritmo.data.labels.push(chart_ritmoTime);
+      this.chart_ritmo.data.datasets[0].data.push(res); // PONE EL VALOR EN Y , ACA VAN LOS DATOS QUE VIENEN DE MONGO
+      this.chart_ritmo.update();
+      this.ritmoActual = res;
+    } , err => {
+      console.log('error' , err);
+    });
+  }
+
+/********** Gráfica de repeticiones *************/
+
+  public barChartOptions: ChartOptions = {
+    responsive: true,
+  };
+
+  public barChartLabels: Label[] = [];
+  public barChartType: ChartType = 'bar';
+  public barChartLegend = true;
+
+  public barChartData: ChartDataSets[] = [
+    { data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A' },
+  ];
+
+
+  /* **************************************** */
 
 }
