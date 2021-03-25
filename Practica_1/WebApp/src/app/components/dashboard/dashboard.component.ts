@@ -14,12 +14,14 @@ export class DashboardComponent implements OnInit {
   hours = new Date().getHours();
   msg: string = "";
   constructor(
-    private authService: AuthService,
     private s : MedicionesService
   ) {
 
 
     console.log(this.history);
+    this.history.push({ fecha: "sa",valor: 7,type: 'Oxigeno'});
+    this.history.push({ fecha: "HOLA",valor: 10,type: 'Oxigeno'});
+
   }
 
   ngOnInit(): void {
@@ -36,6 +38,7 @@ export class DashboardComponent implements OnInit {
       console.log("*GET HISTORY OF OXYGEN" , res)
       for (let i = 0 ; i < res.length; i++){
         const objetoHistory = {
+
           fecha: res[i].fecha,
           valor: res[i].oxygen,
           type: 'Oxigeno'
@@ -49,6 +52,7 @@ export class DashboardComponent implements OnInit {
       console.log("*GET HISTORY OF temperature" , res)
       for (let i = 0 ; i < res.length; i++){
         const objetoHistory = {
+
           fecha: res[i].fecha,
           valor: res[i].temperature,
           type: 'Temperatura'
@@ -62,6 +66,7 @@ export class DashboardComponent implements OnInit {
       console.log("*GET HISTORY OF rhythm" , res)
       for (let i = 0 ; i < res.length; i++){
         const objetoHistory = {
+
           fecha: res[i].fecha,
           valor: res[i].rhythm,
           type: 'Ritmo'
