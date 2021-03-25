@@ -4,6 +4,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material/material.module';
 import { RouterModule, Routes} from '@angular/router';
+import { ChartsModule } from 'ng2-charts';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
@@ -71,7 +72,8 @@ import { ReportTestComponent } from './components/report-test/report-test.compon
     ReactiveFormsModule,
     HttpClientModule,
     FlexLayoutModule,
-    RouterModule.forRoot(routes)
+    ChartsModule,
+    RouterModule.forRoot(routes),
   ],
   providers: [
     AuthGuard,
