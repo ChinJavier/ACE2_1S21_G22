@@ -1,4 +1,4 @@
-<div class="container2">
+<div >
   <div class="container">
     <mat-selection-list  >
           <mat-card-title>METRICS</mat-card-title>
@@ -27,22 +27,86 @@
   </div>
 
   <div class="container">
-    <mat-selection-list >
-      <!--dirigirlas a las gráficas-->
-      <mat-card-title class="colors" >REPORTS</mat-card-title>
-      <mat-card-subtitle class="colors">Athlete</mat-card-subtitle>
-      <mat-card-actions class="colors">
-        <button mat-button [routerLink]="['/report-test']">Speed</button></mat-card-actions>
-      <mat-card-actions class="colors">Repetitions</mat-card-actions>
-      <mat-card-actions class="colors">Distance</mat-card-actions>
-      <mat-card-actions class="colors">Heart Rate</mat-card-actions>
-      <mat-card-actions class="colors">Failed Record</mat-card-actions>
-    </mat-selection-list>
+    
     <mat-selection-list>
       <mat-card-title>RECORD</mat-card-title>
       <mat-card *ngFor="let vel of meditionsVelocity">
         {{vel.fecha}} <br>
         {{vel.valor}}
+      </mat-card>
+    </mat-selection-list>
+    
+  </div>
+  <!--graficas y lista-->
+  <div class="container">
+    <h1> GRÁFICAS VELOCIDAD</h1>
+  </div>
+  
+  <div class="container2">
+    <mat-selection-list>
+      <mat-card-title>INFORME DE VELOCIDAD</mat-card-title>
+      <mat-card *ngFor="let vel of lista">
+        24.3.2021 <br>
+        {{vel}}
+      </mat-card>
+    </mat-selection-list>
+
+  </div>
+    
+    
+  
+  <div class="container">
+    <h1> GRÁFICAS REPETICIONES</h1>
+  </div>
+  
+  <div class="container2">
+    <mat-selection-list>
+      <mat-card-title>INFORME DE REPETICIONES</mat-card-title>
+      <mat-card *ngFor="let vel of lista">
+        24.3.2021 <br>
+        {{vel}}
+      </mat-card>
+    </mat-selection-list>
+    
+  </div>
+  <div class="container">
+    <h1> GRÁFICAS DISTANCE</h1>
+  </div>
+  
+  <div class="container2">
+    <mat-selection-list>
+      <mat-card-title>INFORME DE DISTANCIA</mat-card-title>
+      <mat-card *ngFor="let vel of lista">
+        24.3.2021 <br>
+        {{vel}}
+      </mat-card>
+    </mat-selection-list>
+    
+  </div>
+  <div class="container">
+    <h1> GRÁFICAS HEART RATE</h1>
+  </div>
+  
+  <div class="container2">
+    <mat-selection-list>
+      <mat-card-title>INFORME DE RITMO CARDIACO</mat-card-title>
+      <mat-card *ngFor="let vel of lista">
+        24.3.2021 <br>
+        {{vel}}
+      </mat-card>
+    </mat-selection-list>
+    
+  </div>
+  <div class="container">
+    <h1> GRÁFICA FAILED RECORD</h1>
+  </div>
+  
+  <div class="container2">
+    <mat-selection-list>
+      <mat-card-title>INFORME DE FALLOS</mat-card-title>
+      <mat-card *ngFor="let vel of lista">
+        24.3.2021 <br>
+        {{vel}}
       </mat-card>
     </mat-selection-list>
     
