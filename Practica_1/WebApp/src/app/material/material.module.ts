@@ -20,6 +20,9 @@ import {ScrollingModule} from '@angular/cdk/scrolling';
 import { MatTableModule } from '@angular/material/table';
 import {MatSelectModule} from '@angular/material/select';
 
+import { MatSidenavModule } from '@angular/material/sidenav';
+
+
 const MaterialComponents = [
   MatButtonModule,
   ScrollingModule,
@@ -40,7 +43,8 @@ const MaterialComponents = [
   MatCheckboxModule,
   MatDatepickerModule,
   MatTableModule,
-  MatSelectModule
+  MatSelectModule,
+  MatSidenavModule
 ];
 
 @NgModule({

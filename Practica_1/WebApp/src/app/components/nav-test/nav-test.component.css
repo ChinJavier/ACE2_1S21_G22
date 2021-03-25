@@ -1,0 +1,29 @@
+.padding-10 {
+    padding: 10px;
+}
+
+a {
+    color: white
+}
+
+.txt-time {
+    padding-top: 6px;
+    font-weight: bold;
+    color: white;
+    font-size: 18px;
+}
+.txt-msg {
+    padding-top: 6px;
+    font-weight: bold;
+    color: white;
+    font-size: 18px;
+}
+
+a {
+    text-decoration: none;
+    transition: all 0.5s;
+}
+
+li a:hover {
+    background-color: #ccc;
+}
