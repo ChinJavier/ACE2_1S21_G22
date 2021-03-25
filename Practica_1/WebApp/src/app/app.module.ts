@@ -33,6 +33,7 @@ import { ReportOxigenoComponent } from './components/report-oxigeno/report-oxige
 import { SuccessComponent } from './components/dialogs/success/success.component';
 import { ShowtimeComponent } from './components/showtime/showtime.component';
 import { ReportTestComponent } from './components/report-test/report-test.component';
+import { NavTestComponent } from './components/nav-test/nav-test.component';
 
 
 
@@ -60,7 +61,8 @@ import { ReportTestComponent } from './components/report-test/report-test.compon
     HeaderComponent,
     SuccessComponent,
     ShowtimeComponent,
-    ReportTestComponent
+    ReportTestComponent,
+    NavTestComponent
   ],
   imports: [
     BrowserModule,

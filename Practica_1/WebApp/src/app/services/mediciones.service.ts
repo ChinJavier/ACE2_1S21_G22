@@ -31,6 +31,7 @@ export class MedicionesService {
     return this.http.get(`${this.backend}rhythm`);
   }
 
+  // JALA LOS DATOS GUARDADOS EN MONGO
   public getMediciones(typeMedition: string , username: string | null): Observable<any>{
     return this.http.get(`${baseURL}meditions/all/${typeMedition}/${username}`);
   }
