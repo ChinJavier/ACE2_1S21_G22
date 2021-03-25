@@ -4,7 +4,7 @@
 }
 
 .card {
-    width: 400px;
+    width: 800px;
     margin: 50px;
     background:white;
 }
@@ -68,4 +68,14 @@
 
 .h-list {
     padding: 100px;
+}
+
+.ajuste {
+    margin-top: 30px;
+    overflow: scroll;
+    height: 800px;
+    width:auto;
+}
+button{
+    width: 100%;
 }
