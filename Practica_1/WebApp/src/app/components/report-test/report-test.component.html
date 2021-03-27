@@ -8,8 +8,6 @@
 
 <div class="container">
 
-  <button mat-button mat-raised-button color="primary" [routerLink]="['/dashboard']">Atrás</button>
-
     <div class="row">
       <div class="col-12">
         <mat-selection-list>
@@ -18,9 +16,9 @@
               <mat-card-title>Métricas</mat-card-title>
             </mat-card-header>
             <mat-card-content>
-              <mat-card-subtitle>Velicidad promedio: {{ promedioVelocity  }}</mat-card-subtitle>
-              <mat-card-subtitle>Distancia total: {{ TotalDistance }}</mat-card-subtitle>
-              <mat-card-subtitle>Num. Repetición: {{ RepetitionsCount | json}} </mat-card-subtitle>
+              <mat-card-subtitle>Velicidad promedio: 7 m/s</mat-card-subtitle>
+              <mat-card-subtitle>Distancia total: 120 m</mat-card-subtitle>
+              <mat-card-subtitle>Num. Repetición: 4 </mat-card-subtitle>
             </mat-card-content>
           </mat-card>
         </mat-selection-list>
@@ -35,10 +33,10 @@
             <mat-card-title>Tiempo Real</mat-card-title>
           </mat-card-header>
           <mat-card-content>
-            <mat-card-subtitle>Velocidad: {{ RealVelocity |json}} </mat-card-subtitle>
-            <mat-card-subtitle>Ritmo Cardíaco: {{ RealRythm }}</mat-card-subtitle>
-            <mat-card-subtitle>Distancia: {{ RealDistance }}</mat-card-subtitle>
-            <mat-card-subtitle>Num. Repetición: {{ RepetitionsCount }} </mat-card-subtitle>
+            <mat-card-subtitle>Velocidad: 7.8 m/s </mat-card-subtitle>
+            <mat-card-subtitle>Ritmo Cardíaco: 16 lat/s</mat-card-subtitle>
+            <mat-card-subtitle>Distancia: 120 m </mat-card-subtitle>
+            <mat-card-subtitle>Num. Repetición: 5 </mat-card-subtitle>
           </mat-card-content>
         </mat-card>
       </mat-selection-list>
@@ -53,9 +51,9 @@
             <mat-card-title>Reporte de Velocidad</mat-card-title>
           </mat-card-header>
           <mat-card-content>
-            <mat-card-subtitle>Máx: {{ maxVelocity }} </mat-card-subtitle>
-            <mat-card-subtitle>Promedio: </mat-card-subtitle>
-            <mat-card-subtitle>Mín:{{ minVelocity }} </mat-card-subtitle>
+            <mat-card-subtitle>Máx: 10.3 m/s </mat-card-subtitle>
+            <mat-card-subtitle>Promedio: 7.8 m/s </mat-card-subtitle>
+            <mat-card-subtitle>Mín: 6.2 m/s </mat-card-subtitle>
           </mat-card-content>
         </mat-card>
       </mat-selection-list>
@@ -95,6 +93,21 @@
       </mat-selection-list>
     </div>
 
+    <div class="col-6">
+      <h1>Gráfica de Velocidad</h1>
+      <div style="display: block">
+        <canvas baseChart
+          [data]="velocityData"
+          [labels]="velocityLabels"
+          [options]="barChartOptions"
+          [legend]="velocityChartLegend"
+          [chartType]="velocityChartType">
+        </canvas>
+      </div>
+
+    </div>
+
+
   </div>
 
   <div class="row">
@@ -114,11 +127,11 @@
 
       <div style="display: block">
         <canvas baseChart
-          [datasets]="barChartData"
-          [labels]="barChartLabels"
+          [datasets]="repetitionData"
+          [labels]="repetitionLabels"
           [options]="barChartOptions"
-          [legend]="barChartLegend"
-          [chartType]="barChartType">
+          [legend]="repetitionChartLegend"
+          [chartType]="repetitionChartType">
         </canvas>
       </div>
 
@@ -139,7 +152,19 @@
       </mat-selection-list>
     </div>
     <div class="col-6">
+
       <h1>Gráfica Distancia</h1>
+
+      <div style="display: block">
+        <canvas baseChart
+          [data]="distanceData"
+          [labels]="distanceLabels"
+          [options]="barChartOptions"
+          [legend]="distanceLegend"
+          [chartType]="barChartType">
+        </canvas>
+      </div>
+
     </div>
   </div>
 
@@ -157,6 +182,17 @@
     </div>
     <div class="col-6">
       <h1>Ritmo Cárdiaco Gráfica</h1>
+
+      <div style="display: block">
+        <canvas baseChart
+          [datasets]="rythmData"
+          [labels]="rythmLabels"
+          [options]="barChartOptions"
+          [legend]="rythmLegend"
+          [chartType]="barChartType">
+        </canvas>
+      </div>
+
     </div>
   </div>
 
@@ -174,6 +210,17 @@
     </div>
     <div class="col-6">
       <h1> Gráfica de Fallos</h1>
+
+      <div style="display: block">
+        <canvas baseChart
+          [datasets]="failsData"
+          [labels]="failsLabels"
+          [options]="barChartOptions"
+          [legend]="failsLegend"
+          [chartType]="barChartType">
+        </canvas>
+      </div>
+
     </div>
   </div>
 
