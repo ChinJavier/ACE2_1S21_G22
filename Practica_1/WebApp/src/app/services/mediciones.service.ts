@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { baseURL_sensores, baseURL } from '../shared/URL';
+import { map, catchError } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -28,7 +29,7 @@ export class MedicionesService {
   }
 
   public getrhythm(): Observable<any>{
-    return this.http.get(`${this.backend}rhythm`);
+    return this.http.get(`${this.backend}rhythm`)
   }
 
   // JALA LOS DATOS GUARDADOS EN MONGO
@@ -38,6 +39,21 @@ export class MedicionesService {
 
   public saveMedicion(objeto_body: any ,ruta: string): Observable<any>{ // FUNCION GENERICA
     return this.http.post(`${baseURL}${ruta}` , objeto_body);
+  }
+
+
+  // MEDICIONES PROYECTO 1
+  getVelocityByUser( username: string ){
+    return this.http.get( `${ baseURL }meditions/all/velocity/${username} ` )
+      .pipe(
+        catchError(res => of(false))
+      );
+  }
+  getDistanceByUser( username: string ){
+    return this.http.get( `${ baseURL }meditions/all/distance/${username} ` )
+      .pipe(
+        catchError(res => of(false))
+      );
   }
 
 }
