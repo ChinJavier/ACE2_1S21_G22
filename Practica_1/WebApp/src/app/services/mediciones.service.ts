@@ -12,13 +12,6 @@ export class MedicionesService {
   constructor(private http: HttpClient) {
     this.backend = baseURL_sensores;// redundante :v
   }
-   // metodos que hacen peticiones al servidor de node
-
-   // PETICION POST DESDE ANGULAR
-  // public crearAlgo(obj: any): Observable<any>{
-  //   return this.http.post(`${this.backend}`, obj);
-  // }
-
   // PETICION GET DESDE ANGULAR
   public getTemperatura(): Observable<any>{
       return this.http.get(`${this.backend}temperature`);
@@ -55,5 +48,24 @@ export class MedicionesService {
         catchError(res => of(false))
       );
   }
+
+  getRhythmByUser( username: string ){
+    return this.http.get( `${ baseURL }meditions/all/rhythm/${username}`)
+      .pipe(
+        catchError(res => of(false))
+      );
+  }
+
+  getRepetitionByUser( username: string ){
+    return this.http.get( `${ baseURL }meditions/all/repetition/${username}`)
+      .pipe(
+        catchError(res => of(false))
+      );
+  }
+
+
+
+
+ 
 
 }

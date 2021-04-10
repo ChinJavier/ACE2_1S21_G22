@@ -67,8 +67,8 @@
           <mat-card-header>
             <mat-card-title>Record</mat-card-title>
           </mat-card-header>
-          <mat-card-subtitle *ngFor="let vel of meditionsVelocity">
-            {{ vel.fecha }} <br />
+          <mat-card-subtitle *ngFor="let vel of velocityDataAux">
+            {{ vel.fecha | date: "dd/MM/yyyy"  }} <br/>
             {{ vel.valor }}
           </mat-card-subtitle>
         </mat-card>
@@ -84,9 +84,9 @@
             <mat-card-title>Informe de Velocidad </mat-card-title>
           </mat-card-header>
           <mat-card-content>
-            <mat-card-subtitle *ngFor="let vel of lista">
-              24.3.2021 <br />
-              {{ vel }}
+            <mat-card-subtitle *ngFor="let vel of fecha_velocityDataAux">
+              {{ vel.createdAt }} <br />
+              {{ vel.velocity }} 
             </mat-card-subtitle>
           </mat-card-content>
         </mat-card>
@@ -94,7 +94,7 @@
     </div>
 
     <div class="col-6">
-      <h1>Gráfica de Velocidad</h1>
+      <h1>Gráfica de Velocidad (m/s) </h1>
       <div style="display: block">
         <canvas baseChart
           [data]="velocityData"
@@ -114,20 +114,20 @@
     <div class="col-6">
       <mat-selection-list>
         <mat-card>
-          <mat-card-title>Informe the repeticiones</mat-card-title>
-          <mat-card-subtitle *ngFor="let vel of lista">
-            24.3.2021 <br />
-            {{vel}}
+          <mat-card-title>Informe the repeticiones </mat-card-title>
+          <mat-card-subtitle *ngFor="let vel of fecha_repeticionesDataAux">
+            {{ vel.createdAt }} <br />
+            {{ vel.repetition }} 
           </mat-card-subtitle>
         </mat-card>
       </mat-selection-list>
     </div>
     <div class="col-6">
-      <h1>Gráfica de Repeticiones</h1>
+      <h1>Gráfica de Repeticiones  (#)</h1>
 
       <div style="display: block">
         <canvas baseChart
-          [datasets]="repetitionData"
+          [data]="repetitionData"
           [labels]="repetitionLabels"
           [options]="barChartOptions"
           [legend]="repetitionChartLegend"
@@ -143,17 +143,17 @@
     <div class="col-6">
       <mat-selection-list>
         <mat-card>
-          <mat-card-title>Informe Distancia</mat-card-title>
-          <mat-card-subtitle *ngFor="let vel of lista">
-            24.3.2021 <br />
-            {{ vel }}
+          <mat-card-title>Informe Distancia </mat-card-title>
+          <mat-card-subtitle *ngFor="let vel of fecha_distanceDataAux">
+            {{ vel.createdAt }} <br />
+            {{ vel.distance }} 
           </mat-card-subtitle>
         </mat-card>
       </mat-selection-list>
     </div>
     <div class="col-6">
 
-      <h1>Gráfica Distancia</h1>
+      <h1>Gráfica Distancia (m)</h1>
 
       <div style="display: block">
         <canvas baseChart
@@ -172,23 +172,23 @@
     <div class="col-6">
       <mat-selection-list>
         <mat-card>
-          <mat-card-title>Informe de Ritmo Cárdiaco</mat-card-title>
-          <mat-card-subtitle *ngFor="let vel of lista">
-            24.3.2021 <br />
-            {{ vel }}
+          <mat-card-title>Informe de Ritmo Cárdiaco </mat-card-title>
+          <mat-card-subtitle *ngFor="let vel of fecha_ritmoDataAux">
+            {{ vel.fecha }} <br />
+            {{ vel.rhythm }}
           </mat-card-subtitle>
         </mat-card>
       </mat-selection-list>
     </div>
     <div class="col-6">
-      <h1>Ritmo Cárdiaco Gráfica</h1>
+      <h1>Ritmo Cárdiaco Gráfica  (bpm) </h1>
 
       <div style="display: block">
         <canvas baseChart
-          [datasets]="rythmData"
+          [data]="rythmData"
           [labels]="rythmLabels"
-          [options]="barChartOptions"
           [legend]="rythmLegend"
+          [options]="barChartOptions"
           [chartType]="barChartType">
         </canvas>
       </div>
@@ -209,11 +209,11 @@
       </mat-selection-list>
     </div>
     <div class="col-6">
-      <h1> Gráfica de Fallos</h1>
+      <h1> Gráfica de Fallos  (#)</h1>
 
       <div style="display: block">
         <canvas baseChart
-          [datasets]="failsData"
+          [data]="failsData"
           [labels]="failsLabels"
           [options]="barChartOptions"
           [legend]="failsLegend"

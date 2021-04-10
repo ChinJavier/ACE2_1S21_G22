@@ -4,7 +4,7 @@ import Swal from 'sweetalert2'
 import { ChartDataSets, ChartOptions, ChartType } from 'chart.js';
 import { Label, MultiDataSet } from 'ng2-charts';
 
-import { Chart } from 'chart.js';
+
 @Component({
   selector: 'app-report-test',
   templateUrl:'./report-test.component.html',
@@ -12,11 +12,18 @@ import { Chart } from 'chart.js';
 })
 export class ReportTestComponent implements OnInit {
   ok: boolean = false;
+
+
+  
   medicionesOxigeno=[];
   medicionesTemperatura=[];
   medicionesRitmo:any=[];
   meditionsVelocity:any=[];
   meditionsDistance:any=[];
+
+
+
+
   lista:string[]=["120","98","88","56","102","76","11","estas","tal","estas"];
   promedioVelocity:any=0;
   maxVelocity:any=0;
@@ -27,17 +34,31 @@ export class ReportTestComponent implements OnInit {
   RealRythm:any=0;
   RealDistance:any=0;
 
+  //---------------------------- DATA AUXS 
   velocityDataAux: any = [];
   failsDataAux: any = [];
   repetitionDataAux: any = [];
   distanceDataAux: any = [];
+  repeticionesDataAux: any = [];
+  fallosDataAux: any = [];
+  ritmoDataAux: any = [];
+
+   // PARA LA GRAFICA DE VELOCIDAD
+   private hilo1: any = null;
+   private hilo2: any = null;
+   private hilo3: any = null;
+   private hilo4: any = null;
+   private hilo5: any = null;
 
 
-   // PARA LA GRAFICA DE RITMO
-   private hilo: any = null;
-   public chart_ritmo: any = null;
-   public ritmoActual = 0;
-   //--------------------- fin
+  //---------------------------- DATA AUXS 2
+   //---------------------------- DATA AUXS 
+   fecha_velocityDataAux: any = [];      //OK       
+   fecha_distanceDataAux: any = [];      //OK
+   fecha_repeticionesDataAux: any = [];  //OK
+   fecha_ritmoDataAux: any = [];         //OK
+   fecha_failsDataAux: any = [];  
+   fecha_fallosDataAux: any = [];
 
 
   constructor(private medicionesService: MedicionesService) {
@@ -45,18 +66,23 @@ export class ReportTestComponent implements OnInit {
   }
 
   getMedicionesRitmoC(){
-    let user=localStorage.getItem('uid');
-    this.medicionesService.getMediciones('rhythm',user).subscribe(res=>{
-      for( let i=0; i<res.length; i++){
-        const objectRythm={
-          valor : res[i].valor
-        };
-        this.medicionesRitmo.push(objectRythm);
-      }
-    }, err =>{
-      console.log("Error en getMedicionesRitmoC")
-    })
+    let username=localStorage.getItem('username');
+    this.medicionesService.getRhythmByUser(username || '')
+      .subscribe( (res: any)  => {
+        const valores = res.registrosRitmo;
+        this.ritmoDataAux = [];
+        this.fecha_ritmoDataAux = [];
+        if(valores.length > 0 || valores.length !== undefined) {
+          for(let i = 0; i < valores.length; i++) {
+            this.ritmoDataAux.push(valores[i].rhythm);
+            this.fecha_ritmoDataAux.push(valores[i]);
+          }
+        }
+        this.rythmLabels = this.ritmoDataAux;
+        this.rythmData = this.ritmoDataAux;
+      });
   }
+
   getMeditionsVelocity(){
     let username=localStorage.getItem('username');
     this.medicionesService.getVelocityByUser(username || '')
@@ -64,11 +90,11 @@ export class ReportTestComponent implements OnInit {
 
         const {velocities} = res;
         this.velocityDataAux = [];
+        this.fecha_velocityDataAux = [];
         if(velocities.length > 0 || velocities.length !== undefined) {
           for(let i = 0; i < velocities.length; i++) {
             this.velocityDataAux.push(velocities[i].velocity);
-            this.velocityDataAux.push(234 + i)
-
+            this.fecha_velocityDataAux.push(velocities[i]);
           }
         }
         this.velocityLabels = this.velocityDataAux;
@@ -83,19 +109,15 @@ export class ReportTestComponent implements OnInit {
 
         const {values} = res;
         this.distanceDataAux = [];
-        console.log('VALUES',values);
+        this.fecha_distanceDataAux = [];
         if(values.length > 0 || values.length !== undefined) {
           for(let i = 0; i < values.length; i++) {
             this.distanceDataAux.push(values[i].distance);
-            this.distanceDataAux.push(234 + i)
-
+            this.fecha_distanceDataAux.push(values[i]);
           }
         }
         this.distanceLabels = this.distanceDataAux;
         this.distanceData = this.distanceDataAux;
-
-        console.log('ARR2', this.velocityData);
-
       });
   }
 
@@ -144,195 +166,84 @@ export class ReportTestComponent implements OnInit {
     return totalDistance;
   }
 
-  getRepetition(){
-    let user=localStorage.getItem('username');
-    this.medicionesService.getMediciones('Repetition',user).subscribe(res=>{
-      this.RepetitionsCount =res;
-    }
-    , err =>{
-      console.log("Error en getRepetition")
-    })
-  }
-  getRealVelocity(){
-    let user=localStorage.getItem('username');
-    this.medicionesService.getMediciones('Repetition',user).subscribe(res=>{
-      this.RealVelocity =res;
-    }
-    , err =>{
-      console.log("Error en getRealVelocity")
-    })
-  }
-  getRealRythm(){
-    let user=localStorage.getItem('username');
-    this.medicionesService.getMediciones('Ryhtm',user).subscribe(res=>{
-      this.RealRythm =res;
-    }, err =>{
-      console.log("Error en getRealRythm")
-    })
-  }
-  getRealDistance(){
-    let user=localStorage.getItem('username');
-    this.medicionesService.getMediciones('Distance',user).subscribe(res=>{
-      this.RealDistance =res;
-    }, err =>{
-      console.log("Error en getRealDistance")
-    })
+
+
+  getMeditionsRepetition(){
+    let username=localStorage.getItem('username');
+    this.medicionesService.getMediciones('Repetition',username)
+      .subscribe( (res: any)  => {
+
+        let values  = res.repeticiones;
+        console.log('VALUES',values);
+        this.repeticionesDataAux = [];
+        this.fecha_repeticionesDataAux = [];
+        if(values.length > 0 || values.length !== undefined) {
+          for(let i = 0; i < values.length; i++) {
+            this.repeticionesDataAux.push(values[i].repetition);
+            this.fecha_repeticionesDataAux.push(values[i]);
+          }
+        }
+        this.repetitionLabels = this.repeticionesDataAux;
+        this.repetitionData = this.repeticionesDataAux;
+      });
   }
 
 
   // constructor cuanado esta todo montado
 ngOnInit(): void {
 
-  //this.getMedicionesRitmoC();
   this.getMeditionsVelocity();
   this.getMeditionsDistance();
-  //this.getRealRythm();
-  this.getRepetition();
-  this.getRealVelocity();
-  this.getRealDistance();
+  this.getMeditionsRepetition();
+  this.getMedicionesRitmoC();
 
-  //------------------------------------------- GRAFICA DE RITMO
-  this.chart_ritmo = new Chart('realtime', {
-    type: 'line',
-    data: {
-      labels: [],
-      datasets: [
-        {
-        label: 'ritmo cardiaco vs tiempo',
-        fill: false,
-        data: [7,7],
-        backgroundColor: '#168ede',
-        borderColor: '#FF0C00'
-        }
-      ]
-      },
-      options: {
-      tooltips: {
-        enabled: false
-      },
-      legend: {
-        display: true,
-        position: 'bottom',
-        labels: {
-          fontColor: 'black'
-        }
-      },
-      scales: {
-        yAxes: [{
-          ticks: {
-            fontColor: "black",
-            suggestedMin: 70,
-            suggestedMax: 200
-          }
-        }],
-        xAxes: [{
-        ticks: {
-          fontColor: "black",
-          beginAtZero: true
-        }
-        }]
-      }
-      }
-  });
-  this.showGraphic();
-  this.hilo = setInterval(() =>{this.showGraphic();},1000);
-  //----------------------------------------- FIN DE LA GRAFICA DE RITMO
+  this.hilo1 = setInterval(() =>{this.getMeditionsVelocity();},1000);
+  this.hilo2 = setInterval(() =>{this.getMeditionsDistance();},1000);
+  this.hilo3 = setInterval(() =>{this.getMedicionesRitmoC();},1000);
+  this.hilo4 = setInterval(() =>{this.getMeditionsRepetition();},1000);
 
-
+  /*this.hilo5 = setInterval(() =>{this.getMeditionsVelocity();},1000);*/
 }
 //Called once, before the instance is destroyed.
   ngOnDestroy(): void {
-    clearInterval(this.hilo);// deja de llamar a las peticiones
-  }
-
-  private showGraphic(): void {
-    this.medicionesService.getrhythm().subscribe(res => {
-      let chart_ritmoTime: any = new Date();
-      // PONE EL TIEMPO Y SI ES MAYOR A 15 DATOS DA UN SHIFT
-      chart_ritmoTime = chart_ritmoTime.getHours() + ':' + ((chart_ritmoTime.getMinutes() < 10) ? '0' + chart_ritmoTime.getMinutes() : chart_ritmoTime.getMinutes()) + ':' + ((chart_ritmoTime.getSeconds() < 10) ? '0' + chart_ritmoTime.getSeconds() : chart_ritmoTime.getSeconds());
-      if(this.chart_ritmo.data.labels.length > 15) {
-          this.chart_ritmo.data.labels.shift();
-          this.chart_ritmo.data.datasets[0].data.shift();
-      }
-      this.chart_ritmo.data.labels.push(chart_ritmoTime);
-      this.chart_ritmo.data.datasets[0].data.push(res); // PONE EL VALOR EN Y , ACA VAN LOS DATOS QUE VIENEN DE MONGO
-      this.chart_ritmo.update();
-      this.ritmoActual = res;
-    } , err => {
-      //console.log('error' , err);
-    });
+    clearInterval(this.hilo1);// deja de llamar a las peticiones
+    clearInterval(this.hilo2);
+    clearInterval(this.hilo3);
+    clearInterval(this.hilo4);
+    clearInterval(this.hilo5);
   }
 
 /********** Gráfica de velocidad *************/
-
-  public barChartOptions: ChartOptions = {
-    responsive: true,
-  };
-
+  public barChartOptions: ChartOptions = {responsive: true,};
   public velocityLabels: Label[] = [];
   public velocityChartType: ChartType = 'bar';
   public velocityChartLegend = true;
-
   public velocityData: MultiDataSet = [];
-
-
-
   /* **************************************** */
 
 /********** Gráfica de repeticiones *************/
-
-
   public repetitionLabels: Label[] = [];
   public repetitionChartType: ChartType = 'bar';
   public repetitionChartLegend = true;
-
-  public repetitionData: ChartDataSets[] = [
-    { data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A' },
-  ];
-
-
+  public repetitionData:  MultiDataSet= [];
   /* **************************************** */
 
 /********** Gráfica de Distancia *************/
-
-
   public distanceLabels: Label[] = [];
   public distanceLegend = true;
-
   public distanceData: MultiDataSet = [];
-
 
   /* **************************************** */
 /********** Gráfica de ritmo *************/
-
-
   public rythmLabels: Label[] = [];
   public rythmLegend = true;
-
-  public rythmData: ChartDataSets[] = [
-    { data: [65, 59, 80, 81, 56, 55, 30], label: 'Series A' },
-    { data: [65, 59, 80, 81, 56, 55, 40], label: 'Series B' },
-    { data: [95, 59, 80, 55, 56, 55, 10], label: 'Series C' },
-    { data: [65, 90, 11, 44, 33, 55, 50], label: 'Series D' },
-  ];
-
-
-  /* **************************************** */
-
+  public rythmData: MultiDataSet= [];
+ /* **************************************** */
 /********** Gráfica de Fallos *************/
-
-
   public failsLabels: Label[] = [];
   public barChartType: ChartType = 'bar';
   public failsLegend = true;
-
-  public failsData: ChartDataSets[] = [
-    { data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A' },
-    { data: [10, 59, 33, 81, 56, 2, 40], label: 'Series B' },
-    { data: [95, 59, 80, 55, 56, 55, 40], label: 'Series C' },
-  ];
-
-
+  public failsData:  MultiDataSet= [];
   /* **************************************** */
 
 }
