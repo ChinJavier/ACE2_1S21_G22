@@ -49,7 +49,7 @@ router.route('/rhythm/:id').get(getRhythm);
 
 // TODO: Distance, velocity
 
-router.post('/mobile/fallos/:_id' , fallos);
+router.post('/mobile/fallos/:_id/:repeticion' , fallos);
 
 
 module.exports = router;

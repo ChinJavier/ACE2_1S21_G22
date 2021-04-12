@@ -9,9 +9,14 @@ const renditionSchema = new Schema({
     username: {
         type: String,
         required: true,
+    },
+    fecha:{
+        type: String,
+        required: true,
+        default: Date.now()
     }
 }, {
-    timestamps: true
+    timestamps: false
 });
 
 module.exports = model('Rendition', renditionSchema);
