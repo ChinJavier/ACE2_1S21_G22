@@ -16,8 +16,8 @@
               <mat-card-title>Métricas</mat-card-title>
             </mat-card-header>
             <mat-card-content>
-              <mat-card-subtitle>Velicidad promedio: 7 m/s</mat-card-subtitle>
-              <mat-card-subtitle>Distancia total: 120 m</mat-card-subtitle>
+              <mat-card-subtitle>Velicidad promedio: {{avgVelocity}} m/s</mat-card-subtitle>
+              <mat-card-subtitle>Distancia total: {{ totalDistance }} m</mat-card-subtitle>
               <mat-card-subtitle>Num. Repetición: 4 </mat-card-subtitle>
             </mat-card-content>
           </mat-card>
@@ -51,9 +51,9 @@
             <mat-card-title>Reporte de Velocidad</mat-card-title>
           </mat-card-header>
           <mat-card-content>
-            <mat-card-subtitle>Máx: 10.3 m/s </mat-card-subtitle>
-            <mat-card-subtitle>Promedio: 7.8 m/s </mat-card-subtitle>
-            <mat-card-subtitle>Mín: 6.2 m/s </mat-card-subtitle>
+            <mat-card-subtitle>Máx: {{ maxVelocity }} m/s </mat-card-subtitle>
+            <mat-card-subtitle>Promedio: {{ avgVelocity }} m/s </mat-card-subtitle>
+            <mat-card-subtitle>Mín: {{ minVelocity }} m/s </mat-card-subtitle>
           </mat-card-content>
         </mat-card>
       </mat-selection-list>
