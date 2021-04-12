@@ -6,9 +6,9 @@ const oxygenSchema = new Schema({
         type: Number,
         required: true
     },
-    fecha:{ // para saber cual fue la ultima medicion tomada
+    fecha: { // para saber cual fue la ultima medicion tomada
         type: Date,
-        default : Date.now
+        default: Date.now
     },
     user: {
         type: Schema.ObjectId,
@@ -16,4 +16,5 @@ const oxygenSchema = new Schema({
         required: true
     }
 });
+
 module.exports = model('Oxygen', oxygenSchema);

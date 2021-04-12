@@ -6,14 +6,13 @@ const rhythmSchema = new Schema({
         type: Number,
         required: true
     },
+    username: {
+        type: String,
+    },
     fecha:{ // para saber cual fue la ultima medicion tomada
         type: Date,
-        default : Date.now
-    },
-    user: {
-        type: Schema.ObjectId,
-        ref: "User",
-        require: true
+        default : Date.now,
+
     },
 });
 module.exports = model('Rhythm',rhythmSchema);
