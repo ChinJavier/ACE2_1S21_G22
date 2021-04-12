@@ -1,0 +1,52 @@
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootswatch/4.5.2/materia/bootstrap.min.css"
+    integrity="sha384-B4morbeopVCSpzeC1c4nyV0d0cqvlSAfyXVfrPJa25im5p+yEN/YmhlgQP/OyMZD" crossorigin="anonymous" />
+    
+    
+    <app-showtime></app-showtime>
+
+<div class="container col-xl-10 col-8 col-md-8 sm-col-8 my-4 jumbotron">
+    <hr class="offset-xl-1 my-4 col-xl-10 ">
+    <h1 class="display-3" style="text-align: center;">MEDIDOR DE TEMPERATURA</h1>
+    <hr class="offset-xl-1 my-4 col-xl-10">
+
+
+    <div class="offset-xl-1 alert alert-dismissible alert-danger col-xl-10">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <h4 class="alert-heading">Warning!</h4>
+        <p class="mb-0">
+            La temperatura corporal normal promedio aceptada es generalmente de (37°C).
+            Algunos estudios han mostrado que la temperatura corporal "normal" puede tener un amplio rango que va desde los 97°F (36.1°C) hasta los 99°F (37.2°C).
+        </p>
+    </div>
+
+
+
+
+
+
+
+
+    <div class="offset-xl-1 card col-xl-10" >
+        <canvas id="realtime">{{ char_grafica }}</canvas>
+
+        <div class="card-content">
+        <h3>Realtime</h3>
+        <p>Esta grafica muestra la temperatura en tiempo real</p>
+        </div>
+
+    </div>
+
+
+    <body class="offset-xl-1 card border-primary mb-3 col-xl-10 col-md-12 col-12 col-sm-12" style="height: 100%;">
+        <div class="card-header white">
+            <p style="font-size: 5vw; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif">
+                Temperatura: {{this.valorActual}} C°
+            </p>
+        </div>
+    </body>
+    <button type="button"  [routerLink]="['/dashboard']" class="offset-xl-1 btn btn-outline-danger col-xl-5">BACK</button>
+    <button (click) = "saveTemperatura()" type="button" class="btn btn-outline-success col-xl-5">SAVE</button>
+</div>
+
+
+
