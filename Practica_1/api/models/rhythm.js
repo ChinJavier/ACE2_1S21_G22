@@ -9,10 +9,13 @@ const rhythmSchema = new Schema({
     username: {
         type: String,
     },
-    fecha:{ // para saber cual fue la ultima medicion tomada
-        type: Date,
-        default : Date.now,
-
-    },
-});
+    fecha_:{
+        type: String,
+        required: true,
+        default: Date.now()
+    }
+} ,
+{ timestamps: false }
+);
 module.exports = model('Rhythm',rhythmSchema);
+

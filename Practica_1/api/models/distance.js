@@ -7,9 +7,14 @@ const distanceSchema = new Schema({
     },
     username: {
         type: String,
+    },
+    fecha:{
+        type: String,
+        required: true,
+        default: Date.now()
     }
 },
-    { timestamps: true }
+    { timestamps: false }
 );
 
 module.exports = model('Distance', distanceSchema);
