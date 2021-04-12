@@ -1,0 +1,123 @@
+
+<link  rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootswatch/4.5.2/yeti/bootstrap.min.css" integrity="sha384-mLBxp+1RMvmQmXOjBzRjqqr0dP9VHU2tb3FK6VB0fJN/AOu7/y+CAeYeWJZ4b3ii" crossorigin="anonymous">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand">TVE G22</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <ul class="navbar-nav" style="text-align: left;">
+  
+</ul>
+
+
+<div class="collapse navbar-collapse" id="navbarNav">
+  <ul class="navbar-nav">
+
+      <li class="nav-item active my-sm-5 my-xl-0">
+          <a style="color:aliceblue" [routerLink]="['/list-profile']" mat-button ><span class="material-icons">
+                  logout
+          </span> back
+          </a>
+      </li>
+  </ul>
+
+</div>
+<!--CORRE EL CONTENIDO A LA DERECHA-->
+  <span class="flex-spacer">
+  </span>
+
+
+    
+  <div class="counter-container">
+      <p style ="color: white;" class="txt-time">{{time | date:'mediumTime'}}</p>
+  </div>
+</nav>
+
+<mat-toolbar >
+    <span> Historial de {{username}} </span >
+</mat-toolbar >
+
+
+
+<div class="row">
+    <table class="table table-hover col-xl-4">
+        <thead>
+          <tr>
+            <th scope="col">
+                <mat-toolbar >
+                <span> RITMO</span >
+            </mat-toolbar >
+        </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="table-active" *ngFor="let h of history_ritmo">
+            <td>
+              <div class="card-header text-black-50" style="background-color: azure; border-radius: 50px;">
+
+                </div>
+                <div class="card-body" >
+                    <p class="card-text" style="color: black;">VALOR: {{ h.valor }}</p>
+                    <p class="card-text" style="color: black;">FECHA: {{ h.fecha | date: "dd/MM/yyyy" }}</p>
+                    <p class="card-text" style="color: black;">HORA: {{ h.fecha | date: "hh:mm:ss" }}</p>
+                </div>
+            </td>
+          </tr>
+        </tbody>
+    </table>
+
+    <table class="table table-hover col-xl-4">
+        <thead>
+          <tr>
+            <th scope="col">
+                <mat-toolbar >
+                <span> TEMPERATURA</span >
+            </mat-toolbar >
+        </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="table-active" *ngFor="let h of history_temperatura">
+            <td>
+                <div class="card-header text-black-50" style="background-color: azure; border-radius: 50px;">
+                </div>
+                <div class="card-body" >
+                    <p class="card-text" style="color: black;">VALOR: {{ h.valor }}</p>
+                    <p class="card-text" style="color: black;">FECHA: {{ h.fecha | date: "dd/MM/yyyy" }}</p>
+                    <p class="card-text" style="color: black;">HORA: {{ h.fecha | date: "hh:mm:ss" }}</p>
+                </div>
+            </td>
+          </tr>
+        </tbody>
+    </table>
+
+    <table class="table table-hover col-xl-4">
+        <thead>
+          <tr>
+            <th scope="col">                    
+                <mat-toolbar >
+                <span> OXIGENO</span >
+            </mat-toolbar >
+        </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="table-active" *ngFor="let h of history_oxigeno">
+            <td>
+              <div class="card-header text-black-50" style="background-color: azure; border-radius: 50px;">
+
+                </div>
+                <div class="card-body" >
+                    <p class="card-text" style="color: black;">VALOR: {{ h.valor }}</p>
+                    <p class="card-text" style="color: black;">FECHA: {{ h.fecha | date: "dd/MM/yyyy" }}</p>
+                    <p class="card-text" style="color: black;">HORA: {{ h.fecha | date: "hh:mm:ss" }}</p>
+                </div>
+            </td>
+          </tr>
+        </tbody>
+    </table>
+
+
+
