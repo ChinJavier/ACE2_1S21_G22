@@ -1,0 +1,48 @@
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootswatch/4.5.2/materia/bootstrap.min.css"
+    integrity="sha384-B4morbeopVCSpzeC1c4nyV0d0cqvlSAfyXVfrPJa25im5p+yEN/YmhlgQP/OyMZD" crossorigin="anonymous" />
+    <app-showtime></app-showtime>
+
+<div class="container">
+    <mat-card class="card">
+        <mat-card-header>
+            <div mat-card-avatar class="example-header-image"></div>
+            <mat-card-title>HISTORIAL DE RITMO CARDIACO DEL ATLETA</mat-card-title>
+            
+        </mat-card-header>
+
+        <br>
+        <br>
+
+
+        <mat-card-content>
+            <div mat-card-image class="col-xl-12">
+                <canvas id="realtime">{{ char_grafica }}</canvas>
+            </div>
+        </mat-card-content>
+
+
+        <div class="prom-content">
+            <b>Promedio de ritmo cardiaco: {{this.promedio}}</b>
+        </div>
+        <mat-card-actions>
+            <button mat-button [routerLink]="['/dashboard']">Back</button>
+        </mat-card-actions>
+    </mat-card>
+</div>
+
+<br>
+<br>
+<mat-list class="h-list" class="animate__animated animate__fadeInLeft">
+    <h1>Historial de mediciones <span class="material-icons"> remove_red_eye </span>
+    </h1>
+    <mat-list-item *ngFor="let h of history">
+      <mat-icon mat-list-icon>folder</mat-icon>
+      <div mat-line><strong>{{h.type}}</strong></div>
+      <div mat-line>Resultado: {{ h.valor }}</div>
+      <div mat-line>{{ h.fecha | date: "dd/MM/yyyy" }} </div>
+      <div mat-line>{{ h.fecha | date: "hh:mm:ss" }} </div>
+    </mat-list-item>
+
+    <mat-divider></mat-divider>
+
+  </mat-list>

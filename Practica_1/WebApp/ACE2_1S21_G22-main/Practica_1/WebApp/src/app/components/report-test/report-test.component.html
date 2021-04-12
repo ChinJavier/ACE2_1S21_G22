@@ -1,0 +1,228 @@
+<app-nav-test></app-nav-test>
+<link
+  rel="stylesheet"
+  href="https://stackpath.bootstrapcdn.com/bootswatch/4.5.2/materia/bootstrap.min.css"
+  integrity="sha384-B4morbeopVCSpzeC1c4nyV0d0cqvlSAfyXVfrPJa25im5p+yEN/YmhlgQP/OyMZD"
+  crossorigin="anonymous"
+/>
+
+<div class="container">
+
+    <div class="row">
+      <div class="col-12">
+        <mat-selection-list>
+          <mat-card>
+            <mat-card-header>
+              <mat-card-title>Métricas</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+              <mat-card-subtitle>Velicidad promedio: 7 m/s</mat-card-subtitle>
+              <mat-card-subtitle>Distancia total: 120 m</mat-card-subtitle>
+              <mat-card-subtitle>Num. Repetición: 4 </mat-card-subtitle>
+            </mat-card-content>
+          </mat-card>
+        </mat-selection-list>
+      </div>
+    </div>
+
+  <div class="row">
+    <div class="col">
+      <mat-selection-list>
+        <mat-card>
+          <mat-card-header>
+            <mat-card-title>Tiempo Real</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <mat-card-subtitle>Velocidad: 7.8 m/s </mat-card-subtitle>
+            <mat-card-subtitle>Ritmo Cardíaco: 16 lat/s</mat-card-subtitle>
+            <mat-card-subtitle>Distancia: 120 m </mat-card-subtitle>
+            <mat-card-subtitle>Num. Repetición: 5 </mat-card-subtitle>
+          </mat-card-content>
+        </mat-card>
+      </mat-selection-list>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col">
+      <mat-selection-list>
+        <mat-card>
+          <mat-card-header>
+            <mat-card-title>Reporte de Velocidad</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <mat-card-subtitle>Máx: 10.3 m/s </mat-card-subtitle>
+            <mat-card-subtitle>Promedio: 7.8 m/s </mat-card-subtitle>
+            <mat-card-subtitle>Mín: 6.2 m/s </mat-card-subtitle>
+          </mat-card-content>
+        </mat-card>
+      </mat-selection-list>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col">
+      <mat-selection-list>
+        <mat-card>
+          <mat-card-header>
+            <mat-card-title>Record</mat-card-title>
+          </mat-card-header>
+          <mat-card-subtitle *ngFor="let vel of velocityDataAux">
+            {{ vel.fecha | date: "dd/MM/yyyy"  }} <br/>
+            {{ vel.valor }}
+          </mat-card-subtitle>
+        </mat-card>
+      </mat-selection-list>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-6">
+      <mat-selection-list>
+        <mat-card>
+          <mat-card-header>
+            <mat-card-title>Informe de Velocidad </mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <mat-card-subtitle *ngFor="let vel of fecha_velocityDataAux">
+              {{ vel.createdAt }} <br />
+              {{ vel.velocity }} 
+            </mat-card-subtitle>
+          </mat-card-content>
+        </mat-card>
+      </mat-selection-list>
+    </div>
+
+    <div class="col-6">
+      <h1>Gráfica de Velocidad (m/s) </h1>
+      <div style="display: block">
+        <canvas baseChart
+          [data]="velocityData"
+          [labels]="velocityLabels"
+          [options]="barChartOptions"
+          [legend]="velocityChartLegend"
+          [chartType]="velocityChartType">
+        </canvas>
+      </div>
+
+    </div>
+
+
+  </div>
+
+  <div class="row">
+    <div class="col-6">
+      <mat-selection-list>
+        <mat-card>
+          <mat-card-title>Informe the repeticiones </mat-card-title>
+          <mat-card-subtitle *ngFor="let vel of fecha_repeticionesDataAux">
+            {{ vel.createdAt }} <br />
+            {{ vel.repetition }} 
+          </mat-card-subtitle>
+        </mat-card>
+      </mat-selection-list>
+    </div>
+    <div class="col-6">
+      <h1>Gráfica de Repeticiones  (#)</h1>
+
+      <div style="display: block">
+        <canvas baseChart
+          [data]="repetitionData"
+          [labels]="repetitionLabels"
+          [options]="barChartOptions"
+          [legend]="repetitionChartLegend"
+          [chartType]="repetitionChartType">
+        </canvas>
+      </div>
+
+
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-6">
+      <mat-selection-list>
+        <mat-card>
+          <mat-card-title>Informe Distancia </mat-card-title>
+          <mat-card-subtitle *ngFor="let vel of fecha_distanceDataAux">
+            {{ vel.createdAt }} <br />
+            {{ vel.distance }} 
+          </mat-card-subtitle>
+        </mat-card>
+      </mat-selection-list>
+    </div>
+    <div class="col-6">
+
+      <h1>Gráfica Distancia (m)</h1>
+
+      <div style="display: block">
+        <canvas baseChart
+          [data]="distanceData"
+          [labels]="distanceLabels"
+          [options]="barChartOptions"
+          [legend]="distanceLegend"
+          [chartType]="barChartType">
+        </canvas>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-6">
+      <mat-selection-list>
+        <mat-card>
+          <mat-card-title>Informe de Ritmo Cárdiaco </mat-card-title>
+          <mat-card-subtitle *ngFor="let vel of fecha_ritmoDataAux">
+            {{ vel.fecha }} <br />
+            {{ vel.rhythm }}
+          </mat-card-subtitle>
+        </mat-card>
+      </mat-selection-list>
+    </div>
+    <div class="col-6">
+      <h1>Ritmo Cárdiaco Gráfica  (bpm) </h1>
+
+      <div style="display: block">
+        <canvas baseChart
+          [data]="rythmData"
+          [labels]="rythmLabels"
+          [legend]="rythmLegend"
+          [options]="barChartOptions"
+          [chartType]="barChartType">
+        </canvas>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-6">
+      <mat-selection-list>
+        <mat-card>
+          <mat-card-title>Informe de Fallos</mat-card-title>
+          <mat-card-subtitle *ngFor="let vel of lista">
+            24.3.2021 <br />
+            {{ vel }}
+          </mat-card-subtitle>
+        </mat-card>
+      </mat-selection-list>
+    </div>
+    <div class="col-6">
+      <h1> Gráfica de Fallos  (#)</h1>
+
+      <div style="display: block">
+        <canvas baseChart
+          [data]="failsData"
+          [labels]="failsLabels"
+          [options]="barChartOptions"
+          [legend]="failsLegend"
+          [chartType]="barChartType">
+        </canvas>
+      </div>
+
+    </div>
+  </div>
+
+
+</div>
