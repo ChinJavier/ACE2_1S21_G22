@@ -25,10 +25,10 @@ export class ReportTestComponent implements OnInit {
 
 
   lista:string[]=["120","98","88","56","102","76","11","estas","tal","estas"];
-  promedioVelocity:any=0;
+  avgVelocity:any=0;
   maxVelocity:any=0;
   minVelocity:any=0;
-  TotalDistance:any=0;
+  totalDistance:any=0;
   RepetitionsCount:any=0;
   RealVelocity:any=0;
   RealRythm:any=0;
@@ -99,8 +99,12 @@ export class ReportTestComponent implements OnInit {
         }
         this.velocityLabels = this.velocityDataAux;
         this.velocityData = this.velocityDataAux;
-
+        this.AVGVelocity();
+        this.getVelocityMax();
       });
+
+
+
   }
   getMeditionsDistance(){
     let username=localStorage.getItem('username');
@@ -109,7 +113,12 @@ export class ReportTestComponent implements OnInit {
 
         const {values} = res;
         this.distanceDataAux = [];
+<<<<<<< HEAD
         this.fecha_distanceDataAux = [];
+=======
+
+        console.log('VALUES',values);
+>>>>>>> 1af381e929af4472fa79f8fc506db3e95a11f25e
         if(values.length > 0 || values.length !== undefined) {
           for(let i = 0; i < values.length; i++) {
             this.distanceDataAux.push(values[i].distance);
@@ -118,6 +127,13 @@ export class ReportTestComponent implements OnInit {
         }
         this.distanceLabels = this.distanceDataAux;
         this.distanceData = this.distanceDataAux;
+<<<<<<< HEAD
+=======
+
+        console.log('ARR2', this.velocityData);
+        this.getTotalDistance()
+
+>>>>>>> 1af381e929af4472fa79f8fc506db3e95a11f25e
       });
   }
 
@@ -126,29 +142,34 @@ export class ReportTestComponent implements OnInit {
 
   AVGVelocity(){
     let suma=0;
-    for(let i = 0 ; i < this.meditionsVelocity.length; i++){
-      suma += this.meditionsVelocity[i].valor;
+    console.log('data1', this.velocityData);
+    for(let i = 0 ; i < 1000; i++){
+      suma += Number(this.velocityData[i]);
     }
-    if (this.meditionsVelocity.length == 0){
+    console.log('SUMA', suma);
+    console.log('fd',this.meditionsVelocity);
+    if (this.velocityData.length == 0){
       Swal.fire('Error', 'El usuario no tiene mediciones.', 'error')
       return
     }
-    return suma/this.meditionsVelocity.length;
+    this.avgVelocity = suma/1000;
+    console.log('AVG VELOCITY:', this.avgVelocity);
   }
   getVelocityMax(){
     let max =-1;
-    for(let i=0; i<this.meditionsVelocity.length; i++){
-      if (this.meditionsVelocity[i].valor > max){
-        max = this.meditionsVelocity[i].valor;
+    for(let i=0; i<1000; i++){
+      if (Number(this.velocityData[i]) > max){
+        max = Number(this.velocityData[i]);
       }
     }
+    console.log('MAX:', max);
     this.maxVelocity=max;
   }
   getVelocityMin(){
     let min=99999;
-    for(let i=0; i<this.meditionsVelocity.length; i++){
-      if (this.meditionsVelocity[i].valor < min){
-        min = this.meditionsVelocity[i].valor;
+    for(let i=0; i<1000; i++){
+      if (Number(this.velocityData[i]) < min){
+        min = Number(this.velocityData[i]);
       }
     }
     this.minVelocity=min;
@@ -156,14 +177,15 @@ export class ReportTestComponent implements OnInit {
 
   getTotalDistance(){
     let totalDistance=0;
-    for(let i=0; i<this.meditionsDistance.length; i++){
-      totalDistance += this.meditionsDistance[i].valor;
+    for(let i=0; i<this.distanceData.length; i++){
+      totalDistance += Number(this.distanceData[i]);
     }
-    if(this.meditionsDistance.length==0){
+    if(this.distanceData.length==0){
       Swal.fire('Error', 'No hay medidas de distancia!', 'error')
       return 0
     }
-    return totalDistance;
+    this.totalDistance = totalDistance;
+    return;
   }
 
 
