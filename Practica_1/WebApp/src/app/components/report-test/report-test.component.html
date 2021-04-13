@@ -7,74 +7,202 @@
 />
 
 <div class="container">
-
     <div class="row">
       <div class="col-12">
         <mat-selection-list>
           <mat-card>
-            <mat-card-header>
-              <mat-card-title>Métricas</mat-card-title>
-            </mat-card-header>
+
             <mat-card-content>
-              <mat-card-subtitle>Velicidad promedio: {{avgVelocity}} m/s</mat-card-subtitle>
-              <mat-card-subtitle>Distancia total: {{ totalDistance }} m</mat-card-subtitle>
-              <mat-card-subtitle>Num. Repetición: 4 </mat-card-subtitle>
+              <table class="table">
+                <thead class="thead-dark">
+                  <tr><th colspan="3" class="text-center">Conteo de repeticiones por fecha</th></tr>
+                  
+                  <tr class="text-center" >
+                    <th scope="col">fecha <br>(YY-MM-DD-HH-mm-ss)</th>
+                    <th scope="col"># de repeticiones</th>
+                    <th scope="col">¿ Aprobo ?</th>
+                  </tr>
+                </thead>
+                <tbody>
+                   <!--NG FOR TR  -->
+                  <tr class="text-center" *ngFor = "let rep of showRep1">
+                    <td>{{rep.fecha}}</td>
+                    <td>{{rep.cantidadRepeticiones}}</td>
+                    <td>{{rep.logrado}}</td>
+                    
+                  </tr>
+                </tbody>
+              </table>
+            </mat-card-content>
+
+
+          </mat-card>
+        </mat-selection-list>
+
+
+        <mat-selection-list>
+          <mat-card>
+            <mat-card-header>
+              <mat-card-title></mat-card-title>
+            </mat-card-header>
+
+             
+      
+              <mat-card-content>
+
+                <table class="table">
+                  <thead class="thead-dark">
+                    <tr><th colspan="4" class="text-center">Conteo de repeticiones por semana</th></tr>
+                    <tr class="text-center">
+                      <th scope="col">Semana del año</th>
+                      <th scope="col"># de repeteciones Promedio</th>
+                      <th scope="col"># de repeteciones maximo</th>
+                      <th scope="col"># de repeteciones minimo</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                     <!--NG FOR TR  -->
+                    <tr class="text-center">
+                      <td>Mark</td>
+                      <td>Otto</td>
+                      <td>Mark</td>
+                      <td>Otto</td>
+                    </tr>
+                  </tbody>
+                </table>
+               
+            </mat-card-content>
+
+
+          </mat-card>
+        </mat-selection-list>
+
+      
+      
+      <mat-selection-list>
+        <mat-card>
+            
+            <mat-card-content>
+              <table class="table">
+                <thead class="thead-dark">
+                  <tr><th colspan="4" class="text-center">Velocidad Alcanzada</th></tr>
+                  <tr class="text-center">
+                    <th scope="col"># repeticion </th>
+                    <th scope="col">Promedio de velocidad</th>
+                    <th scope="col">velocidad maxima</th>
+                    <th scope="col">velocidad minima</th>
+                  </tr>
+                </thead>
+                <tbody>
+                   <!--NG FOR TR  -->
+                  <tr class="text-center">
+                    <td>Mark</td>
+                    <td>Otto</td>
+                    <td>Mark</td>
+                    <td>Otto</td>
+                  </tr>
+                </tbody>
+              </table>
+          </mat-card-content>
+        </mat-card>
+      </mat-selection-list>
+
+
+
+      <mat-selection-list>
+        <mat-card>
+          <mat-card-header>
+
+          </mat-card-header>
+          <mat-card-content>
+
+            <mat-selection-list>
+              <mat-card>
+                  <mat-card-content>
+                    <table class="table">
+                      <thead class="thead-dark">
+                        <tr><th colspan="2" class="text-center">Distancia medida por repeticion</th></tr>
+                        <tr class="text-center">
+                          <th scope="col"># repeticion </th>
+                          <th scope="col">Distancia recorrida</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                         <!--NG FOR TR  -->
+                        <tr class="text-center">
+                          <td>Mark</td>
+                          <td>Otto</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                </mat-card-content>
+              </mat-card>
+            </mat-selection-list>
+      
+     
+          </mat-card-content>
+        </mat-card>
+      </mat-selection-list>
+
+
+
+
+        <mat-selection-list>
+          <mat-card>
+              
+              <mat-card-content>
+                <table class="table">
+                  <thead class="thead-dark">
+                    <tr><th colspan="2" class="text-center">Conteo de veces que el atleta ha fallado:  {{this.showRep4.length}}</th></tr>
+                    <tr class="text-center">
+                      <th scope="col">Fecha</th>
+                      <th scope="col"># de repeticion antes de fallar</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                     <!--NG FOR TR  -->
+                    <tr class="text-center" *ngFor="let rep of showRep4">
+                      <td>{{rep.fecha}}</td>
+                      <td>{{rep.cantidadRepeticiones}}</td>
+                    </tr>
+                  </tbody>
+                </table>
             </mat-card-content>
           </mat-card>
         </mat-selection-list>
+
+
+
+      <mat-selection-list>
+        <mat-card>
+            
+            <mat-card-content>
+              <table class="table">
+                <thead class="thead-dark">
+                  <tr><th colspan="2" class="text-center">Conteo de veces que el atleta ha Rendido: #</th></tr>
+                  <tr class="text-center">
+                    <th scope="col"># de test </th>
+                    <th scope="col"># de repeticion antes de rendirese</th>
+                  </tr>
+                </thead>
+                <tbody>
+                   <!--NG FOR TR  -->
+                  <tr class="text-center">
+                    <td>Mark</td>
+                    <td>Otto</td>
+                  </tr>
+                </tbody>
+              </table>
+          </mat-card-content>
+        </mat-card>
+      </mat-selection-list>
+
       </div>
     </div>
 
-  <div class="row">
-    <div class="col">
-      <mat-selection-list>
-        <mat-card>
-          <mat-card-header>
-            <mat-card-title>Tiempo Real</mat-card-title>
-          </mat-card-header>
-          <mat-card-content>
-            <mat-card-subtitle>Velocidad: 7.8 m/s </mat-card-subtitle>
-            <mat-card-subtitle>Ritmo Cardíaco: 16 lat/s</mat-card-subtitle>
-            <mat-card-subtitle>Distancia: 120 m </mat-card-subtitle>
-            <mat-card-subtitle>Num. Repetición: 5 </mat-card-subtitle>
-          </mat-card-content>
-        </mat-card>
-      </mat-selection-list>
-    </div>
-  </div>
 
-  <div class="row">
-    <div class="col">
-      <mat-selection-list>
-        <mat-card>
-          <mat-card-header>
-            <mat-card-title>Reporte de Velocidad</mat-card-title>
-          </mat-card-header>
-          <mat-card-content>
-            <mat-card-subtitle>Máx: {{ maxVelocity }} m/s </mat-card-subtitle>
-            <mat-card-subtitle>Promedio: {{ avgVelocity }} m/s </mat-card-subtitle>
-            <mat-card-subtitle>Mín: {{ minVelocity }} m/s </mat-card-subtitle>
-          </mat-card-content>
-        </mat-card>
-      </mat-selection-list>
-    </div>
-  </div>
 
-  <div class="row">
-    <div class="col">
-      <mat-selection-list>
-        <mat-card>
-          <mat-card-header>
-            <mat-card-title>Record</mat-card-title>
-          </mat-card-header>
-          <mat-card-subtitle *ngFor="let vel of velocityDataAux">
-            {{ vel.fecha }} <br/>
-            {{ vel.valor }}
-          </mat-card-subtitle>
-        </mat-card>
-      </mat-selection-list>
-    </div>
-  </div>
+
 
   <div class="row">
     <div class="col-6">

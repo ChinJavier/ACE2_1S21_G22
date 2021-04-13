@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
+import {baseLogic} from '../shared/URL';
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
-  private url_api: string = "https://tve-app-g22.herokuapp.com/logic/";
+  private url_api: string = baseLogic;
   constructor(private http: HttpClient) {}
 
   public getInfoUser(username: string | null):Observable<any>{

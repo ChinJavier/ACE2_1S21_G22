@@ -3,7 +3,7 @@ import { MedicionesService } from 'src/app/services/mediciones.service';
 import Swal from 'sweetalert2'
 import { ChartDataSets, ChartOptions, ChartType } from 'chart.js';
 import { Label, MultiDataSet } from 'ng2-charts';
-
+import {ConsultasService} from '../../services/consultas.service'
 
 @Component({
   selector: 'app-report-test',
@@ -11,12 +11,11 @@ import { Label, MultiDataSet } from 'ng2-charts';
   styleUrls: ['./report-test.component.css']
 })
 export class ReportTestComponent implements OnInit {
-  ok: boolean = false;
-
-
+ 
+  showRep1: any = [];
+  showRep4: any = [];
   
-  medicionesOxigeno=[];
-  medicionesTemperatura=[];
+
   medicionesRitmo:any=[];
   meditionsVelocity:any=[];
   meditionsDistance:any=[];
@@ -61,7 +60,7 @@ export class ReportTestComponent implements OnInit {
    fecha_fallosDataAux: any = [];
 
 
-  constructor(private medicionesService: MedicionesService) {
+  constructor(private medicionesService: MedicionesService , private repService: ConsultasService) {
 
   }
 
@@ -74,8 +73,11 @@ export class ReportTestComponent implements OnInit {
         this.fecha_ritmoDataAux = [];
         if(valores.length > 0 || valores.length !== undefined) {
           for(let i = 0; i < valores.length; i++) {
-            this.ritmoDataAux.push(valores[i].rhythm);
-            this.fecha_ritmoDataAux.push(valores[i]);
+            if (valores[i].rhythm != 0){
+              this.ritmoDataAux.push(valores[i].rhythm);
+              this.fecha_ritmoDataAux.push(valores[i]);
+            }
+
           }
         }
         this.rythmLabels = this.ritmoDataAux;
@@ -114,7 +116,7 @@ export class ReportTestComponent implements OnInit {
         const {values} = res;
         this.distanceDataAux = [];
         this.fecha_distanceDataAux = [];
-        console.log('VALUES',values);
+      //  console.log('VALUES',values);
         if(values.length > 0 || values.length !== undefined) {
           for(let i = 0; i < values.length; i++) {
             this.distanceDataAux.push(values[i].distance);
@@ -123,7 +125,7 @@ export class ReportTestComponent implements OnInit {
         }
         this.distanceLabels = this.distanceDataAux;
         this.distanceData = this.distanceDataAux;
-        console.log('ARR2', this.velocityData);
+       // console.log('ARR2', this.velocityData);
        // this.getTotalDistance()
       });
   }
@@ -133,18 +135,18 @@ export class ReportTestComponent implements OnInit {
 
   AVGVelocity(){
     let suma=0;
-    console.log('data1', this.velocityData);
+   // console.log('data1', this.velocityData);
     for(let i = 0 ; i < 1000; i++){
       suma += Number(this.velocityData[i]);
     }
-    console.log('SUMA', suma);
-    console.log('fd',this.meditionsVelocity);
+    //console.log('SUMA', suma);
+    //console.log('fd',this.meditionsVelocity);
     if (this.velocityData.length == 0){
       Swal.fire('Error', 'El usuario no tiene mediciones.', 'error')
       return
     }
     this.avgVelocity = suma/1000;
-    console.log('AVG VELOCITY:', this.avgVelocity);
+    //console.log('AVG VELOCITY:', this.avgVelocity);
   }
   getVelocityMax(){
     let max =-1;
@@ -153,7 +155,7 @@ export class ReportTestComponent implements OnInit {
         max = Number(this.velocityData[i]);
       }
     }
-    console.log('MAX:', max);
+    //console.log('MAX:', max);
     this.maxVelocity=max;
   }
   getVelocityMin(){
@@ -187,13 +189,15 @@ export class ReportTestComponent implements OnInit {
       .subscribe( (res: any)  => {
 
         let values  = res.repeticiones;
-        console.log('VALUES',values);
+       // console.log('VALUES',values);
         this.repeticionesDataAux = [];
         this.fecha_repeticionesDataAux = [];
         if(values.length > 0 || values.length !== undefined) {
           for(let i = 0; i < values.length; i++) {
-            this.repeticionesDataAux.push(values[i].repetition);
-            this.fecha_repeticionesDataAux.push(values[i]);
+            if (values[i].repetition != 0){
+              this.repeticionesDataAux.push(values[i].repetition);
+              this.fecha_repeticionesDataAux.push(values[i]);
+            }
           }
         }
         this.repetitionLabels = this.repeticionesDataAux;
@@ -214,9 +218,19 @@ ngOnInit(): void {
   this.hilo2 = setInterval(() =>{this.getMeditionsDistance();},1000);
   this.hilo3 = setInterval(() =>{this.getMedicionesRitmoC();},1000);
   this.hilo4 = setInterval(() =>{this.getMeditionsRepetition();},1000);
-
-  /*this.hilo5 = setInterval(() =>{this.getMeditionsVelocity();},1000);*/
+  this.getReporte4();
+  this.getRep1();
 }
+
+
+public getRep1(): any{
+  this.repService.getReporte1(localStorage.getItem('username')).subscribe(res => { this.showRep1 = res; console.log(res); } , err => console.log("error reporte1"));
+}
+
+public getReporte4(): any{
+  this.repService.getReporte4(localStorage.getItem('username')).subscribe(res=>{this.showRep4 = res;} , err => console.log("error rep4"));
+}
+
 //Called once, before the instance is destroyed.
   ngOnDestroy(): void {
     clearInterval(this.hilo1);// deja de llamar a las peticiones

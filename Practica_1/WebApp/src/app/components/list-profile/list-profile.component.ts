@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Router, ActivatedRoute} from '@angular/router';
-import {UserService} from './../../services/user.service'
+import {UserService} from './../../services/user.service';
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-list-profile',
   templateUrl: './list-profile.component.html',
@@ -42,19 +43,25 @@ export class ListProfileComponent implements OnInit {
   }
 
   enter_with_how_user(_id:any , username:any):void{
-    alert('estas entrando con el usuario de tu atleta...');
-    const id_coach:any = localStorage.getItem('uid');
-    const user_coach:any = localStorage.getItem('username');
-    localStorage.setItem('username' ,username);
-    localStorage.setItem('uid' , _id);
-    localStorage.setItem('username_coach' ,user_coach);
-    localStorage.setItem('uid_coach' , id_coach);
-    console.log("____ CHANGE USER ______");
-    console.log(localStorage.getItem('uid'));
-    console.log(localStorage.getItem('username'));
-    console.log("______________________");
-    this.router.navigate(['/dashboard']);
-
+ 
+    Swal.fire({text: `¿Seguro que desea entrar como coach de ${username} ?` , icon: 'warning' , showCancelButton:true, confirmButtonText:"SI", cancelButtonText:"CANCELAR"})
+    .then (resultado =>{
+      if(resultado.value){
+        const id_coach:any = localStorage.getItem('uid');
+        const user_coach:any = localStorage.getItem('username');
+        localStorage.setItem('username' ,username);
+        localStorage.setItem('uid' , _id);
+        localStorage.setItem('username_coach' ,user_coach);
+        localStorage.setItem('uid_coach' , id_coach);
+        console.log("____ CHANGE USER ______");
+        console.log(localStorage.getItem('uid'));
+        console.log(localStorage.getItem('username'));
+        console.log("______________________");
+        this.router.navigate(['/dashboard']);
+      }else{
+        return
+      }
+    });
   }
 
 
