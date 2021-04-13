@@ -68,7 +68,7 @@
             <mat-card-title>Record</mat-card-title>
           </mat-card-header>
           <mat-card-subtitle *ngFor="let vel of velocityDataAux">
-            {{ vel.fecha | date: "dd/MM/yyyy"  }} <br/>
+            {{ vel.fecha }} <br/>
             {{ vel.valor }}
           </mat-card-subtitle>
         </mat-card>
@@ -85,7 +85,7 @@
           </mat-card-header>
           <mat-card-content>
             <mat-card-subtitle *ngFor="let vel of fecha_velocityDataAux">
-              {{ vel.createdAt }} <br />
+              {{ vel.fecha }} <br />
               {{ vel.velocity }} 
             </mat-card-subtitle>
           </mat-card-content>
@@ -116,7 +116,7 @@
         <mat-card>
           <mat-card-title>Informe the repeticiones </mat-card-title>
           <mat-card-subtitle *ngFor="let vel of fecha_repeticionesDataAux">
-            {{ vel.createdAt }} <br />
+            {{ vel.fecha }} <br />
             {{ vel.repetition }} 
           </mat-card-subtitle>
         </mat-card>
@@ -145,7 +145,7 @@
         <mat-card>
           <mat-card-title>Informe Distancia </mat-card-title>
           <mat-card-subtitle *ngFor="let vel of fecha_distanceDataAux">
-            {{ vel.createdAt }} <br />
+            {{ vel.fecha }} <br />
             {{ vel.distance }} 
           </mat-card-subtitle>
         </mat-card>
