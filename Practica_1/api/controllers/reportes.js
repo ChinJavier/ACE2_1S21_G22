@@ -190,9 +190,8 @@ const entrenamientos4 = [];
 
 
 const fallos_total = async (req, res) => {
-    console.log(res);
-    /*
-    const repeticiones4 = await Repetition.find({ "username": "abcprueba" }).sort({ fecha: 1 });
+    const {username} = req.params;
+    const repeticiones4 = await Repetition.find({ "username": username }).sort({ fecha: 1 });
     //console.log(repeticiones);
     let objEntrenamiento4 = {
         "cantidadRepeticiones": 0,
@@ -237,7 +236,8 @@ const fallos_total = async (req, res) => {
     let resultado = (entrenamientos4.filter(objAux => {
         return objAux.logrado == false;
     }));
-    */
+    
+    res.send(resultado);
 
 
 }
@@ -250,7 +250,7 @@ const rendido_total = async (req, res) => {
 }
 
 
-fallos_total();
+
 
 module.exports = {
     reporte1,
