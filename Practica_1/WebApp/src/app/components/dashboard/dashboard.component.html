@@ -8,7 +8,7 @@
 
 <div class="row col-xl-12">
   <div
-    class="stats-container col-xl-6"
+    class="stats-container col-xl-12"
     fxLayout.sm="column"
     fxLayout.md="column"
     fxLayout.xs="column"
@@ -27,10 +27,9 @@
       <mat-card-content>
         <img mat-card-image src="assets/course.jpg" />
         <p>
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Provident
-          blanditiis tenetur molestiae ducimus similique, sapiente perspiciatis
-          dolorum hic magnam nisi error quia eius explicabo expedita dignissimos
-          est magni. Accusamus, iusto.
+          Prueba tu destresa , demostrando que eres capaz de superar el Course Navette
+          ,aprovechando la tecnologia y automatizacion que proveemos para ayudarte a mejorar tu rendimiento fisico.
+          ¿De que trata Course Navette ? descrubelo por ti mismo dandole click al boton que esta justo por debajo!
         </p>
       </mat-card-content>
       <mat-card-actions>
@@ -39,43 +38,5 @@
     </mat-card>
   </div>
 
-  <div class="ajuste col-6">
-      <table class="table ajuste  table-striped col-12" style="width: 900px;">
-        <thead class="thead-light">
-          <tr>
 
-          </tr>
-          <tr>
-            <th>
-              <h1>
-                #
-              </h1>
-            </th>
-            <th>
-              <h1>
-                Historial de mediciones
-                <span class="material-icons"> remove_red_eye </span>
-              </h1>
-            </th>
-
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let h of history; let i = index;">
-            <th>
-              {{ i  }}
-            </th>
-            <th>
-                <mat-icon mat-list-icon>folder</mat-icon>
-                <strong>{{h.type}}</strong>
-                Resultado: {{ h.valor }}
-                {{ h.fecha | date: "dd/MM/yyyy" }}
-                {{ h.fecha | date: "hh:mm:ss" }}
-            </th>
-
-          </tr>
-        </tbody>
-      </table>
-    </div>
-</div>
 <!-- NO IMPORTA QUE EL HISTORY ESTE VACIO , cuando en las peticiones se llene el ngFor lo va recargar-->
