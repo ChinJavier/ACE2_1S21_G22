@@ -113,12 +113,8 @@ export class ReportTestComponent implements OnInit {
 
         const {values} = res;
         this.distanceDataAux = [];
-<<<<<<< HEAD
         this.fecha_distanceDataAux = [];
-=======
-
         console.log('VALUES',values);
->>>>>>> 1af381e929af4472fa79f8fc506db3e95a11f25e
         if(values.length > 0 || values.length !== undefined) {
           for(let i = 0; i < values.length; i++) {
             this.distanceDataAux.push(values[i].distance);
@@ -127,13 +123,8 @@ export class ReportTestComponent implements OnInit {
         }
         this.distanceLabels = this.distanceDataAux;
         this.distanceData = this.distanceDataAux;
-<<<<<<< HEAD
-=======
-
         console.log('ARR2', this.velocityData);
-        this.getTotalDistance()
-
->>>>>>> 1af381e929af4472fa79f8fc506db3e95a11f25e
+       // this.getTotalDistance()
       });
   }
 
