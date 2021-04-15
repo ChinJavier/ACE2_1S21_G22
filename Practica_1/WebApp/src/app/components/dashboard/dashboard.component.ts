@@ -18,18 +18,14 @@ export class DashboardComponent implements OnInit {
   ) {
 
 
-    console.log(this.history);
-    this.history.push({ fecha: "sa",valor: 7,type: 'Oxigeno'});
-    this.history.push({ fecha: "HOLA",valor: 10,type: 'Oxigeno'});
-
   }
 
   ngOnInit(): void {
     this.username = localStorage.getItem('username');
     this.uid = localStorage.getItem('uid');
-    this.getMediciones();
+    //this.getMediciones();
     this.getDate();
-    this.displayMsg();
+   // this.displayMsg();
   }
 
    getMediciones():void{

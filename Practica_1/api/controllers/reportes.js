@@ -3,16 +3,17 @@ const model_rhythm = require('../models/rhythm');
 const Rendition = require('../models/rendition');
 const Distance = require('../models/distance');
 const Repetition = require('../models/repetition');
-
+const User = require('../models/user');
 // TODO:    REPORTES
 
 
 // ============================================= REPORTE 1
-const entrenamientos = [];
+var entrenamientos = [];
 
 
-const reporte1 = async (req, res) => {
+const reporte1 = async (req, res) => { // parte 1
     const { username } = req.params;
+    entrenamientos = [];
     console.log("USUARIO: ", username);
     const repeticiones = await Repetition.find({ "username": username }).sort({ fecha: 1 });
     let objEntrenamiento = {
@@ -107,90 +108,106 @@ function getMes(mesNumber) {
     }
 }
 
-// ============================================= REPORTE 2
-const entrenamientos2 = [];
+// ============================================= REPORTE 2 Velocidad alcanzada:
+var entrenamientos2 = [];
 
 const velocidad_alcanzada = async (req, res) => {
-    //const {username} = req.params;
-    //console.log("USUARIO: " ,username);
-    const repeticiones2 = await Repetition.find({ "username": "abcprueba" }).sort({ fecha: 1 });
-
-    let objEntrenamiento2 = {
-        "repeticiones": []
-    }
-
-    let objRepeticiones2 = {
-        "numeroRepeticion": 0,
-        "instanciasRepeticiones": []
-    }
-
-    let flag2 = false;
-    let repeticionActual = 0;
-
-    for (let i = 0; i < repeticiones2.length; i++) {
-        try {
-            if (i == 0) {
-                repeticionActual = repeticiones2[i].repetition;
-                objRepeticiones2.numeroRepeticion = repeticionActual;
-            }
-            if (repeticionActual != repeticiones2[i].repetition) {
-                objEntrenamiento2.repeticiones.push(objRepeticiones2)
-                repeticionActual++;
-                objRepeticiones2.numeroRepeticion = repeticionActual;
-                objRepeticiones2.instanciasRepeticiones = [];
-            }
-
-            objRepeticiones2.instanciasRepeticiones.push(repeticion2[i]);
-
-            if (repeticiones2[i + 1] != undefined) {
-                if (repeticiones2[i].repetition != 0 && repeticiones2[i + 1].repetition == 0 && repeticiones2[i].repetition > 0 && repeticiones2[i].repetition < 22 && Number.isInteger(repeticiones2[i].repetition)) {
-                    objEntrenamiento2.cantidadRepeticiones = repeticiones2[i].repetition;
-                    objEntrenamiento2.fecha = repeticiones2[i].fecha;
-                    if (repeticiones2[i].repetition < 21) {
-                        objEntrenamiento2.logrado = false;
-                    }
-                    entrenamientos2.push({
-                        "cantidadRepeticiones": objEntrenamiento2.cantidadRepeticiones,
-                        "logrado": objEntrenamiento2.logrado,
-                        "fecha": objEntrenamiento2.fecha
-                    });
-                    objEntrenamiento2.cantidadRepeticiones = 0;
-                    objEntrenamiento2.logrado = true;
-                    flag2 = true;
+    const { username } = req.params;
+    try {
+        const resultado = await User
+        .aggregate(
+        [ // EN ESTE VECTOR SE PONEN LOS STATES
+            {
+                $lookup:
+                {
+                    from: "velocities" , // hijo
+                    localField: "username", // hablamos del padre
+                    foreignField: "username", // que coindica con el atributo del hijo
+                    as: "UserVelocities" // le doy un alias
                 }
+            },{$unwind: "$UserVelocities",},// COMO ESTA AL MISMO NIVEL DE ESTA CAPA PUEDO HACER REFERENCIA A TODO LO DE DISTANCIA
+            {
+            $lookup:
+            {
+                from: "repetitions" , // hijo
+                localField: "username", // hablamos del padre
+                foreignField: "username", // que coindica con el atributo del hijo
+                as: "UserRepetitions" // le doy un alias
             }
-
-        } catch (error) {
-            console.log(error);
-        }
+        }, {$unwind: "$UserRepetitions"},
+        {$match: {"UserRepetitions.fecha": {"$exists": true},"UserVelocities.fecha": {"$exists": true}, $and: [  {"UserVelocities.velocity": {$gte: 0.001 } }, { "UserRepetitions.repetition": {$gte: 1} } , { "UserRepetitions.repetition": {$lt: 21} } , {username: username}]  }}, // ACA VA EL USUARIO
+        { $project : { _id: 0 , username : 1 , UserVelocities : { velocity : 1  , fecha : 1 } , UserRepetitions: { repetition: 1 , fecha : 1} , "dateComp": {"$cmp":["$UserRepetitions.fecha","$UserVelocities.fecha"]} }}, // 1 para incluir  , 0 para excluir
+        {"$match":{"dateComp": 0 }},
+        { $sort : { "UserVelocities.fecha" : 1 } }
+        ]
+        );
+        res.send(resultado);
+       // console.log(resultado);
+    } catch (error) {
+        console.log(":(" , error);
     }
-    if (!flag2) {
-        objEntrenamiento2.cantidadRepeticiones = repeticiones2[repeticiones2.length - 1].repetition;
-        objEntrenamiento2.fecha = repeticiones2[repeticiones2.length - 1].fecha;
-        if (repeticiones2[repeticiones2.length - 1].repetition < 21) {
-            objEntrenamient2.logrado = false;
-        }
-        entrenamientos2.push(objEntrenamiento2)
-    }
-
-    res.send(entrenamientos2);
 }
 
 
 
-// ============================================= REPORTE 3
+
+
+// ============================================= REPORTE 3 Distancia medida por repetición:
 const distancia_alcanzada = async (req, res) => {
 
+    const { username } = req.params;
+    try {
+        const resultado = await User
+        .aggregate(
+        [ // EN ESTE VECTOR SE PONEN LOS STATES
+            {
+                $lookup:
+                {
+                    from: "distances" , // hijo
+                    localField: "username", // hablamos del padre
+                    foreignField: "username", // que coindica con el atributo del hijo
+                    as: "UserDistances" // le doy un alias
+                }
+            },{$unwind: "$UserDistances",},// COMO ESTA AL MISMO NIVEL DE ESTA CAPA PUEDO HACER REFERENCIA A TODO LO DE DISTANCIA
+            {
+            $lookup:
+            {
+                from: "repetitions" , // hijo
+                localField: "username", // hablamos del padre
+                foreignField: "username", // que coindica con el atributo del hijo
+                as: "UserRepetitions" // le doy un alias
+            }
+        }, {$unwind: "$UserRepetitions"},
+        {$match: {"UserRepetitions.fecha": {"$exists": true},"UserDistances.fecha": {"$exists": true}, $and: [  {"UserDistances.distance": {$gte: 11} }, { "UserRepetitions.repetition": {$gte: 1} } , { "UserRepetitions.repetition": {$lt: 21} } , { "UserDistances.distance": {$lt: 23} } , {username: username} ] }}, // ACA VA EL USUARIO
+        { $project : { _id: 0 , username : 1 , UserDistances : { distance : 1  , fecha : 1 } , UserRepetitions: { repetition: 1 , fecha : 1} , "dateComp": {"$cmp":["$UserRepetitions.fecha","$UserDistances.fecha"]} }}, // 1 para incluir  , 0 para excluir
+        {"$match":{"dateComp": 0 }},
+        { $sort : { "UserDistances.fecha" : 1 } }
+        ]
+        );
+        res.send(resultado);
+        //console.log(resultado);
+    } catch (error) {
+        console.log(":(" , error);
+    }
+
+// lookup es para filtrar documents como que si fuera join
+// unwind ayuda a que sea un solo objeto
+// project es un GROUP BY
+// MATCH es un WHERE para condicionales
+
 }
 
 
 
-// ============================================= REPORTE 4
-const entrenamientos4 = [];
+
+
+// ============================================= REPORTE 4 Conteo de veces que el atleta ha fallado:
+var entrenamientos4 = [];
 
 
 const fallos_total = async (req, res) => {
     const {username} = req.params;
+    entrenamientos4 = [];
     const repeticiones4 = await Repetition.find({ "username": username }).sort({ fecha: 1 });
     //console.log(repeticiones);
     let objEntrenamiento4 = {
@@ -244,9 +261,11 @@ const fallos_total = async (req, res) => {
 
 
 
-// ============================================= REPORTE 5
+// ============================================= REPORTE 5 Conteo de veces que el atleta se ha rendido:
 const rendido_total = async (req, res) => {
-    const repeticiones5 = await Rendition.find({ "username": "abcprueba" }).sort({ fecha: 1 });
+    const {username} = req.params;
+    const repeticiones5 = await Rendition.find({ "username": username }).sort({ fecha: 1 });
+    res.send(repeticiones5);
 }
 
 
@@ -254,8 +273,48 @@ const rendido_total = async (req, res) => {
 
 module.exports = {
     reporte1,
-    fallos_total
+    fallos_total,
+    rendido_total,
+    distancia_alcanzada,
+    velocidad_alcanzada
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 /*
