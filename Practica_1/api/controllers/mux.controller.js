@@ -21,7 +21,7 @@ const getData = async (req, res) => {
     }
     var f = new Date();
     //"%Y-%m-%d-%H-%M-%S"
-    let fechaFormateada = f.getFullYear()+"-"+f.getMonth()+"-"+f.getDate()+"-"+f.getHours()+"-"+f.getMinutes()+"-"+f.getSeconds();
+    let fechaFormateada = f.getFullYear()+"-"+(f.getMonth()+1)+"-"+f.getDate()+"-"+f.getHours()+"-"+f.getMinutes()+"-"+f.getSeconds();
     console.log(fechaFormateada)
     const username = dbUser.username;
     const dbDistance = new Distance({ distance: distancia, username: username , fecha: fechaFormateada});
@@ -51,21 +51,23 @@ const getData = async (req, res) => {
 }
 
 const fallos = async (req, res) =>{
-    const { _id , repeticion } = req.params;
+    const { username , repeticion} = req.params;
+    //abcprueba
+    //2021-04-10-15-58-48
 
+    var f = new Date();
+    //"%Y-%m-%d-%H-%M-%S"
+    let fechaFormateada = f.getFullYear()+"-"+(f.getMonth()+1)+"-"+f.getDate()+"-"+f.getHours()+"-"+f.getMinutes()+"-"+f.getSeconds();
+    console.log(fechaFormateada)
+
+    console.log({username: username , repeticion: repeticion , fecha: fechaFormateada});
     try {
-      /*  const dbUser = await User.findById({ _id});
-        if(!dbUser) {
-            return res.status(400).json({
-                ok: false,
-                msg: 'El usuario no existe',
-            });
-        }
-        
-        }*/
-
+    const dbrendicion = new Rendition({username: username , repeticion: repeticion , fecha: fechaFormateada})
+    await dbrendicion.save();
+    res.json({msg:'ok'});
     } catch (error) {
         console.log(error);
+        res.json({msg:'F'});
     }
 }
 

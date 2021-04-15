@@ -17,4 +17,8 @@ export class ConsultasService {
   public getReporte4(username: any): Observable<any>{
     return this.http.get(`${this.url_api}rep/4/proyecto1/${username}`);
   }
+
+  public getReporteGenerico(username: any , numeroReporte : any ): Observable<any>{
+    return this.http.get(`${this.url_api}rep/${numeroReporte}/proyecto1/${username}`);
+  }
 }

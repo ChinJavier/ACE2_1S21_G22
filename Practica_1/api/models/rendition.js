@@ -2,7 +2,7 @@ const { Schema, model } = require('mongoose');
 
 
 const renditionSchema = new Schema({
-    rendition: {
+    repeticion: {
         type: Number,
         required: true
     },
