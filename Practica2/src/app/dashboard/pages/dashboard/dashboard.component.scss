@@ -31,6 +31,11 @@
 
 }
 
+.col-12 {
+    width: 100%;
+    text-align: center;
+}
+
 .dashboard_one {
 
     height: 300px;
@@ -102,7 +107,7 @@ button {
 
 @media  (max-width: 736px) {
     .dashboard {
-        height: 1700px;
+        height: 1800px;
     }
     .dashboard_one {
         height: 330px;
