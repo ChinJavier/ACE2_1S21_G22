@@ -47,6 +47,7 @@ export class DashboardComponent implements OnInit {
         let minute = Number(this.minutes);
         second += 1;
         if(second > 59) {
+          second = 0;
           (this.seconds) = '00';
           minute += 1;
         }
