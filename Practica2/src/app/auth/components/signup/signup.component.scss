@@ -1,0 +1,51 @@
+.login_container {
+    height: 100vh;
+    background: rgb(2,0,36);
+    background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,121,115,1) 0%, rgba(0,212,255,1) 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .login__box {
+        height: 400px;
+        width: 400px;
+        background: #ffff;
+        border-radius: 10px;
+        box-shadow:
+            0 0.7px 2.2px rgba(0, 0, 0, 0.039),
+            0 1.7px 5.3px rgba(0, 0, 0, 0.057),
+            0 3.3px 10px rgba(0, 0, 0, 0.07),
+            0 5.8px 17.9px rgba(0, 0, 0, 0.083),
+            0 10.9px 33.4px rgba(0, 0, 0, 0.101),
+            0 26px 80px rgba(0, 0, 0, 0.14);
+    }
+    .row {
+        padding: 10px
+    }
+    input {
+        margin-left: 50px;
+        width: 70%;
+        margin-bottom: 0px;
+    }
+    label {
+        margin-left: 30px;
+        margin-top: 10px;
+    }
+
+    button {
+        margin-top: 30px;
+        margin-left: 50px;
+        width: 70%;
+    }
+}
+
+.login__title {
+    padding: 12px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 38px;
+}
+
+.already__registered {
+    text-align: center;
+    font-size: 14px;
+}

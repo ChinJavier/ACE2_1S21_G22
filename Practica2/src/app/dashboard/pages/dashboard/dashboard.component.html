@@ -1,0 +1,96 @@
+<div class="dashboard">
+    <br>
+    <br>
+    <div class="row">
+
+        <div class="col-12">
+            <button class="btn btn-danger" (click)="logout()">Cerrar Sesión</button>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6 col-sm-12">
+            <div class="dashboard_one animate__flipInX  animate__animated">
+                <br>
+                <div class="title">¡Bienvenido {{ username }}!</div>
+                <br>
+                <br>
+                <div class="form-floating mb-3">
+                    <input type="number" class="form-control" [(ngModel)]="weight" sid="floatingInput" placeholder="Ingresa tu peso en kilogramos">
+                    <label for="floatingInput">Ingresa tu peso en kilogramos</label>
+                </div>
+                <div class="form__action">
+                    <button
+                        class="btn btn-warning btn-rp"
+                        (click)="start()"
+                    >
+                        Realizar prueba
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-sm-12">
+            <div class="dashboard_one animate__flipInX animate__animated">
+                <br>
+                <div class="title">VO2 MAX</div>
+                <br>
+                <br>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="dashboard_two animate__flipInX animate__animated" style="color:white; text-align: center;">
+                <br>
+                <h1>Medición de Aire</h1>
+
+                <div class="line_chart" style="display: block">
+                    <canvas baseChart
+                        [data]="vxoData"
+                        [labels]="vxoLabels"
+                        [options]="vxoChartOptions"
+                        [legend]="vxoChartLegend"
+                        [chartType]="vxoChartType"
+                      >
+
+                    </canvas>
+                  </div>
+
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="dashboard_timer animate__flipInX animate__animated">
+
+                <div class="time__container">
+                    {{minutes}}:{{seconds}}
+                </div>
+
+                <div class="timer__actions">
+                    <button
+                        class="btn btn-success"
+                        (click)="takeTime()"
+                    >
+                        Tomar tiempo
+                    </button>
+                    <br>
+                    <button
+                        class="btn btn-danger"
+                        (click)="pause()"
+                    >
+                        Pausar/Reanudar
+                    </button>
+                    <br>
+                    <button
+                        class="btn btn-warning"
+                        (click)="reset()"
+                    >
+                        Reiniciar
+                    </button>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
