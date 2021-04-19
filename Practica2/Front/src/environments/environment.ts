@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  API_URL: 'https://tve-app-g22.herokuapp.com/api/v1/'
+  //API_URL: 'https://tve-app-g22.herokuapp.com/api/v1/',
+  API_URL: 'http://localhost:3000/api/v1/'
 };
 
 /*

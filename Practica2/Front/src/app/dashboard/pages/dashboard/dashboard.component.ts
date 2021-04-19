@@ -6,6 +6,8 @@ import { interval, Observable } from 'rxjs';
 import { take } from 'rxjs/operators';
 import { DashboardService } from '../../services/dashboard.service';
 import { AuthService } from 'src/app/auth/services/auth.service';
+import { Chart } from 'chart.js';
+
 
 @Component({
   selector: 'app-dashboard',
@@ -13,7 +15,8 @@ import { AuthService } from 'src/app/auth/services/auth.service';
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
-
+	private hilo: any = null;
+	public char_grafica: any = null;
   vxData: any = [];
   vxDataAux: any = [];
   time: Date = new Date();
@@ -37,6 +40,55 @@ export class DashboardComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
+
+
+    this.char_grafica = new Chart('realtime', {
+			type: 'line',
+			data: {
+				labels: [],
+				datasets: [
+				  {
+					label: 'Medicion de Aire en Tiempo Reals',
+					fill: false,
+					data: [],
+					backgroundColor: '#168ede',
+					borderColor: '#FF0C00'
+				  }
+				]
+			  },
+			  options: {
+				tooltips: {
+					enabled: false
+				},
+				legend: {
+					display: true,
+					position: 'bottom',
+					labels: {
+						fontColor: 'black'
+					}
+				},
+				scales: {
+				  yAxes: [{
+					  ticks: {
+						  fontColor: "black",
+						  suggestedMin: 0,
+						  suggestedMax: 40
+					  }
+				  }],
+				  xAxes: [{
+					ticks: {
+						fontColor: "black",
+						beginAtZero: true
+					}
+				  }]
+				}
+			  }
+		});
+		
+		this.showGraphic();
+		
+		this.hilo = setInterval(() =>{this.showGraphic();},1000);
   }
 
   takeTime() {
@@ -123,8 +175,30 @@ export class DashboardComponent implements OnInit {
     this.authService.logout();
   }
 
-  public vxoLabels: Label[] = [];
-  public vxoChartType: ChartType = 'bar';
-  public vxoChartLegend = true;
-  public vxoData: MultiDataSet = [ [2,3]];
+  private bandera = false;
+  private showGraphic(): void {
+    this.bandera = !this.bandera;
+		//this.service.getTemperatura().subscribe(res => {
+			let char_graficaTime: any = new Date();
+			// PONE EL TIEMPO Y SI ES MAYOR A 15 DATOS DA UN SHIFT
+			char_graficaTime = char_graficaTime.getHours() + ':' + ((char_graficaTime.getMinutes() < 10) ? '0' + char_graficaTime.getMinutes() : char_graficaTime.getMinutes()) + ':' + ((char_graficaTime.getSeconds() < 10) ? '0' + char_graficaTime.getSeconds() : char_graficaTime.getSeconds());
+			if(this.char_grafica.data.labels.length > 7) {
+					this.char_grafica.data.labels.shift();
+					this.char_grafica.data.datasets[0].data.shift();
+			}
+			this.char_grafica.data.labels.push(char_graficaTime);
+			if(this.bandera){
+        this.char_grafica.data.datasets[0].data.push(10); // PONE EL VALOR EN Y , ACA VAN LOS DATOS QUE VIENEN DE MONGO
+
+      }else{
+        this.char_grafica.data.datasets[0].data.push(-10); // PONE EL VALOR EN Y , ACA VAN LOS DATOS QUE VIENEN DE MONGO
+			
+      }
+      this.char_grafica.update();
+		//	this.valorActual = res;
+		//} , err => {
+		//	console.log('error' , err);
+		//});
+	}
+
 }

@@ -42,18 +42,13 @@
         <div class="col-md-6">
             <div class="dashboard_two animate__flipInX animate__animated" style="color:white; text-align: center;">
                 <br>
-                <h1>Medición de Aire</h1>
+              
 
                 <div class="line_chart" style="display: block">
-                    <canvas baseChart
-                        [data]="vxoData"
-                        [labels]="vxoLabels"
-                        [options]="vxoChartOptions"
-                        [legend]="vxoChartLegend"
-                        [chartType]="vxoChartType"
-                      >
-
-                    </canvas>
+                    <div class="offset-xl-1 card col-xl-12 col-md-12"  style="max-height: 350px;">
+                        <canvas id="realtime">{{ char_grafica }}</canvas>
+                
+                    </div>
                   </div>
 
             </div>
@@ -71,22 +66,22 @@
                         class="btn btn-success"
                         (click)="takeTime()"
                     >
-                        Tomar tiempo
+                        Iniciar Test
                     </button>
                     <br>
                     <button
                         class="btn btn-danger"
                         (click)="pause()"
                     >
-                        Pausar/Reanudar
+                        Cancelar
                     </button>
-                    <br>
                     <button
-                        class="btn btn-warning"
-                        (click)="reset()"
-                    >
-                        Reiniciar
-                    </button>
+                    class="btn btn-warning"
+                    (click)="pause()"
+                >
+                    Reportes
+                </button>
+                
 
                 </div>
 

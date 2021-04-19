@@ -19,7 +19,7 @@ app.use(morgan('dev'));
 
 // POR EL MOMENTO SOLO RUTAS DE USUARIO
 app.use('/api/v1/auth', require('./routes/auth.routes'));
-
+app.use('/logic',require('./routes/logic.routes'));
 
 
 // Manejador de rutas
