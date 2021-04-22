@@ -1,0 +1,127 @@
+.dashboard {
+    background: rgba(4, 38, 78, 0.63);
+    height: 1000px;
+    .title {
+        text-align: center;
+        color: white;
+        font-size: 40px;
+    }
+
+    .row {
+        margin: 0px 30px;
+
+    }
+
+    .form-floating {
+
+        display: flex;
+        justify-content: center;
+        text-align: center;
+    }
+
+    input {
+        width: 70%;
+    }
+
+    label {
+        margin-left: 115px;
+    }
+
+
+
+}
+
+.col-12 {
+    width: 100%;
+    text-align: center;
+}
+
+.dashboard_one {
+
+    height: 300px;
+    background: rgba(4, 53, 109, 0.63);
+    border-radius: 5px;
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    box-shadow:
+        0 0.2px 7.7px rgba(0, 0, 0, 0.059),
+        0 0.4px 19.5px rgba(0, 0, 0, 0.084),
+        0 0.9px 39.9px rgba(0, 0, 0, 0.106),
+        0 1.8px 82.1px rgba(0, 0, 0, 0.131),
+        0 5px 225px rgba(0, 0, 0, 0.19);
+    margin: 30px 0px;
+}
+
+.dashboard_two {
+    height: 450px;
+    background: rgba(4, 53, 109, 0.63);
+    border-radius: 5px;
+
+    box-shadow:
+        0 0.2px 7.7px rgba(0, 0, 0, 0.059),
+        0 0.4px 19.5px rgba(0, 0, 0, 0.084),
+        0 0.9px 39.9px rgba(0, 0, 0, 0.106),
+        0 1.8px 82.1px rgba(0, 0, 0, 0.131),
+        0 5px 225px rgba(0, 0, 0, 0.19);
+    margin: 30px 0px;
+
+    .line_chart {
+        margin-top: 30px;
+        max-width: 700px;
+        max-height: 450px;
+    }
+
+}
+.dashboard_timer {
+    height: 380px;
+    background: rgba(4, 53, 109, 0.63);
+    border-radius: 5px;
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+
+    box-shadow:
+        0 0.2px 7.7px rgba(0, 0, 0, 0.059),
+        0 0.4px 19.5px rgba(0, 0, 0, 0.084),
+        0 0.9px 39.9px rgba(0, 0, 0, 0.106),
+        0 1.8px 82.1px rgba(0, 0, 0, 0.131),
+        0 5px 225px rgba(0, 0, 0, 0.19);
+    margin: 30px 0px;
+
+    .time__container {
+        font-size: 60px;
+        color: white;
+    }
+
+}
+
+
+button {
+    width: 70%;
+    margin-bottom: 10px;
+}
+
+
+@media  (max-width: 736px) {
+    .dashboard {
+        height: 1800px;
+    }
+    .dashboard_one {
+        height: 330px;
+        .title {
+            font-size: 30px;
+        }
+        label {
+            font-size: 15px;
+            margin-left: 60px;
+        }
+    }
+
+    .dashboard_two {
+        height: 400px;
+    }
+
+  }

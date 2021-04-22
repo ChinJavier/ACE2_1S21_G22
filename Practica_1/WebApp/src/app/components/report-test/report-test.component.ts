@@ -1,242 +1,475 @@
 import { Component, OnInit } from '@angular/core';
 import { MedicionesService } from 'src/app/services/mediciones.service';
-import { Chart } from 'chart.js';
+import Swal from 'sweetalert2'
+import { ChartDataSets, ChartOptions, ChartType } from 'chart.js';
+import { Label, MultiDataSet } from 'ng2-charts';
+import {ConsultasService} from '../../services/consultas.service'
+import { groupBy } from 'rxjs/operators';
+
 @Component({
   selector: 'app-report-test',
   templateUrl:'./report-test.component.html',
   styleUrls: ['./report-test.component.css']
 })
 export class ReportTestComponent implements OnInit {
-  medicionesOxigeno=[];
-  medicionesTemperatura=[];
+
+  showRep1: any = [];
+  showRep1_1: any = [];
+  showRep3: any = [];
+  showRep2: any = [];
+  
+  showRep4: any = [];
+  showRep5: any = [];
+
   medicionesRitmo:any=[];
   meditionsVelocity:any=[];
   meditionsDistance:any=[];
-  lista:string[]=["hola","que","tal","estas"];
-  promedioVelocity:any=0;
+
+
+
+
+  lista:string[]=["120","98","88","56","102","76","11","estas","tal","estas"];
+  avgVelocity:any=0;
   maxVelocity:any=0;
   minVelocity:any=0;
-  TotalDistance:any=0;
+  totalDistance:any=0;
   RepetitionsCount:any=0;
   RealVelocity:any=0;
   RealRythm:any=0;
   RealDistance:any=0;
-   // PARA LA GRAFICA DE RITMO
-   private hilo: any = null;
-   public chart_ritmo: any = null;
-   public ritmoActual = 0;
-   //--------------------- fin
+
+  //---------------------------- DATA AUXS 
+  velocityDataAux: any = [];
+  failsDataAux: any = [];
+  repetitionDataAux: any = [];
+  distanceDataAux: any = [];
+  repeticionesDataAux: any = [];
+  fallosDataAux: any = [];
+  ritmoDataAux: any = [];
+
+   // PARA LA GRAFICA DE VELOCIDAD
+   private hilo1: any = null;
+   private hilo2: any = null;
+   private hilo3: any = null;
+   private hilo4: any = null;
+   private hilo5: any = null;
 
 
-  constructor(private medicionesService: MedicionesService) { 
-    this.getMedicionesRitmoC();
-    this.getMeditionsVelocity();
-    this.getMeditionsDistance();
-    this.getRepetition();
-    this.getRealVelocity();
-    this.getRealRythm();
-    this.getRealDistance();
+  //---------------------------- DATA AUXS 2
+   //---------------------------- DATA AUXS 
+   fecha_velocityDataAux: any = [];      //OK       
+   fecha_distanceDataAux: any = [];      //OK
+   fecha_repeticionesDataAux: any = [];  //OK
+   fecha_ritmoDataAux: any = [];         //OK
+   fecha_failsDataAux: any = [];  
+   fecha_fallosDataAux: any = [];
+
+
+  constructor(private medicionesService: MedicionesService , private repService: ConsultasService) {
+
   }
+
+
 
   getMedicionesRitmoC(){
-    let user=localStorage.getItem('uid');
-    this.medicionesService.getMediciones('rhythm',user).subscribe(res=>{
-      for( let i=0; i<res.length; i++){
-        const objectRythm={
-          valor : res[i].valor
-        };
-        this.medicionesRitmo.push(objectRythm);
-      }
-    }, err =>{
-      console.log("Error en getMedicionesRitmoC")
-    })
+    let username=localStorage.getItem('username');
+    this.medicionesService.getRhythmByUser(username || '')
+      .subscribe( (res: any)  => {
+        const valores = res.registrosRitmo;
+        this.ritmoDataAux = [];
+        this.fecha_ritmoDataAux = [];
+        if(valores.length > 0 || valores.length !== undefined) {
+          for(let i = 0; i < valores.length; i++) {
+            if (valores[i].rhythm != 0){
+              this.ritmoDataAux.push(valores[i].rhythm);
+              this.fecha_ritmoDataAux.push(valores[i]);
+            }
+
+          }
+        }
+        this.rythmLabels = this.ritmoDataAux;
+        this.rythmData = this.ritmoDataAux;
+      });
   }
+
   getMeditionsVelocity(){
-    let user=localStorage.getItem('username');
-    this.medicionesService.getMediciones('velocity',user).subscribe(res=>{
-      for (let i = 0 ; i < res.length; i++){
-        const objetoVelocity = {
-          valor: res[i].valor,
-          fecha: res[i].fecha
-        };
-        this.meditionsVelocity.push(objetoVelocity);
-      }
-      this.promedioVelocity = this.AVGVelocity();
-      if (this.promedioVelocity!=0){
-        this.getVelocityMax();
-        this.getVelocityMin();
-      }
-    }, err =>{
-      console.log("Error en getMeditionsVelocity")
-    })
+    let username=localStorage.getItem('username');
+    this.medicionesService.getVelocityByUser(username || '')
+      .subscribe( (res: any)  => {
+
+        const {velocities} = res;
+        this.velocityDataAux = [];
+        this.fecha_velocityDataAux = [];
+        if(velocities.length > 0 || velocities.length !== undefined) {
+          for(let i = 0; i < velocities.length; i++) {
+            if (velocities[i].velocity > 0){
+              this.velocityDataAux.push(velocities[i].velocity);
+            }
+            this.fecha_velocityDataAux.push(velocities[i]);
+          }
+        }
+        this.velocityLabels = this.velocityDataAux;
+        this.velocityData = this.velocityDataAux;
+      });
+
+
+
   }
-  AVGVelocity(){
-    let suma=0;
-    for(let i = 0 ; i < this.meditionsVelocity.length; i++){
-      suma += this.meditionsVelocity[i].valor;
-    }
-    if (this.meditionsVelocity.length == 0){
-      alert('por el momento no tienes registros');
-      return 0
-    }
-    return suma/this.meditionsVelocity.length;
-  }
-  getVelocityMax(){
-    let max =-1;
-    for(let i=0; i<this.meditionsVelocity.length; i++){
-      if (this.meditionsVelocity[i].valor > max){
-        max = this.meditionsVelocity[i].valor;
-      }
-    }
-    this.maxVelocity=max;
-  }
-  getVelocityMin(){
-    let min=99999;
-    for(let i=0; i<this.meditionsVelocity.length; i++){
-      if (this.meditionsVelocity[i].valor < min){
-        min = this.meditionsVelocity[i].valor;
-      }
-    }
-    this.minVelocity=min;
-  }
-  
   getMeditionsDistance(){
-    let user = localStorage.getItem('username');
-    this.medicionesService.getMediciones('Distance', user).subscribe(res =>{
-      this.getMeditionsDistance = res;
-      for(let i=0; i< res.length; i++){
-        const objectDistance={
-          valor: res[i].valor
+    let username=localStorage.getItem('username');
+    this.medicionesService.getDistanceByUser(username || '')
+      .subscribe( (res: any)  => {
 
-        };
-        this.meditionsDistance.push(objectDistance);
-      }
-      this.TotalDistance = this.getTotalDistance();
-      
-    }, err =>{
-      console.log("Error en getMeditionsDistance")
-    })
+        const {values} = res;
+        this.distanceDataAux = [];
+        this.fecha_distanceDataAux = [];
+      //  console.log('VALUES',values);
+        if(values.length > 0 || values.length !== undefined) {
+          for(let i = 0; i < values.length; i++) {
+            if (values[i].distance > 0 ){
+              this.distanceDataAux.push(values[i].distance);
+              this.fecha_distanceDataAux.push(values[i]);
+            }
+          }
+        }
+        this.distanceLabels = this.distanceDataAux;
+        this.distanceData = this.distanceDataAux;
+       // console.log('ARR2', this.velocityData);
+       // this.getTotalDistance()
+      });
   }
-  getTotalDistance(){
-    let totalDistance=0;
-    for(let i=0; i<this.meditionsDistance.length; i++){
-      totalDistance += this.meditionsDistance[i].valor;
+
+  getMeditionFallos(){
+    this.getReporte4();
+    let aux:any = [];
+    aux.push(this.showRep4.length);
+    this.failsData = aux;
+    this.failsLabels = aux;
+  }
+
+
+
+
+
+  getMeditionsRepetition(){
+    let username=localStorage.getItem('username');
+    this.medicionesService.getMediciones('Repetition',username)
+      .subscribe( (res: any)  => {
+
+        let values  = res.repeticiones;
+       // console.log('VALUES',values);
+        this.repeticionesDataAux = [];
+        this.fecha_repeticionesDataAux = [];
+        if(values.length > 0 || values.length !== undefined) {
+          for(let i = 0; i < values.length; i++) {
+            if (Math.round(values[i].repetition) != 0   &&  Math.round(values[i].repetition) < 23){
+              if(!(this.esRepetido(Math.round(values[i].repetition)))){
+                this.repeticionesDataAux.push(Math.round(values[i].repetition));
+              }
+              this.fecha_repeticionesDataAux.push(values[i]);
+            }
+          }
+        }
+        this.repetitionLabels = this.repeticionesDataAux;
+        this.repetitionData = this.repeticionesDataAux;
+      });
+  }
+
+  public esRepetido( valor :any ){
+    for(let i = 0; i < this.repeticionesDataAux.length; i++) {
+      if (this.repeticionesDataAux[i] == valor ){
+      return true ;
+      }
     }
-    if(this.meditionsDistance.length==0){
-      alert('Por el momento no hay registros');
-      return 0
-    }
-    return totalDistance;
+    return false;
   }
   
-  getRepetition(){
-    let user=localStorage.getItem('username');
-    this.medicionesService.getMediciones('Repetition',user).subscribe(res=>{
-      this.RepetitionsCount =res;
-    }
-    , err =>{
-      console.log("Error en getRepetition")
-    })
-  }
-  getRealVelocity(){
-    let user=localStorage.getItem('username');
-    this.medicionesService.getMediciones('Repetition',user).subscribe(res=>{
-      this.RealVelocity =res;
-    }
-    , err =>{
-      console.log("Error en getRealVelocity")
-    })
-  }
-  getRealRythm(){
-    let user=localStorage.getItem('username');
-    this.medicionesService.getMediciones('Ryhtm',user).subscribe(res=>{
-      this.RealRythm =res;
-    }, err =>{
-      console.log("Error en getRealRythm")
-    })
-  }
-  getRealDistance(){
-    let user=localStorage.getItem('username');
-    this.medicionesService.getMediciones('Distance',user).subscribe(res=>{
-      this.RealDistance =res;
-    }, err =>{
-      console.log("Error en getRealDistance")
-    })
-  }
-
 
   // constructor cuanado esta todo montado
 ngOnInit(): void {
-  //------------------------------------------- GRAFICA DE RITMO
-  this.chart_ritmo = new Chart('realtime', {
-    type: 'line',
-    data: {
-      labels: [],
-      datasets: [
-        {
-        label: 'ritmo cardiaco vs tiempo',
-        fill: false,
-        data: [7,7],
-        backgroundColor: '#168ede',
-        borderColor: '#FF0C00'
-        }
-      ]
-      },
-      options: {
-      tooltips: {
-        enabled: false
-      },
-      legend: {
-        display: true,
-        position: 'bottom',
-        labels: {
-          fontColor: 'black'
-        }
-      },
-      scales: {
-        yAxes: [{
-          ticks: {
-            fontColor: "black",
-            suggestedMin: 70,
-            suggestedMax: 200
-          }
-        }],
-        xAxes: [{
-        ticks: {
-          fontColor: "black",
-          beginAtZero: true
-        }
-        }]
-      }
-      }
-  });
-  this.showGraphic();
-  this.hilo = setInterval(() =>{this.showGraphic();},1000);
-  //----------------------------------------- FIN DE LA GRAFICA DE RITMO
+  
 
 
-}
-//Called once, before the instance is destroyed.
-ngOnDestroy(): void {
-  clearInterval(this.hilo);// deja de llamar a las peticiones
+  this.getMeditionsVelocity();
+  this.getMeditionsDistance();
+  this.getMeditionsRepetition();
+  this.getMedicionesRitmoC();
+  this.getMeditionFallos();
+
+  this.hilo1 = setInterval(() =>{this.getMeditionsVelocity();},1500);
+  this.hilo2 = setInterval(() =>{this.getMeditionsDistance();},2000);
+  this.hilo3 = setInterval(() =>{this.getMedicionesRitmoC();},1500);
+  this.hilo4 = setInterval(() =>{this.getMeditionsRepetition();},1500);
+  this.hilo5 = setInterval(() =>{this.getMeditionFallos();},3000);
+
+  this.getRep2();
+  this.getReporte4();
+  this.getRep1();
+  this.getRep5();
+
+  this.getRep3();
+ 
 }
 
-private showGraphic(): void {
-  this.medicionesService.getrhythm().subscribe(res => {
-    let chart_ritmoTime: any = new Date();
-    // PONE EL TIEMPO Y SI ES MAYOR A 15 DATOS DA UN SHIFT
-    chart_ritmoTime = chart_ritmoTime.getHours() + ':' + ((chart_ritmoTime.getMinutes() < 10) ? '0' + chart_ritmoTime.getMinutes() : chart_ritmoTime.getMinutes()) + ':' + ((chart_ritmoTime.getSeconds() < 10) ? '0' + chart_ritmoTime.getSeconds() : chart_ritmoTime.getSeconds());
-    if(this.chart_ritmo.data.labels.length > 15) {
-        this.chart_ritmo.data.labels.shift();
-        this.chart_ritmo.data.datasets[0].data.shift();
+
+public getRep1(): any{
+  this.repService.getReporte1(localStorage.getItem('username')).subscribe(res => { 
+    this.showRep1 = res;
+    for(let x = 0 ; x < this.showRep1.length; x++){
+
+      if(this.isNewWeek(this.showRep1[x].semana)){
+        this.showRep1_1.push(
+          {
+            semana: this.showRep1[x].semana  ,
+            min: this.showRep1[x].cantidadRepeticiones ,
+            max: this.showRep1[x].cantidadRepeticiones ,
+            promedio: this.showRep1[x].cantidadRepeticiones ,
+            allRepeticiones: [this.showRep1[x].cantidadRepeticiones]
+          });
+      }else{
+        // miremos si tiene la menor repeticion  o si tiene la mayor
+        this.insertToWeek( this.showRep1[x].semana ,  this.showRep1[x].cantidadRepeticiones );
+      }
     }
-    this.chart_ritmo.data.labels.push(chart_ritmoTime);
-    this.chart_ritmo.data.datasets[0].data.push(res); // PONE EL VALOR EN Y , ACA VAN LOS DATOS QUE VIENEN DE MONGO
-    this.chart_ritmo.update();
-    this.ritmoActual = res;
-  } , err => {
-    console.log('error' , err);
+    this.completeRep1();
+  } , err => console.log("error reporte1"));
+}
+
+public completeRep1():any{
+
+  for(let yy = 0 ; yy < this.showRep1_1.length; yy++){
+    let promedio = this.calcularPromedio(this.showRep1_1[yy].allRepeticiones);
+    let max = this.getMaximo(this.showRep1_1[yy].allRepeticiones);
+    let min = this.getMinimo(this.showRep1_1[yy].allRepeticiones);
+    this.showRep1_1[yy].promedio = promedio;
+    this.showRep1_1[yy].max = max;
+    this.showRep1_1[yy].min = min;
+  }
+}
+
+public isNewWeek( semana_ : any): Boolean{
+  // objeto esperado  { semana , repeticionMin , repeticionMax ,  { arreglo de repeticiones} }
+  for(let x = 0 ; x < this.showRep1_1.length; x++){
+    if(this.showRep1_1[x].semana == semana_){
+      return false;
+    }
+  }
+  return true
+}
+
+public insertToWeek(semana_:any , repeticion : any): any{
+  for(let x = 0 ; x < this.showRep1_1.length; x++){
+    if(this.showRep1_1[x].semana == semana_){
+      this.showRep1_1[x].allRepeticiones.push(repeticion);
+    }
+  }
+}
+
+
+calcularPromedio(arreglo: any){
+  let suma= 0;
+  for(let i = 0 ; i < arreglo.length; i++){
+    suma += arreglo[i];
+  }
+  if (arreglo.length == 0){
+    alert('por el momento no tienes registros');
+    return -777
+  }
+  return suma/arreglo.length;
+}
+
+public getMinimo(arreglo: any):any{
+  let min= 1000*9999;
+  for(let i = 0 ; i < arreglo.length; i++){
+  if( Number(arreglo[i]) < min){
+    min = arreglo[i];
+  }
+  }
+  if (arreglo.length == 0){
+    console.log('por el momento no tienes registros');
+    min = 0 ;
+  }
+  return min;
+}
+
+public getMaximo(arreglo: any): any{
+  let max= -500;
+  for(let i = 0 ; i < arreglo.length; i++){
+   if( arreglo[i] > max ){
+    max = arreglo[i];
+   }
+  }
+  if (arreglo.length == 0){
+    console.log('por el momento no tienes registros');
+    max = 0 ;
+  }
+  return max;
+}
+
+public getReporte4(): any{
+  this.repService.getReporte4(localStorage.getItem('username')).subscribe(res=>{this.showRep4 = res;} , err => console.log("error rep4"));
+}
+
+public getRep5(){
+  this.repService.getReporteGenerico(localStorage.getItem('username') , "5").subscribe(res =>{
+    this.showRep5 = res;
+  }, 
+  err=>{ console.log("err rep 5")
   });
 }
+
+public getRep3(){
+  this.repService.getReporteGenerico(localStorage.getItem('username') , "3").subscribe(res =>{
+    let data = res;
+   
+    // UserDistances.distance
+    // UserRepetitions.repetition
+    // solo al cambio guardar la ultima :v
+    let anteriorDistancia  = 0,anteriorRep = 0;
+    let fechaAnt ="";
+    if (data.length > 1){
+      for(let u_u = 0 ; u_u < data.length; u_u++){
+          let actDist = data[u_u].UserDistances.distance;
+          let actRep = Math.round(data[u_u].UserRepetitions.repetition);
+          let fechaAct = data[u_u].UserRepetitions.fecha;
+          if(actRep != anteriorRep && anteriorDistancia != 0 && anteriorRep != 0 && anteriorDistancia > 11 && anteriorDistancia < 23 ){// aun no ha cambiado
+              this.showRep3.push({fecha: fechaAnt,repeticion: anteriorRep , distancia: anteriorDistancia});
+          }
+
+          if(data[u_u+1]!= undefined){
+            anteriorRep = actRep;
+            anteriorDistancia = actDist;
+            fechaAnt = fechaAct;
+          }
+      }
+     // console.log(this.showRep3);
+    }
+     // inserto la ultima fijo
+     if (data.length != 0){
+      this.showRep3.push({repeticion: Math.round(data[data.length-1].UserRepetitions.repetition) , distancia: data[data.length-1].UserDistances.distance , fecha:data[data.length-1].UserDistances.fecha});
+     }
+    
+  },
+  err=>{ console.log("err rep 3")
+  });
+}
+
+
+
+public getRep2(){
+  this.repService.getReporteGenerico(localStorage.getItem('username') , "2").subscribe(res =>{
+    let data = res;
+    let anteriorvelocity  = 0,anteriorRep = 0;
+
+    if (data.length > 1){
+      for(let u_u = 0 ; u_u < data.length; u_u++){
+          let actVel = data[u_u].UserVelocities.velocity;
+          let actRep = Math.round(data[u_u].UserRepetitions.repetition);
+
+          if(actRep != anteriorRep && anteriorvelocity != 0 && anteriorRep != 0 ){// aun no ha cambiado
+            // aca hay un new test
+            // objeto esperado  { repeticion  , promedio , min ,  max ,  { arreglo de allvelocities }
+            this.showRep2.push(
+              {
+                repeticion: anteriorRep  ,
+                min: anteriorvelocity ,
+                max: anteriorvelocity ,
+                promedio: anteriorvelocity ,
+                allvelocities: [anteriorvelocity]
+              });
+          }else{
+            // insertar en el test
+            this.insertToTest(actVel,actRep);
+          }
+
+          if(data[u_u+1]!= undefined){
+            anteriorRep = actRep;
+            anteriorvelocity = actVel;
+          }
+      }
+      
+    }
+     // inserto la ultima fijo
+     if (data.length != 0){
+
+      this.insertToTest(Math.round(data[data.length-1].UserRepetitions.repetition) , data[data.length-1].UserVelocities.velocity);
+     }else if(data.length == 1){
+      this.showRep2.push(
+        {
+          repeticion: Math.round(data[data.length-1].UserRepetitions.repetition)  ,
+          min: data[data.length-1].UserVelocities.velocity ,
+          max: data[data.length-1].UserVelocities.velocity ,
+          promedio: data[data.length-1].UserVelocities.velocity ,
+          allvelocities: [data[data.length-1].UserVelocities.velocity]
+        });
+     }
+
+     this.completeRep2();
+     console.log(this.showRep2);
+
+  },
+  err=>{ console.log("err rep 2")
+  });
+}
+
+public completeRep2(){
+  for(let yy = 0 ; yy < this.showRep2.length; yy++){
+    this.showRep2[yy].promedio = this.calcularPromedio(this.showRep2[yy].allvelocities);
+    this.showRep2[yy].max = this.getMaximo(this.showRep2[yy].allvelocities);
+    this.showRep2[yy].min = this.getMinimo(this.showRep2[yy].allvelocities);
+  }
+}
+
+
+public insertToTest(velocidad:any , repeticion : any): any{
+  // objeto esperado  { repeticion  , promedio , min ,  max ,  { arreglo de allvelocities }
+  for(let x = 0 ; x < this.showRep2 .length; x++){
+    if(this.showRep2[x].repeticion == repeticion){
+      this.showRep2[x].allvelocities.push(velocidad);
+    }
+  }
+}
+
+//Called once, before the instance is destroyed.
+  ngOnDestroy(): void {
+    clearInterval(this.hilo1);// deja de llamar a las peticiones
+    clearInterval(this.hilo2);
+    clearInterval(this.hilo3);
+    clearInterval(this.hilo4);
+    clearInterval(this.hilo5);
+  }
+
+/********** Gráfica de velocidad *************/
+  public barChartOptions: ChartOptions = {responsive: true,};
+  public velocityLabels: Label[] = [];
+  public velocityChartType: ChartType = 'bar';
+  public velocityChartLegend = true;
+  public velocityData: MultiDataSet = [];
+  /* **************************************** */
+
+/********** Gráfica de repeticiones *************/
+  public repetitionLabels: Label[] = [];
+  public repetitionChartType: ChartType = 'bar';
+  public repetitionChartLegend = true;
+  public repetitionData:  MultiDataSet= [];
+  /* **************************************** */
+
+/********** Gráfica de Distancia *************/
+  public distanceLabels: Label[] = [];
+  public distanceLegend = true;
+  public distanceData: MultiDataSet = [];
+
+  /* **************************************** */
+/********** Gráfica de ritmo *************/
+  public rythmLabels: Label[] = [];
+  public rythmLegend = true;
+  public rythmData: MultiDataSet= [];
+ /* **************************************** */
+/********** Gráfica de Fallos *************/
+  public failsLabels: Label[] = [];
+  public barChartType: ChartType = 'bar';
+  public failsLegend = true;
+  public failsData:  MultiDataSet= [];
+  /* **************************************** */
 
 }
