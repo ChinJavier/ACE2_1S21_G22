@@ -1,6 +1,6 @@
 .dashboard {
     background: rgba(4, 38, 78, 0.63);
-    height: 1000px;
+    height: 1500px;
     .title {
         text-align: center;
         color: white;
@@ -124,4 +124,16 @@ button {
         height: 400px;
     }
 
+  }
+  h3{
+      background-color: rgb(61, 177, 119);
+      margin-left: 60px;
+      margin-right: 60px;
+      color:white;
+  }
+  h4{
+    background-color: rgb(194, 156, 177);
+    margin-left: 60px;
+    margin-right: 60px;
+    color:rgb(13, 14, 13);
   }
