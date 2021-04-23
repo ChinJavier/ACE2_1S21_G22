@@ -8,6 +8,8 @@ import { DashboardService } from '../../services/dashboard.service';
 import { AuthService } from 'src/app/auth/services/auth.service';
 import { Chart } from 'chart.js';
 import { LogicService } from '../../services/logic.service';
+import { Test } from '../../../models/Test';
+
 
 
 @Component({
@@ -47,16 +49,17 @@ export class DashboardComponent implements OnInit {
 //----------------------------------------
 
   banderaTest = false;
-
+  testActual = 0;
+  listaTest:Test[] =[];
 //----------------------------------------
 
-  volEMin: number =999;
-  volEMax: number = -999;
-  volIMin: number = 999;
-  volIMax: number = -999;
-  promE: number =0;
-  promI: number =0;
-  vo2: number=0;
+  volEMin: any =999;
+  volEMax: any = -999;
+  volIMin: any = 999;
+  volIMax: any = -999;
+  promE: any =0;
+  promI: any =0;
+  vo2: any=0;
 
 
   constructor(
@@ -85,7 +88,36 @@ export class DashboardComponent implements OnInit {
     
   }
 
+  mostrarTest():void{
+    console.log(this.testActual);
+    for(let i = 0 ; i <this.listaTest.length; i++){
+      if(this.testActual == this.listaTest[i].test){
+        this.volEMin =  this.listaTest[i].volEmin;
+        this.volEMax = this.listaTest[i].volEmax;
+        this.volIMin =  this.listaTest[i].volImin;
+        this.volIMax =  this.listaTest[i].volImax;
+        this.promE= this.listaTest[i].promE;
+        this.promI= this.listaTest[i].promI;
+        this.weight = this.listaTest[i].peso;
+        this.vo2 = this.listaTest[i].vo2;
+        break;
+      }
+    }
+  }
+  saveMeditions(objeto: any): void{
+    this.logicservice.saveMeditions(objeto).subscribe(
+      res => console.log(res),
+      err => console.log(err)
+    );
+  }
+
   ngOnInit(): void {
+    this.logicservice.getAllTest(localStorage.getItem('username')).subscribe(
+      res =>{
+        this.listaTest = res;
+      },
+      err=> console.log(err));
+
     this.logicservice.setPrimaryValue().subscribe(res =>console.log(res),err=>{console.log(err)});
 
 
@@ -163,12 +195,13 @@ export class DashboardComponent implements OnInit {
 
           if (minute == 5){// MINUTO 5
             this.banderaTest = false;
-            clearInterval(this.hiloTimer);
             this.clearGraph();
             this.calcularReportes();
             this.minutes = '00';
             this.seconds = '00';
-            Swal.fire('Test Terminado!!')
+            clearInterval(this.hiloTimer);
+            Swal.fire('Test Terminado!!');
+            return;
           }
         }
         if(second < 10) {
@@ -233,10 +266,20 @@ export class DashboardComponent implements OnInit {
         this.vo2 =datoEnMinutos/this.weight;
       }
     console.log("Promedio Ex : " , this.promE ," promedio I: " , this.promI ," VO2:", this.vo2)
-
+    this.getNewtest();// da el inidice
+    let newTest = {test: this.testActual , username: localStorage.getItem('username'), promE: this.promE , promI: this.promI , vo2: this.vo2 , peso: this.weight ,volEmin: this.volEMin ,volEmax: this.volEMax, volImin: this.volIMin ,volImax: this.volIMax };
+    this.listaTest.push(newTest);
+    this.saveMeditions(newTest)
   }
 
-
+  getNewtest():void{
+    if (this.listaTest.length == 0){
+      this.testActual = 1 ;
+    }else{
+      let ultimoTest = this.listaTest[this.listaTest.length-1];
+      this.testActual = Number(ultimoTest.test) + 1;
+    }
+  }
 
   start() {
     this.takeTime();
