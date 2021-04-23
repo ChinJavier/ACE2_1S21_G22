@@ -7,13 +7,13 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ErrorComponent } from './shared/error/error.component';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
-import { ReportesComponent } from './reportes/reportes.component';
+//import { ReportesComponent } from './reportes/reportes.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ErrorComponent,
-    ReportesComponent
+   // ReportesComponent
   ],
   imports: [
     BrowserModule,
