@@ -109,6 +109,8 @@ export class DashboardComponent implements OnInit {
           second = 0;
           (this.seconds) = '00';
           minute += 1;
+          // MINUTO INCREMENTA ENTONCES ACA GUARDO UN DATO EN LA BASE DE DATOS
+          
         }
         if(second < 10) {
 
@@ -164,7 +166,8 @@ export class DashboardComponent implements OnInit {
   };
 
   start() {
-    this.dashboardService.setWeight(this.username!, this.weight)
+    this.takeTime();
+   /* this.dashboardService.setWeight(this.username!, this.weight)
       .subscribe(
         res => {
           if(res) {
@@ -175,7 +178,7 @@ export class DashboardComponent implements OnInit {
           }
           this.weight =''
         }
-      )
+      )*/
   }
 
   logout() {

@@ -27,9 +27,33 @@ const saveMedition = async (req,res) =>{
 
 
 
+var AIRE = 0;
 
 
 
+
+const realtime = async (req,res) =>{
+    const {aire} = req.params; // ML / min
+    try {
+        AIRE = aire;
+        console.log(AIRE)
+        res.send('ok LLego: '+aire);
+    } catch (error) {
+        res.send('NO LLEGO')
+    }
+
+}
+
+const getRelatime = async(req,res) =>{
+    try {
+        if(AIRE != undefined){
+            res.send(AIRE);
+        }
+    } catch (error) {
+        console.log("error recuperando el realtime")
+        res.json({msj:'error recuperando el realtime'});
+    }
+}
 
 
 
@@ -37,5 +61,7 @@ const saveMedition = async (req,res) =>{
 
 
 module.exports={
-    saveMedition
+    saveMedition,
+    getRelatime,
+    realtime
 }
