@@ -28,30 +28,30 @@ const saveMedition = async (req,res) =>{
 
 
 var AIRE = 0;
-
+var LETRA= 'p';
 
 
 
 const realtime = async (req,res) =>{
-    const {aire} = req.params; // ML / min
+    const {aire , letra} = req.params; // ML / min
     try {
-        AIRE = aire;
-        console.log(AIRE)
-        res.send('ok LLego: '+aire);
+            AIRE = aire;
+            LETRA = letra;
+
+        res.status(200).json({msg: 'ok LLego: '+AIRE , 'ok': true});
     } catch (error) {
-        res.send('NO LLEGO')
+        res.status(450).json({msg: 'ÑO' });
     }
 
 }
 
 const getRelatime = async(req,res) =>{
     try {
-        if(AIRE != undefined){
-            res.send(AIRE);
-        }
+            let respuesta = [AIRE , LETRA];
+            res.send(respuesta);
     } catch (error) {
-        console.log("error recuperando el realtime")
-        res.json({msj:'error recuperando el realtime'});
+        console.log("!!!!!!!!!!!!!!!!!!!!!***************")
+        res.status(500).json({msj:'error recuperando el realtime'});
     }
 }
 
