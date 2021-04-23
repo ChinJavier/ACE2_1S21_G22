@@ -32,6 +32,13 @@ export class DashboardComponent implements OnInit {
   pauseTime: boolean = false;
 
   counter: number = 0;
+  volEMin: number =0;
+  volEMax: number =0;
+  volIMin: number =0;
+  volIMax: number =0;
+  promE: number =0;
+  promI: number =0;
+  vo2: number=0;
   constructor(
     private dashboardService: DashboardService,
     private authService: AuthService
