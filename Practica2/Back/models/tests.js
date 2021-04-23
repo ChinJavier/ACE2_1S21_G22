@@ -10,23 +10,44 @@ const TestSchema = new Schema(
             type: String,
             require: true
         },
-        fechaHoraInicio: { // solo lo tendra 1 por test
-            type: String,
-            require: false
-        },
-        medicion: {// deberia de ser otra colleccion pero en este caso para hacerlo mas facil estara unido al test
+        peso:{
             type: Number,
             require: true
         },
-        inhalado:{
+        volEmin: {
             type: Number,
             require: true
         },
-        exhalado:{
+        volEmax: {
+            type: Number,
+            require: true
+        },
+        volImin: {
+            type: Number,
+            require: true
+        },
+        volImax: {
+            type: Number,
+            require: true
+        },
+        promE:{
+            type: Number,
+            require: true
+        },
+        promI:{
+            type: Number,
+            required: true
+        },
+        vo2:{
             type: Number,
             required: true
         }
     }
 );
+/*
+  promE: number =0;
+  promI: number =0;
+  vo2: number=0;
 
+*/
 module.exports = model('tests' , TestSchema);// en plural por buena practica

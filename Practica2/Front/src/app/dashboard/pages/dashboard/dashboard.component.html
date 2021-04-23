@@ -64,13 +64,20 @@
                 <div class="timer__actions">
  
                     <br>
-                    <button
-                        class="btn btn-danger"
-                        (click)="pause()"
-                    >
-                        Cancelar
-                    </button>
 
+
+                    <select class="form-control" name ="combo" [(ngModel)]="this.testActual" class="col-9 col-md-9">
+                     
+                        <option *ngFor="let test of listaTest" value={{test.test}}>{{test.test}}</option>
+                    </select>
+                    <br>
+                    <br>
+                    <button
+                        class="btn btn-success"
+                        (click)="mostrarTest()"
+                    >
+                        mostrar Test
+                    </button>
                 
 
                 </div>
@@ -83,10 +90,10 @@
                 <br>
                 <br>
                 
-                <h3 >Volumen Exhalado / seg</h3>
+                <h3 >Volumen Exhalado / min</h3>
                 <h4 >Máximo: {{volEMax}}</h4>
                 <h4 >Mínimo: {{volEMin}} </h4>
-                <h3 >Volumen Inhalado / seg</h3>
+                <h3 >Volumen Inhalado / min</h3>
                 <h4 >Máximo: {{volIMax}}</h4>
                 <h4 >Mínimo: {{volIMin}} </h4>
                 

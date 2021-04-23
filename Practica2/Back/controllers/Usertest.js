@@ -2,17 +2,6 @@
 const TestModel = require('./../models/tests');
 const controller = {}
 const saveMedition = async (req,res) =>{
-        /*
-        expected object:
-
-        test , 
-        username , 
-        fechaHoraInicio , 
-        medicion ,
-        inhalado ,
-        exhalado 
-        
-        */ 
     try {
         console.log(req.body)
         const newMedition = new TestModel(req.body);
@@ -57,11 +46,26 @@ const getRelatime = async(req,res) =>{
 
 
 
+const getAllTest = async(req,res) =>{
+    const {username} = req.params;
+    try {
+        const allTest = await TestModel.find({username: username}).sort({test:1}); // LOS DEVUELVE DESCENDENTE
+        console.log(allTest);
+        res.send(allTest);// devuelve todos los mensajes
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+
+
+
 
 
 
 module.exports={
     saveMedition,
     getRelatime,
-    realtime
+    realtime,
+    getAllTest
 }
