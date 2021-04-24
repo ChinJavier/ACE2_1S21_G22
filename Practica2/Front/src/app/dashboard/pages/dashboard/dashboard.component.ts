@@ -100,6 +100,7 @@ export class DashboardComponent implements OnInit {
         this.promI= this.listaTest[i].promI;
         this.weight = this.listaTest[i].peso;
         this.vo2 = this.listaTest[i].vo2;
+        this.clearGraph();
         break;
       }
     }
@@ -150,8 +151,8 @@ export class DashboardComponent implements OnInit {
 				  yAxes: [{
 					  ticks: {
 						  fontColor: "black",
-						  suggestedMin: -20,
-						  suggestedMax: 30
+						  suggestedMin: -1000,
+						  suggestedMax: 1000
 					  }
 				  }],
 				  xAxes: [{
@@ -195,7 +196,7 @@ export class DashboardComponent implements OnInit {
 
           if (minute == 5){// MINUTO 5
             this.banderaTest = false;
-            this.clearGraph();
+            
             this.calcularReportes();
             this.minutes = '00';
             this.seconds = '00';
@@ -284,8 +285,10 @@ export class DashboardComponent implements OnInit {
   start() {
     this.takeTime();
     console.log(this.weight);
+    this.clearGraph();
     this.banderaTest = true;
     this.limpiarVariables();
+    
 
   }
 
@@ -327,10 +330,8 @@ export class DashboardComponent implements OnInit {
         char_graficaTime = ((char_graficaTime.getMinutes() < 10) ? '0' + char_graficaTime.getMinutes() : char_graficaTime.getMinutes()) + ':' + ((char_graficaTime.getSeconds() < 10) ? '0' + char_graficaTime.getSeconds() : char_graficaTime.getSeconds());
        
        
-        if(this.char_grafica.data.labels.length > (30) ) {
-            this.char_grafica.data.labels.shift();
-            this.char_grafica.data.datasets[0].data.shift();
-        } // NO HAY SHIFT
+      
+
         this.char_grafica.data.labels.push(char_graficaTime);
         this.char_grafica.data.datasets[0].data.push(res[0]);
         this.char_grafica.update();
