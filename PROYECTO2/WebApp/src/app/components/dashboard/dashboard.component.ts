@@ -8,15 +8,21 @@ import {MedicionesService} from './../../services/mediciones.service';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
-  username: string | null = '' ;
-  uid: string | null = '';
-  time = new Date();
-  history:any = [];
-  hours = new Date().getHours();
-  msg: string = "";
+	estados = [
+		"/assets/parado.png",
+		"/assets/caminando.png",
+		"/assets/corriendo.png"
+	]
+	imagen = ""
+	username: string | null = '' ;
+	uid: string | null = '';
+	time = new Date();
+	history:any = [];
+	hours = new Date().getHours();
+	msg: string = "";
 
 
-  // --------------------------------------------------------  GRAFICA DE TEMPERATURA 
+  // --------------------------------------------------------  GRAFICA DE TEMPERATURA
   public hilo_temperatura: any = null;
 	public char_grafica_temperatura: any = null;
 	public valorActual_temperatura = 0;
@@ -46,7 +52,8 @@ export class DashboardComponent implements OnInit {
     this.uid = localStorage.getItem('uid');
     this.getMediciones();
     this.getDate();
-    
+
+	this.imagen = this.estados[0];
 
 
     this.char_grafica_temperatura = new Chart('realtime', {
@@ -139,9 +146,9 @@ export class DashboardComponent implements OnInit {
 				}
 			  }
 		});
-		
+
 		this.showGraphic_ritmo();
-		
+
 		this.hilo_ritmo = setInterval(() =>{this.showGraphic_ritmo();},1000);
 
 
@@ -175,7 +182,7 @@ export class DashboardComponent implements OnInit {
 				},
 				scales: {
 				  yAxes: [{
-					  
+
 					  stacked: true,
 					  ticks: {
 						  fontColor: "black",
@@ -194,9 +201,9 @@ export class DashboardComponent implements OnInit {
 				}
 			  }
 		});
-		
+
 		this.showGraphic_Oxigeno();
-		
+
 		this.hilo_oxigeno = setInterval(() =>{this.showGraphic_Oxigeno();},1000);
 
   }
@@ -252,7 +259,7 @@ export class DashboardComponent implements OnInit {
 
   displayMsg() {
     this.hours = new Date().getHours();
-    
+
     if(this.hours < 10) {
       this.msg = "Good Morning!"
     } else if(this.hours < 16) {

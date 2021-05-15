@@ -1,5 +1,32 @@
 <app-header></app-header>
 
+
+<div class="stats-container" fxLayout.sm="column" fxLayout.md="column" fxLayout.xs="column"
+  fxLayoutAlign="center center">
+
+
+  <mat-card class="card card4 animate__animated animate__backInDown">
+    <mat-card-header>
+      <div fxFlex="100" fxLayout="column">
+        <p class="card-title">Estado</p>
+
+      </div>
+    </mat-card-header>
+    <mat-card-content>
+
+      <div >
+        <div class="card-content">
+            <img [src]="imagen" alt="">
+        </div>
+
+    </div>
+
+    </mat-card-content>
+
+  </mat-card>
+
+</div>
+
 <div class="stats-container" fxLayout.sm="column" fxLayout.md="column" fxLayout.xs="column"
   fxLayoutAlign="center center">
   <mat-card class="card card1 animate__animated animate__backInLeft">
@@ -12,13 +39,13 @@
     <mat-card-content>
       <div class="">
         <canvas id="realtime3">{{ chart_ritmo }}</canvas>
-    
+
         <div class="card-content">
          <h3>Realtime</h3>
          <p>Esta grafica muestra el ritmo cardiaco en tiempo real
          </p>
         </div>
-    
+
     </div>
       <p>
         Lorem ipsum dolor sit amet consectetur, adipisicing elit. Provident
@@ -40,7 +67,7 @@
       </div>
     </mat-card-header>
     <mat-card-content>
-      
+
       <div class="">
         <canvas id="realtime2">{{ char_grafica_oxigeno }}</canvas>
 
@@ -74,10 +101,10 @@
       <div>
         <p class="card-date" style="margin-top: 20px;"></p>
         <canvas id="realtime">{{ char_grafica_temperatura }}</canvas>
-    
+
         <div class="card-content">
       </div>
-    
+
     </div>
     <h3>Realtime Temperatura</h3>
       <p>
@@ -93,6 +120,10 @@
     </mat-card-actions>
   </mat-card>
 </div>
+
+
+
+
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootswatch/4.5.2/lux/bootstrap.min.css"
   integrity="sha384-9+PGKSqjRdkeAU7Eu4nkJU8RFaH8ace8HGXnkiKMP9I9Te0GJ4/km3L1Z8tXigpG" crossorigin="anonymous" />
 <div class="historial-container">

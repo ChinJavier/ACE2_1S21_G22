@@ -6,6 +6,7 @@
 .card {
     width: 400px;
     margin: 50px;
+    margin-top: 15px;
     background:white;
 }
 
@@ -20,6 +21,24 @@
 .card3 {
     box-shadow: 16px 18px 30px 0.5px;
 
+}
+
+.card4 mat-card-content {
+    display: flex;
+    justify-content: center
+}
+.card4 {
+    box-shadow: 3px 3px 25px 0.2px;
+}
+
+.card4 mat-card-header {
+    align-items: center
+}
+
+
+.card4 img {
+    width: 200px;
+    height: 200px;
 }
 
 @media only screen and (max-width: 600px) {
