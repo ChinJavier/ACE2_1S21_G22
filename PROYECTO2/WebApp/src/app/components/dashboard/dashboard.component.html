@@ -6,11 +6,20 @@
     <mat-card-header>
       <div fxFlex="100" fxLayout="column">
         <p class="card-title">Ritmo Cardiaco</p>
-        <p class="card-date">Ultima medición</p>
+
       </div>
     </mat-card-header>
     <mat-card-content>
-      <img mat-card-image src="assets/ritmoC.jpg" />
+      <div class="">
+        <canvas id="realtime3">{{ chart_ritmo }}</canvas>
+    
+        <div class="card-content">
+         <h3>Realtime</h3>
+         <p>Esta grafica muestra el ritmo cardiaco en tiempo real
+         </p>
+        </div>
+    
+    </div>
       <p>
         Lorem ipsum dolor sit amet consectetur, adipisicing elit. Provident
         blanditiis tenetur molestiae ducimus similique, sapiente perspiciatis
@@ -27,11 +36,21 @@
     <mat-card-header>
       <div fxFlex="100" fxLayout="column">
         <p class="card-title">Oxigeno en la Sangre</p>
-        <p class="card-date">Ultima medición</p>
+
       </div>
     </mat-card-header>
     <mat-card-content>
-      <img mat-card-image src="assets/oxigenoSangre.jpg" />
+      
+      <div class="">
+        <canvas id="realtime2">{{ char_grafica_oxigeno }}</canvas>
+
+        <div class="card-content">
+            <h3>Realtime</h3>
+            <p>Esta grafica muestra el oxigeno en tiempo real</p>
+        </div>
+
+    </div>
+
       <p>
         Lorem ipsum dolor sit amet consectetur, adipisicing elit. Provident
         blanditiis tenetur molestiae ducimus similique, sapiente perspiciatis
@@ -48,11 +67,19 @@
     <mat-card-header>
       <div fxFlex="100" fxLayout="column">
         <p class="card-title">Temperatura</p>
-        <p class="card-date">Ultima medición</p>
       </div>
+
     </mat-card-header>
     <mat-card-content>
-      <img mat-card-image src="assets/temperatura.jpg" />
+      <div>
+        <p class="card-date" style="margin-top: 20px;"></p>
+        <canvas id="realtime">{{ char_grafica_temperatura }}</canvas>
+    
+        <div class="card-content">
+      </div>
+    
+    </div>
+    <h3>Realtime Temperatura</h3>
       <p>
         Lorem ipsum dolor sit amet consectetur, adipisicing elit. Provident
         blanditiis tenetur molestiae ducimus similique, sapiente perspiciatis
@@ -74,19 +101,5 @@
 
 
 
-  <mat-list class="h-list" class="animate__animated animate__fadeInLeft">
-    <h1>Historial de mediciones <span class="material-icons"> remove_red_eye </span>
-    </h1>
-    <mat-list-item *ngFor="let h of history">
-      <mat-icon mat-list-icon>folder</mat-icon>
-      <div mat-line><strong>{{h.type}}</strong></div>
-      <div mat-line>Resultado: {{ h.valor }}</div>
-      <div mat-line>{{ h.fecha | date: "dd/MM/yyyy" }} </div>
-      <div mat-line>{{ h.fecha | date: "hh:mm:ss" }} </div>
-    </mat-list-item>
-
-    <mat-divider></mat-divider>
-
-  </mat-list>
 
   <!-- NO IMPORTA QUE EL HISTORY ESTE VACIO , cuando en las peticiones se llene el ngFor lo va recargar-->
