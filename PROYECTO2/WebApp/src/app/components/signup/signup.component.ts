@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
+import Swal from 'sweetalert2';
 import { User } from '../../models/user';
 
 @Component({
@@ -24,9 +25,7 @@ export class SignupComponent implements OnInit {
     age: new FormControl('', [Validators.required]),
     height: new FormControl('', [Validators.required]),
     weight: new FormControl('', [Validators.required]),
-    isCoach: new FormControl('', [
-      Validators.required,
-    ]),
+
   }); 
 
   
@@ -48,18 +47,27 @@ export class SignupComponent implements OnInit {
   onSubmit() {
     this.user = this.signupForm.value;
     console.log(this.user);
-    if (this.user.isCoach != true ){
-      this.user.isCoach = false;
-    }
-    this.user.coach = "SIN_ASIGNAR";
     this.authService.createUser(this.user).subscribe(res => {
       console.log(res);
       localStorage.setItem('x-token', res['token']);
       localStorage.setItem('username', res['username']);
       localStorage.setItem('uid', res['uid']);
       this.router.navigate(['/login/']);
+      Swal.fire({
+        icon:"success",
+        title:"OK",
+        text:"Registrado",
+        showConfirmButton:false,
+        timer: 2000
+      })
     }, err => {
       console.log(err);
+      Swal.fire({
+        icon:"error",
+        title:":(",
+        showConfirmButton:false,
+        timer: 2000
+      })
     }); 
     
   }

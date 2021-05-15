@@ -2,13 +2,14 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { baseURL_sensores } from '../shared/URL';
+import {server} from '../shared/URL';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MedicionesService {
   private backend: string = "";
-  private backCreate: string = "https://tve-app-g22.herokuapp.com/api/v1/auth/";
+  private backCreate: string = server+"/api/v1/auth/";
   constructor(private http: HttpClient) {
     this.backend = baseURL_sensores;// redundante :v
   }

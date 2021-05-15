@@ -1,8 +1,8 @@
-<div class="main-container">
-    <mat-card>
+<div class="main-container" style="padding: 20px;">
+    <mat-card class="card2">
         <mat-card-title>Login</mat-card-title>
-        <mat-card-content>
-            <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <mat-card-content >
+            <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" >
                 <p>
                     <mat-form-field>
                         <input type="text" matInput placeholder="Username" formControlName="username" />

@@ -11,7 +11,7 @@ import { AboutComponent } from './components/about/about.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { HeaderComponent } from './components/header/header.component';
 import { LoginComponent } from './components/login/login.component';
-import { CoachComponent } from './components/coach/coach.component';
+
 import { AthleteComponent } from './components/athlete/athlete.component';
 import { routes } from './routes';
 import { SignupComponent } from './components/signup/signup.component';
@@ -21,7 +21,7 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { HistoryComponent } from './components/history/history.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthGuard } from './guards/auth.guard';
-import { ChooseComponent } from './components/choose/choose.component';
+
 import { UiRhythmComponent } from './components/ui-rhythm/ui-rhythm.component';
 import { UiTemperatureComponent } from './components/ui-temperature/ui-temperature.component';
 import { UiOxygenComponent } from './components/ui-oxygen/ui-oxygen.component';
@@ -43,11 +43,11 @@ import { ShowtimeComponent } from './components/showtime/showtime.component';
     FooterComponent,
     LoginComponent,
     AthleteComponent,
-    CoachComponent,
+
     SignupComponent,
     DashboardComponent,
     ProfileComponent,
-    ChooseComponent,
+
     UiRhythmComponent,
     UiTemperatureComponent,
     UiOxygenComponent,

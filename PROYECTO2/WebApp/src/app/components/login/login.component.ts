@@ -57,7 +57,6 @@ export class LoginComponent implements OnInit {
       localStorage.setItem('uid_coach' , '');
       localStorage.setItem('username_coach' ,'');//
       if (res.isCoach == true){
-        this.router.navigate(['/choose']);
       }else{
         this.router.navigate(['/dashboard']);
       }
