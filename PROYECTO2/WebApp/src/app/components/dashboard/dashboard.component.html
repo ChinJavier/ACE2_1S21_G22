@@ -1,0 +1,92 @@
+<app-header></app-header>
+
+<div class="stats-container" fxLayout.sm="column" fxLayout.md="column" fxLayout.xs="column"
+  fxLayoutAlign="center center">
+  <mat-card class="card card1 animate__animated animate__backInLeft">
+    <mat-card-header>
+      <div fxFlex="100" fxLayout="column">
+        <p class="card-title">Ritmo Cardiaco</p>
+        <p class="card-date">Ultima medición</p>
+      </div>
+    </mat-card-header>
+    <mat-card-content>
+      <img mat-card-image src="assets/ritmoC.jpg" />
+      <p>
+        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Provident
+        blanditiis tenetur molestiae ducimus similique, sapiente perspiciatis
+        dolorum hic magnam nisi error quia eius explicabo expedita dignissimos
+        est magni. Accusamus, iusto.
+      </p>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-button [routerLink]="['/reports']">Reportes</button>
+      <a mat-button [routerLink]="['/rhythm']">Info</a>
+    </mat-card-actions>
+  </mat-card>
+  <mat-card class="card card2 animate__animated animate__backInDown">
+    <mat-card-header>
+      <div fxFlex="100" fxLayout="column">
+        <p class="card-title">Oxigeno en la Sangre</p>
+        <p class="card-date">Ultima medición</p>
+      </div>
+    </mat-card-header>
+    <mat-card-content>
+      <img mat-card-image src="assets/oxigenoSangre.jpg" />
+      <p>
+        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Provident
+        blanditiis tenetur molestiae ducimus similique, sapiente perspiciatis
+        dolorum hic magnam nisi error quia eius explicabo expedita dignissimos
+        est magni. Accusamus, iusto.
+      </p>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-button [routerLink]="['/report-oxigen']">Reportes</button>
+      <button mat-button [routerLink]="['/oxygen']">Info</button>
+    </mat-card-actions>
+  </mat-card>
+  <mat-card class="card card3 animate__animated animate__backInRight">
+    <mat-card-header>
+      <div fxFlex="100" fxLayout="column">
+        <p class="card-title">Temperatura</p>
+        <p class="card-date">Ultima medición</p>
+      </div>
+    </mat-card-header>
+    <mat-card-content>
+      <img mat-card-image src="assets/temperatura.jpg" />
+      <p>
+        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Provident
+        blanditiis tenetur molestiae ducimus similique, sapiente perspiciatis
+        dolorum hic magnam nisi error quia eius explicabo expedita dignissimos
+        est magni. Accusamus, iusto.
+      </p>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-button [routerLink]="['/report-temp']">Reportes</button>
+      <button mat-button [routerLink]="['/temperature']">Info</button>
+    </mat-card-actions>
+  </mat-card>
+</div>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootswatch/4.5.2/lux/bootstrap.min.css"
+  integrity="sha384-9+PGKSqjRdkeAU7Eu4nkJU8RFaH8ace8HGXnkiKMP9I9Te0GJ4/km3L1Z8tXigpG" crossorigin="anonymous" />
+<div class="historial-container">
+
+
+
+
+
+  <mat-list class="h-list" class="animate__animated animate__fadeInLeft">
+    <h1>Historial de mediciones <span class="material-icons"> remove_red_eye </span>
+    </h1>
+    <mat-list-item *ngFor="let h of history">
+      <mat-icon mat-list-icon>folder</mat-icon>
+      <div mat-line><strong>{{h.type}}</strong></div>
+      <div mat-line>Resultado: {{ h.valor }}</div>
+      <div mat-line>{{ h.fecha | date: "dd/MM/yyyy" }} </div>
+      <div mat-line>{{ h.fecha | date: "hh:mm:ss" }} </div>
+    </mat-list-item>
+
+    <mat-divider></mat-divider>
+
+  </mat-list>
+
+  <!-- NO IMPORTA QUE EL HISTORY ESTE VACIO , cuando en las peticiones se llene el ngFor lo va recargar-->
