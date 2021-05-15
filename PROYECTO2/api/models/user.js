@@ -25,15 +25,6 @@ const userSchema = new Schema({
     },
     weight: {
         type: String
-    },
-    isCoach: {
-        type: Boolean,
-        required: true,
-        defaultValue: false,
-    },
-    coach: {
-        type: String,
-        defaultValue: "SIN_ASIGNAR",required: true // >:v ptm xd 
     }
 });
 

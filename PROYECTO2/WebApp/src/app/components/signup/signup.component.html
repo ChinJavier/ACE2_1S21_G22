@@ -3,6 +3,9 @@
         <mat-card-title>Sign Up</mat-card-title>
         <mat-card-content>
             <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+
+     
+
                 <p>
                     <mat-form-field>
                         <input type="text" matInput placeholder="Username" formControlName="username" />
@@ -29,11 +32,6 @@
                         </mat-select>
 
                     </mat-form-field>
-                </p>
-                <p>
-                    <mat-checkbox formControlName="isCoach">
-                        Couch?
-                    </mat-checkbox>
                 </p>
                 <p fxLayout="col" fxLayoutGap="20px">
                     <mat-form-field>

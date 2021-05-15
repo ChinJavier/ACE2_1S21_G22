@@ -23,3 +23,33 @@ button {
     text-align: center; 
     margin-top: 10px;
 }
+
+.stats-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+
+.card1 {
+    box-shadow: -16px 18px 30px 0.5px;
+
+}
+.card2 {
+    box-shadow: 3px 3px 25px 0.2px;
+
+}
+.card3 {
+    box-shadow: 16px 18px 30px 0.5px;
+
+}
+
+@media only screen and (max-width: 600px) {
+    .card {
+        box-shadow: 3px 3px 25px 0.2px;
+    }
+}
+@media only screen and (max-width: 1266px) {
+    .card {
+        box-shadow: 3px 3px 25px 0.2px;
+    }
+  }
