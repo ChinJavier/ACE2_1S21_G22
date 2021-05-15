@@ -26,6 +26,8 @@ export class DashboardComponent implements OnInit {
     //this.getMediciones();
     this.getDate();
    // this.displayMsg();
+
+   console.log("CHIN CHE");
   }
 
    getMediciones():void{
