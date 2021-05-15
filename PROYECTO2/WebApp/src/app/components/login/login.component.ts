@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { User } from '../../models/user';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-login',
@@ -60,7 +61,15 @@ export class LoginComponent implements OnInit {
       }else{
         this.router.navigate(['/dashboard']);
       }
-    }, err => {console.log(err['error']); alert('credenciales incorrectas o error en el server')});
+    }, err => {console.log(err['error']);
+    Swal.fire({
+      icon: "error",
+      text: "Credenciales Incorrectas",
+      showConfirmButton: false,
+      timer: 1500
+    })
+    }
+    );
   }
   
 

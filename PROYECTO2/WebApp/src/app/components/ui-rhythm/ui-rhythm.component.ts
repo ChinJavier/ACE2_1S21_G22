@@ -13,7 +13,7 @@ import { SuccessComponent } from '../dialogs/success/success.component';
   styleUrls: ['./ui-rhythm.component.css']
 })
 export class UiRhythmComponent implements OnInit {
-	private hilo: any = null;
+	private hilo_ritmo: any = null;
 	public chart_ritmo: any = null;
 	public ritmoActual = 0;
 	constructor(private service: MedicionesService,
@@ -66,16 +66,16 @@ export class UiRhythmComponent implements OnInit {
 			  }
 		});
 		
-		this.showGraphic();
+		this.showGraphic_ritmo();
 		
-		this.hilo = setInterval(() =>{this.showGraphic();},1000);
+		this.hilo_ritmo = setInterval(() =>{this.showGraphic_ritmo();},1000);
 	}
 	
 	ngOnDestroy(): void {
-		clearInterval(this.hilo);
+		clearInterval(this.hilo_ritmo);
 	}
 
-	private showGraphic(): void {
+	private showGraphic_ritmo(): void {
 		this.service.getrhythm().subscribe(res => {
 			let chart_ritmoTime: any = new Date();
 			// PONE EL TIEMPO Y SI ES MAYOR A 15 DATOS DA UN SHIFT

@@ -12,9 +12,9 @@ import { SuccessComponent } from '../dialogs/success/success.component';
   styleUrls: ['./ui-oxygen.component.css']
 })
 export class UiOxygenComponent implements OnInit {
-	private hilo: any = null;
-	public char_grafica: any = null;
-	public valorActual = 0;
+	private hilo_oxigeno: any = null;
+	public char_grafica_oxigeno: any = null;
+	public valorActualOxigeno = 0;
 	constructor(
 		private service: MedicionesService,
 		public dialog: MatDialog,
@@ -23,7 +23,7 @@ export class UiOxygenComponent implements OnInit {
 
 	
 	 ngOnInit(): void {
-		this.char_grafica = new Chart('realtime', {
+		this.char_grafica_oxigeno = new Chart('realtime', {
 			type: 'line',
 			data: {
 				labels: [],
@@ -71,13 +71,13 @@ export class UiOxygenComponent implements OnInit {
 			  }
 		});
 		
-		this.showGraphic();
+		this.showGraphic_Oxigeno();
 		
-		this.hilo = setInterval(() =>{this.showGraphic();},1000);
+		this.hilo_oxigeno = setInterval(() =>{this.showGraphic_Oxigeno();},1000);
 	}
 	
 	ngOnDestroy(): void {
-		clearInterval(this.hilo);
+		clearInterval(this.hilo_oxigeno);
 	}
 
 	openDialog() {
@@ -87,19 +87,19 @@ export class UiOxygenComponent implements OnInit {
 		  });
 	}
 
-	private showGraphic(): void {
+	private showGraphic_Oxigeno(): void {
 		this.service.getOxygen().subscribe(res => {
-			let char_graficaTime: any = new Date();
+			let char_grafica_oxigenoTime: any = new Date();
 			// PONE EL TIEMPO Y SI ES MAYOR A 15 DATOS DA UN SHIFT
-			char_graficaTime = char_graficaTime.getHours() + ':' + ((char_graficaTime.getMinutes() < 10) ? '0' + char_graficaTime.getMinutes() : char_graficaTime.getMinutes()) + ':' + ((char_graficaTime.getSeconds() < 10) ? '0' + char_graficaTime.getSeconds() : char_graficaTime.getSeconds());
-			if(this.char_grafica.data.labels.length > 9) {
-					this.char_grafica.data.labels.shift();
-					this.char_grafica.data.datasets[0].data.shift();
+			char_grafica_oxigenoTime = char_grafica_oxigenoTime.getHours() + ':' + ((char_grafica_oxigenoTime.getMinutes() < 10) ? '0' + char_grafica_oxigenoTime.getMinutes() : char_grafica_oxigenoTime.getMinutes()) + ':' + ((char_grafica_oxigenoTime.getSeconds() < 10) ? '0' + char_grafica_oxigenoTime.getSeconds() : char_grafica_oxigenoTime.getSeconds());
+			if(this.char_grafica_oxigeno.data.labels.length > 9) {
+					this.char_grafica_oxigeno.data.labels.shift();
+					this.char_grafica_oxigeno.data.datasets[0].data.shift();
 			}
-			this.char_grafica.data.labels.push(char_graficaTime);
-			this.char_grafica.data.datasets[0].data.push(res); // PONE EL VALOR EN Y , ACA VAN LOS DATOS QUE VIENEN DE MONGO
-			this.char_grafica.update();
-			this.valorActual = res;
+			this.char_grafica_oxigeno.data.labels.push(char_grafica_oxigenoTime);
+			this.char_grafica_oxigeno.data.datasets[0].data.push(res); // PONE EL VALOR EN Y , ACA VAN LOS DATOS QUE VIENEN DE MONGO
+			this.char_grafica_oxigeno.update();
+			this.valorActualOxigeno = res;
 		} , err => {
 			console.log('error' , err);
 		});
@@ -108,7 +108,7 @@ export class UiOxygenComponent implements OnInit {
 
 	public saveOxygen():void{
 		this.openDialog();
-		const objetoModelo = {oxygen: this.valorActual , user: localStorage.getItem('uid')};
+		const objetoModelo = {oxygen: this.valorActualOxigeno , user: localStorage.getItem('uid')};
 		console.log(objetoModelo);
 		this.service.saveMedicion(objetoModelo,"oxygen").subscribe(res => {
 			//alert('Medicion registrada');
