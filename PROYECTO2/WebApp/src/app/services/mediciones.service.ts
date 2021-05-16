@@ -9,16 +9,10 @@ import {server} from '../shared/URL';
 })
 export class MedicionesService {
   private backend: string = "";
-  private backCreate: string = server+"/api/v1/auth/";
   constructor(private http: HttpClient) {
-    this.backend = baseURL_sensores;// redundante :v
+    this.backend = baseURL_sensores;
   }
-   // metodos que hacen peticiones al servidor de node
 
-   // PETICION POST DESDE ANGULAR
-  // public crearAlgo(obj: any): Observable<any>{
-  //   return this.http.post(`${this.backend}`, obj);
-  // }
 
   // PETICION GET DESDE ANGULAR
   public getTemperatura(): Observable<any>{
@@ -33,12 +27,18 @@ export class MedicionesService {
     return this.http.get(`${this.backend}rhythm`);
   }
 
-  public getMediciones(typeMedition: string , username: string | null): Observable<any>{
-    return this.http.get(`${this.backCreate}all/${typeMedition}/${username}`);
+
+
+  /*
+
+  public getMediciones(typeMedition: string , id: string | null): Observable<any>{
+    return this.http.get(`${this.backCreate}all/${typeMedition}/${id}`);
   }
 
   public saveMedicion(objeto_body: any ,ruta: string): Observable<any>{ // FUNCION GENERICA
     return this.http.post(`${this.backCreate}${ruta}` , objeto_body);
   }
+
+  */
 
 }
