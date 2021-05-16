@@ -106,16 +106,6 @@ export class UiOxygenComponent implements OnInit {
 	}
 
 
-	public saveOxygen():void{
-		this.openDialog();
-		const objetoModelo = {oxygen: this.valorActualOxigeno , user: localStorage.getItem('uid')};
-		console.log(objetoModelo);
-		this.service.saveMedicion(objetoModelo,"oxygen").subscribe(res => {
-			//alert('Medicion registrada');
-			console.log(res);
-		} , err => {
-			console.log('**error**' , err);
-		});
-	}
+
 
 }
