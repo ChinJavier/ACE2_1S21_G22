@@ -18,7 +18,11 @@ const meditionSchema = new Schema({
         type: Date,
         default : Date.now
     },
-    user: {
+    test:{//numero de test
+        type: Number,
+        required: true
+    },
+    id_user: {
         type: Schema.ObjectId,
         ref: "User",
         required: true
@@ -26,4 +30,4 @@ const meditionSchema = new Schema({
 },
     { timestamps: true }
 );
-module.exports = model('Medition', meditionSchema);
+module.exports = model('meditions', meditionSchema);

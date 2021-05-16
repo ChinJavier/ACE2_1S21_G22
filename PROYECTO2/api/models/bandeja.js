@@ -1,9 +1,9 @@
 const { Schema, model } = require('mongoose');
 
 
-const temperatureSchema = new Schema({
-    temperature:{
-        type: Number,
+const bandejaSchema = new Schema({
+    mensaje: {
+        type: String,
         required: true
     },
     fecha:{ // para saber cual fue la ultima medicion tomada
@@ -13,7 +13,9 @@ const temperatureSchema = new Schema({
     user: {
         type: Schema.ObjectId,
         ref: "User",
-        require: true
+        required: true
     }
-});
-module.exports = model('Temperature',temperatureSchema);
+},
+    { timestamps: true }
+);
+module.exports = model('bandejas', bandejaSchema);

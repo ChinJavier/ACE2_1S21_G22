@@ -1,40 +1,48 @@
 const Medition = require('../models/medition');
 
-const createMedition = async (req, res) => {
-    let medition = "Medition";
+const ctrl= {};
+
+
+ctrl.save_medition = async (req,res)=>{
+    const nuevo = new Medition(req.body);
     try {
-        medition = new Medition(req.body);
-        await user.save();
-    } catch (e) {
-        console.log(e);
-        return res.status(500).json({
-            ok: false,
-            medition,
-        });
+        await nuevo.save();
+        res.status(200).json({text: 'REGISTER OK'});
+    } catch (error) {
+        res.status(500).json({text: 'ERROR IN SAVE THE DATA'});
     }
-    return res.status(201).json({
-        ok: true,
-        medition,
-    });
-}
-
-const getMeditionsByUsername = async (req, res) => {
-    const { username } = req.body;
-    let medition = await Medition.findOne({ username: username });
-    if (!medition) {
-        return res.status(400).json({
-            ok: false,
-            msg: "There are no meditions for this user yet.",
-        });
-    };
-    return res.status(200).json({
-        type: medition.type,
-        timestamsp: timestamps
-    });
 }
 
 
-module.exports = {
-    createMedition,
-    getMeditionsByUsername,
+ctrl.get_all_meditions = async(req,res) =>{
+    try {
+        const registros =  await Medition.find({id_user: req.params.id});// id de mongo del usuario
+        res.send(registros);
+    } catch (error) {
+        res.send('error al recuperar todos los registros de las mediciones');
+    }
 }
+
+ctrl.get_num_test = async(req,res) =>{
+    try {// le sumo +1 en el front
+        const ultimoTest = await Medition.find({id_user: req.params.id}).sort({test:-1}).limit(1); // LOS DEVUELVE DESCENDENTE
+        if (ultimoTest.length ==  0){
+            res.send({num: 0});
+        }else{
+            res.send({num: ultimoTest[0].test});
+        }
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+
+
+// ctrl.delete =  async (req,res)=> {
+//     await model_rhythm.findByIdAndDelete(req.params.id);
+//     res.json({message:"eliminacion realizada con exito"}) ;
+// }
+
+
+
+module.exports = ctrl;
