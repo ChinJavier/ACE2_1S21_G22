@@ -239,6 +239,15 @@ export class DashboardComponent implements OnInit {
     this.s.getMediciones("rhythm" ,id).subscribe(res => {
       console.log("*GET HISTORY OF rhythm" , res)
       for (let i = 0 ; i < res.length; i++){
+		  if(res[i].rhythm == 0) {
+			  this.imagen = this.estados[0]
+		  }
+		  else if(res[i].rhythm < 30 && res[i].rhythm > 0){
+			this.imagen = this.estados[1]
+		  }
+		  else if(res[i].rhythm > 30){
+			this.imagen = this.estados[2]
+		  }
         const objetoHistory = {
           fecha: res[i].fecha,
           valor: res[i].rhythm,

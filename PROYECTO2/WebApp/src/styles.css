@@ -1,7 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
 
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif;
+    background: rgb(0,0,0);
+background: linear-gradient(90deg, rgba(0,0,0,0.5900735294117647) 0%, rgba(9,101,121,0.0802696078431373) 35%, rgba(2,19,17,0.5816701680672269) 100%);
+}
 .flex-spacer {
     flex: 1 1 auto;
 }

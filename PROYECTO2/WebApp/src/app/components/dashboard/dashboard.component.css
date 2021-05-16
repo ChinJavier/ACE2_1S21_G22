@@ -1,6 +1,7 @@
 .stats-container {
     display: flex;
     justify-content: space-between;
+
 }
 
 .card {
@@ -8,7 +9,10 @@
     margin: 50px;
     margin-top: 15px;
     background:white;
+
 }
+
+
 
 .card1 {
     box-shadow: -16px 18px 30px 0.5px;
