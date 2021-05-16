@@ -23,11 +23,25 @@ routerTest.route('/sensores/').get(
 });
 
 
+routerTest.route('/sensores/datos').get(
+    async(req, res) => {
+        try {
+            // filtros desde el front
+            res.status(200).send({temperature: TEMPERATURE , rhythm:  RHYTHM , oxygen: OXYGEN});
+        } catch (error) {
+            res.status(500).json({error : "FALLO EN OBTENER TODOS LOS DATOS"});
+        }
+    }
+);
+
+
 // DEVOLUCION DE DATOS
 routerTest.route('/sensores/oxygen').get(
     async(req, res) => {
         try {
-            res.status(200).send(OXYGEN);
+            if (OXYGEN > 0 ){
+                res.status(200).send(OXYGEN);
+            }
         } catch (error) {
             res.status(500).json({error : "FALLO EN OBTENER LA OXIGENO"});
         }
@@ -47,7 +61,9 @@ routerTest.route('/sensores/temperature').get(
 routerTest.route('/sensores/rhythm').get(
     async(req, res) => {
         try {
-            res.status(200).send(RHYTHM);
+            if(RHYTHM >= 0 ){
+                res.status(200).send(RHYTHM);
+            }
         } catch (error) {
             res.status(500).json({error : "FALLO EN OBTENER LA OXIGENO"});
         }
