@@ -24,8 +24,38 @@
     </mat-card-content>
 
   </mat-card>
+  <mat-card class="card card4 animate__animated animate__backInDown">
+
+          <div class="time__container">
+              {{minutes}}:{{seconds}}
+          </div>
+
+          <div class="timer__actions">
+
+              <br>
+              <br>
+              <button
+                  class="btn btn-success"
+                  (click)="takeTime()"
+              >
+                  Iniciar
+              </button>
+
+              <button
+                  class="btn btn-danger"
+                  (click)="stop()"
+              >
+                  Parar
+              </button>
+
+          </div>
+
+  </mat-card>
+
 
 </div>
+
+
 
 <div class="stats-container" fxLayout.sm="column" fxLayout.md="column" fxLayout.xs="column"
   fxLayoutAlign="center center">

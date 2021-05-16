@@ -12,6 +12,16 @@
 
 }
 
+.time__container {
+    font-size: 60px;
+    color: black;
+}
+
+.timer__actions button {
+    margin-right: 10px;
+
+}
+
 
 
 .card1 {
@@ -33,6 +43,7 @@
 }
 .card4 {
     box-shadow: 3px 3px 25px 0.2px;
+    padding: 40px;
 }
 
 .card4 mat-card-header {
