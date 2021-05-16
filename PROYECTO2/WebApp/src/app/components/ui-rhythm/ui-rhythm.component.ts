@@ -99,15 +99,4 @@ export class UiRhythmComponent implements OnInit {
 		  });
 	}
 
-	public saveRitmo():void{
-		this.openDialog();
-		const objetoModelo = {rhythm: this.ritmoActual , user: localStorage.getItem('uid')};
-		console.log(objetoModelo);
-		this.service.saveMedicion(objetoModelo,"rhythm").subscribe(res => {
-			console.log(res);
-		} , err => {
-			console.log('error' , err);
-		});
-	}
-
 }

@@ -1,6 +1,5 @@
 // imports de los modelos y cosas necesarias 
 const TestModel = require('./../models/tests');
-const controller = {}
 const saveMedition = async (req,res) =>{
     try {
         console.log(req.body)
@@ -39,7 +38,6 @@ const getRelatime = async(req,res) =>{
             let respuesta = [AIRE , LETRA];
             res.send(respuesta);
     } catch (error) {
-        console.log("!!!!!!!!!!!!!!!!!!!!!***************")
         res.status(500).json({msj:'error recuperando el realtime'});
     }
 }
