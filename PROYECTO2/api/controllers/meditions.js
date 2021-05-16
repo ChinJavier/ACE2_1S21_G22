@@ -3,7 +3,7 @@ const Medition = require('../models/medition');
 const ctrl= {};
 
 
-ctrl.save_medition = async (req,res)=>{
+ctrl.save_medition = async (req,res)=>{ //------------------------------ no cambia pero le dejo la misma estructura que el medition
     const nuevo = new Medition(req.body);
     try {
         await nuevo.save();
@@ -23,7 +23,7 @@ ctrl.get_all_meditions = async(req,res) =>{
     }
 }
 
-ctrl.get_num_test = async(req,res) =>{
+ctrl.get_num_test = async(req,res) =>{//----------------------------------- va cambiar
     try {// le sumo +1 en el front
         const ultimoTest = await Medition.find({id_user: req.params.id}).sort({test:-1}).limit(1); // LOS DEVUELVE DESCENDENTE
         if (ultimoTest.length ==  0){
