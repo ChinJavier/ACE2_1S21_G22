@@ -101,9 +101,9 @@
 
         <div class="card-content">
           <h3>Estadísticas</h3>
-          <p> Míninmo: 10  lat/seg </p>
-          <p> Máximo: 34   lat/seg</p>
-          <p> Promedio: 17  lat/seg </p>
+          <p> Míninmo: {{this.estadisticas_ritmo.min}}  lat/seg </p>
+          <p> Máximo: {{this.estadisticas_ritmo.max}}   lat/seg</p>
+          <p> Promedio: {{this.estadisticas_ritmo.promedio}}  lat/seg </p>
         </div>
 
     </mat-card-content>
@@ -122,9 +122,9 @@
 
         <div class="card-content">
           <h3>Estadísticas</h3>
-          <p> Míninmo: 10 % </p>
-          <p> Máximo: 34 %</p>
-          <p> Promedio: 17 %</p>
+          <p> Míninmo: {{this.estadisticas_oxigeno.min}} % </p>
+          <p> Máximo: {{this.estadisticas_oxigeno.max}} %</p>
+          <p> Promedio: {{this.estadisticas_oxigeno.promedio}} %</p>
         </div>
 
     </mat-card-content>
@@ -143,9 +143,9 @@
         <canvas id="realtime4">{{ rep_grafica_temperatura  }}</canvas>
         <div class="card-content">
           <h3>Estadísticas </h3>
-          <p> Míninmo: 10  C°</p>
-          <p> Máximo: 34  C°</p>
-          <p> Promedio: 17 C° </p>
+          <p> Míninmo: {{this.estadisticas_temp.min}}  C°</p>
+          <p> Máximo: {{this.estadisticas_temp.max}}  C°</p>
+          <p> Promedio: {{this.estadisticas_temp.promedio}} C° </p>
       </div>
 
     </div>

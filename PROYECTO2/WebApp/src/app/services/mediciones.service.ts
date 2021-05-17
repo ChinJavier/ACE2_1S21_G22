@@ -34,7 +34,7 @@ export class MedicionesService {
     return this.http.post(`${server}/logic/saveMedition` , objeto_body);
   }
 
-  public getHistorialMediciones(idMongo: string | null): Observable<Medition[]>{
+  public getHistorialMediciones(idMongo: string | null): Observable<Medition[]>{// general
     // http://localhost:3000/logic/allMeditions/id_mongo
     return this.http.get<Medition[]>(`${server}/logic/allMeditions/${idMongo}`);
   }
