@@ -3,6 +3,7 @@ import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { baseURL_sensores } from '../shared/URL';
 import {server} from '../shared/URL';
+import { Medition } from '../interfaces/interfaces';
 
 @Injectable({
   providedIn: 'root'
@@ -27,18 +28,19 @@ export class MedicionesService {
     return this.http.get(`${this.backend}rhythm`);
   }
 
-
-
-  /*
-
-  public getMediciones(typeMedition: string , id: string | null): Observable<any>{
-    return this.http.get(`${this.backCreate}all/${typeMedition}/${id}`);
+  public saveMedicion(objeto_body: Medition): Observable<any>{ // FUNCION GENERICA
+   //     http://localhost:3000/logic/saveMedition
+    return this.http.post(`${this.backend}/logic/saveMedition` , objeto_body);
   }
 
-  public saveMedicion(objeto_body: any ,ruta: string): Observable<any>{ // FUNCION GENERICA
-    return this.http.post(`${this.backCreate}${ruta}` , objeto_body);
+  public getHistorialMediciones(idMongo: string | null): Observable<Medition[]>{
+    // http://localhost:3000/logic/allMeditions/id_mongo
+    return this.http.get<Medition[]>(`${this.backend}/logic/allMeditions/${idMongo}`);
   }
 
-  */
+  public getNumUltimeTest(idMongo: string){
+    // http://localhost:3000/logic/getNumTest/id_mongo
+    return this.http.get(`${this.backend}/logic/getNumTest/${idMongo}`);// res.num +1
+  }
 
 }

@@ -23,7 +23,7 @@ ctrl.get_all_meditions = async(req,res) =>{
     }
 }
 
-ctrl.get_num_test = async(req,res) =>{//----------------------------------- va cambiar
+ctrl.get_num_test = async(req,res) =>{
     try {// le sumo +1 en el front
         const ultimoTest = await Medition.find({id_user: req.params.id}).sort({test:-1}).limit(1); // LOS DEVUELVE DESCENDENTE
         if (ultimoTest.length ==  0){
