@@ -21,50 +21,50 @@ export class HistoryComponent implements OnInit {
   this.inicializar();
   this._id = this.activatedRoute.snapshot.params.id;
   this.username = this.activatedRoute.snapshot.params.username;
-  this.getMediciones();
+  // this.getMediciones();
   }
 
-  getMediciones():void{
-    this.s.getMediciones("oxygen" ,this._id).subscribe(res => {
-      console.log("*GET HISTORY OF OXYGEN" , res)
-      for (let i = 0 ; i < res.length; i++){
-        const objetoHistory = {
-          fecha: res[i].fecha,
-          valor: res[i].oxygen,
-          type: 'Oxigeno'
-        };
-        this.history_oxigeno.push(objetoHistory);
-      }
-    },
-      err => console.log(err)
-    );
-    this.s.getMediciones("temperature" ,this._id).subscribe(res => {
-      console.log("*GET HISTORY OF temperature" , res)
-      for (let i = 0 ; i < res.length; i++){
-        const objetoHistory = {
-          fecha: res[i].fecha,
-          valor: res[i].temperature,
-          type: 'Temperatura'
-        };
-        this.history_temperatura.push(objetoHistory);
-      }
-    },
-      err => console.log(err)
-    );
-    this.s.getMediciones("rhythm" ,this._id).subscribe(res => {
-      console.log("*GET HISTORY OF rhythm" , res)
-      for (let i = 0 ; i < res.length; i++){
-        const objetoHistory = {
-          fecha: res[i].fecha,
-          valor: res[i].rhythm,
-          type: 'Ritmo'
-        };
-        this.history_oxigeno.push(objetoHistory);
-      }
-    },
-      err => console.log(err)
-    );
-  }
+  // getMediciones():void{
+  //   this.s.getMediciones("oxygen" ,this._id).subscribe(res => {
+  //     console.log("*GET HISTORY OF OXYGEN" , res)
+  //     for (let i = 0 ; i < res.length; i++){
+  //       const objetoHistory = {
+  //         fecha: res[i].fecha,
+  //         valor: res[i].oxygen,
+  //         type: 'Oxigeno'
+  //       };
+  //       this.history_oxigeno.push(objetoHistory);
+  //     }
+  //   },
+  //     err => console.log(err)
+  //   );
+  //   this.s.getMediciones("temperature" ,this._id).subscribe(res => {
+  //     console.log("*GET HISTORY OF temperature" , res)
+  //     for (let i = 0 ; i < res.length; i++){
+  //       const objetoHistory = {
+  //         fecha: res[i].fecha,
+  //         valor: res[i].temperature,
+  //         type: 'Temperatura'
+  //       };
+  //       this.history_temperatura.push(objetoHistory);
+  //     }
+  //   },
+  //     err => console.log(err)
+  //   );
+  //   this.s.getMediciones("rhythm" ,this._id).subscribe(res => {
+  //     console.log("*GET HISTORY OF rhythm" , res)
+  //     for (let i = 0 ; i < res.length; i++){
+  //       const objetoHistory = {
+  //         fecha: res[i].fecha,
+  //         valor: res[i].rhythm,
+  //         type: 'Ritmo'
+  //       };
+  //       this.history_oxigeno.push(objetoHistory);
+  //     }
+  //   },
+  //     err => console.log(err)
+  //   );
+  // }
 
 
   getInfoUsuario():void{

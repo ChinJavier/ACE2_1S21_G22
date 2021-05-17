@@ -16,7 +16,7 @@ export class ReportTempComponent implements OnInit {
 	public char_grafica: any = null;
 
   ngOnInit(): void {
-    this.getMediciones();
+//    this.getMediciones();
 
     // OBJETO QUE CONTROLA LA GRAFICA
     this.char_grafica = new Chart('realtime', {
@@ -85,30 +85,30 @@ export class ReportTempComponent implements OnInit {
      }
 	}
 
-  getMediciones(){
-    // esta peticion me devuelve el historial
-    const id = localStorage.getItem('uid');
-    this.s.getMediciones("temperature" ,id).subscribe(res => {
-      for (let i = 0 ; i < res.length; i++){
-        const objetoHistory = {
-          fecha: res[i].fecha,
-          valor: res[i].temperature,
-          type: 'temperature'
-        };
-        this.history.push(objetoHistory);
-      }
-      this.promedio = this.calcularPromedio();
-      if (this.promedio == undefined){ this.promedio = "NINGUNO"; console.log('ninguno')}
-      this.showGraphic();
-      this.getMinimo();
-      this.getMaximo();
-      // PRINTS SOLO PARA VER LOS VALORES
-      console.log(this.history);
-      console.log(this.promedio);
-    },
-      err => console.log(err)
-    );
-  }
+  // getMediciones(){
+  //   // esta peticion me devuelve el historial
+  //   const id = localStorage.getItem('uid');
+  //   this.s.getMediciones("temperature" ,id).subscribe(res => {
+  //     for (let i = 0 ; i < res.length; i++){
+  //       const objetoHistory = {
+  //         fecha: res[i].fecha,
+  //         valor: res[i].temperature,
+  //         type: 'temperature'
+  //       };
+  //       this.history.push(objetoHistory);
+  //     }
+  //     this.promedio = this.calcularPromedio();
+  //     if (this.promedio == undefined){ this.promedio = "NINGUNO"; console.log('ninguno')}
+  //     this.showGraphic();
+  //     this.getMinimo();
+  //     this.getMaximo();
+  //     // PRINTS SOLO PARA VER LOS VALORES
+  //     console.log(this.history);
+  //     console.log(this.promedio);
+  //   },
+  //     err => console.log(err)
+  //   );
+  // }
 
   calcularPromedio(){
     let suma= 0;
