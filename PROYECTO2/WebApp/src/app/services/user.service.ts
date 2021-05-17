@@ -1,11 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
+import {server} from './../shared/URL';
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
-  private url_api: string = "https://tve-app-g22.herokuapp.com/logic/";
+  
+  private url_api: string = server+"/logic/";
   constructor(private http: HttpClient) {}
 
   public getInfoUser(username: string | null):Observable<any>{

@@ -13,13 +13,13 @@ export class ReportTempComponent implements OnInit {
   promedio:any = "NINGUNO";
   min:any = 0;
   max:any = 0;
-	public char_grafica: any = null;
+	public rep_grafica_temperatura: any = null;
 
   ngOnInit(): void {
 //    this.getMediciones();
 
     // OBJETO QUE CONTROLA LA GRAFICA
-    this.char_grafica = new Chart('realtime', {
+    this.rep_grafica_temperatura = new Chart('realtime4', {
 			type: 'bar',
 			data: {
 				labels: [],
@@ -71,17 +71,17 @@ export class ReportTempComponent implements OnInit {
   }
 
 
-  private showGraphic(): void {
+  private showReportTemperatura(): void {
 			// PONE EL TIEMPO Y SI ES MAYOR A 15 DATOS DA UN SHIFT
     for(let i = 0 ; i < this.history.length; i ++){
-        let char_graficaTime = new Date(this.history[i].fecha).toLocaleDateString() +"  "+new Date(this.history[i].fecha).toLocaleTimeString();
-        if(this.char_grafica.data.labels.length > this.history.length) {
-            this.char_grafica.data.labels.shift();
-            this.char_grafica.data.datasets[0].data.shift();
+        let rep_grafica_temperaturaTime = new Date(this.history[i].fecha).toLocaleDateString() +"  "+new Date(this.history[i].fecha).toLocaleTimeString();
+        if(this.rep_grafica_temperatura.data.labels.length > this.history.length) {
+            this.rep_grafica_temperatura.data.labels.shift();
+            this.rep_grafica_temperatura.data.datasets[0].data.shift();
         }
-        this.char_grafica.data.labels.push(char_graficaTime);
-        this.char_grafica.data.datasets[0].data.push(this.history[i].valor); // PONE EL VALOR EN Y , ACA VAN LOS DATOS QUE VIENEN DE MONGO
-        this.char_grafica.update();
+        this.rep_grafica_temperatura.data.labels.push(rep_grafica_temperaturaTime);
+        this.rep_grafica_temperatura.data.datasets[0].data.push(this.history[i].valor); // PONE EL VALOR EN Y , ACA VAN LOS DATOS QUE VIENEN DE MONGO
+        this.rep_grafica_temperatura.update();
      }
 	}
 
@@ -99,7 +99,7 @@ export class ReportTempComponent implements OnInit {
   //     }
   //     this.promedio = this.calcularPromedio();
   //     if (this.promedio == undefined){ this.promedio = "NINGUNO"; console.log('ninguno')}
-  //     this.showGraphic();
+  //     this.showReportTemperatura();
   //     this.getMinimo();
   //     this.getMaximo();
   //     // PRINTS SOLO PARA VER LOS VALORES

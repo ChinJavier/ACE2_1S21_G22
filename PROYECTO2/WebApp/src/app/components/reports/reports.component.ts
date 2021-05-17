@@ -12,13 +12,13 @@ export class ReportsComponent implements OnInit {
   constructor( private s : MedicionesService) { }
   history:any = [];
   promedio:any = "NINGUNO";
-	public char_grafica: any = null;
+	public rep_grafica_ritmo: any = null;
 
   ngOnInit(): void {
     //this.getMediciones();
 
     // OBJETO QUE CONTROLA LA GRAFICA
-    this.char_grafica = new Chart('realtime', {
+    this.rep_grafica_ritmo = new Chart('realtime', {
 			type: 'bar',
 			data: {
 				labels: [],
@@ -70,17 +70,17 @@ export class ReportsComponent implements OnInit {
   }
 
 
-  private showGraphic(): void {
+  private show_rep_ritmo(): void {
 			// PONE EL TIEMPO Y SI ES MAYOR A 15 DATOS DA UN SHIFT
     for(let i = 0 ; i < this.history.length; i ++){
-        let char_graficaTime = new Date(this.history[i].fecha).toLocaleDateString() +"  "+new Date(this.history[i].fecha).toLocaleTimeString();
-        if(this.char_grafica.data.labels.length > this.history.length) {
-            this.char_grafica.data.labels.shift();
-            this.char_grafica.data.datasets[0].data.shift();
+        let rep_grafica_ritmoTime = new Date(this.history[i].fecha).toLocaleDateString() +"  "+new Date(this.history[i].fecha).toLocaleTimeString();
+        if(this.rep_grafica_ritmo.data.labels.length > this.history.length) {
+            this.rep_grafica_ritmo.data.labels.shift();
+            this.rep_grafica_ritmo.data.datasets[0].data.shift();
         }
-        this.char_grafica.data.labels.push(char_graficaTime);
-        this.char_grafica.data.datasets[0].data.push(this.history[i].valor); // PONE EL VALOR EN Y , ACA VAN LOS DATOS QUE VIENEN DE MONGO
-        this.char_grafica.update();
+        this.rep_grafica_ritmo.data.labels.push(rep_grafica_ritmoTime);
+        this.rep_grafica_ritmo.data.datasets[0].data.push(this.history[i].valor); // PONE EL VALOR EN Y , ACA VAN LOS DATOS QUE VIENEN DE MONGO
+        this.rep_grafica_ritmo.update();
      }
 	}
 
@@ -98,7 +98,7 @@ export class ReportsComponent implements OnInit {
   //     }
   //     this.promedio = this.calcularPromedio();
   //     if (this.promedio == undefined){ this.promedio = "NINGUNO"; console.log('ninguno')}
-  //     this.showGraphic();
+  //     this.show_rep_ritmo();
   //     // PRINTS SOLO PARA VER LOS VALORES
   //     console.log(this.history);
   //     console.log(this.promedio);
