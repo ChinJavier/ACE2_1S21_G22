@@ -2,6 +2,10 @@ const { Schema, model } = require('mongoose');
 
 
 const bandejaSchema = new Schema({
+    encabezado: {
+        type: String,
+        required: true
+    },
     mensaje: {
         type: String,
         required: true
