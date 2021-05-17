@@ -15,7 +15,7 @@ routerQueries.route('/search/getMyUsers/:user').get(getMyUsers);
 // GUARDADO DE DATOS Y RECUPERACION DE LOS MISMOS PARA LOS REPORTES
 routerQueries.get('/allMeditions/:id',get_all_meditions); // http://localhost:3000/logic/allMeditions/id_mongo
 routerQueries.post('/saveMedition',save_medition); // http://localhost:3000/logic/saveMedition
-routerQueries.get('/getNumTest/:id',get_num_test);
+routerQueries.get('/getNumTest/:id',get_num_test); // http://localhost:3000/logic/getNumTest/id_mongo
 
 
 module.exports = {

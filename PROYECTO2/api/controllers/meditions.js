@@ -3,7 +3,7 @@ const Medition = require('../models/medition');
 const ctrl= {};
 
 
-ctrl.save_medition = async (req,res)=>{
+ctrl.save_medition = async (req,res)=>{ //------------------------------ no cambia pero le dejo la misma estructura que el medition
     const nuevo = new Medition(req.body);
     try {
         await nuevo.save();
