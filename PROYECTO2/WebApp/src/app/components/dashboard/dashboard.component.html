@@ -35,8 +35,6 @@
     <mat-card-header>
       <div fxFlex="100" fxLayout="column">
         <h2 class="card-title">Oxigeno</h2>
-        <p>Valor actual: {{valorActualOxigeno}} %</p>
-
       </div>
     </mat-card-header>
     <mat-card-content>
@@ -65,7 +63,7 @@
     <mat-card-header>
       <div fxFlex="100" fxLayout="column">
         <h2 class="card-title">Temperatura</h2>
-        <p>Valor actual: {{valorActual_temperatura}} C° </p>
+
       </div>
 
     </mat-card-header>
@@ -73,11 +71,8 @@
       <div>
         <p class="card-date" style="margin-top: 20px;"></p>
         <canvas id="realtime">{{ char_grafica_temperatura }}</canvas>
-
-        <div class="card-content">
-      </div>
-
     </div>
+
     <div class="card-content" style="margin-top:8px; text-align: center;">
       <h2>Valor actual: {{valorActualOxigeno}} % </h2>
     </div>
@@ -101,6 +96,9 @@
       </div>
     </mat-card-header>
     <mat-card-content>
+      <p class="card-date" style="margin-top: 20px;"></p>
+      <canvas id="realtime6">{{ rep_grafica_ritmo  }}</canvas>
+
         <div class="card-content">
           <h3>Estadísticas</h3>
           <p> Míninmo: 10  lat/seg </p>
@@ -114,11 +112,13 @@
     <mat-card-header>
       <div fxFlex="100" fxLayout="column">
         <h2 class="card-title">Reportes Oxigeno en la Sangre</h2>
-
       </div>
+      
     </mat-card-header>
     <hr>
     <mat-card-content>
+      <p class="card-date" style="margin-top: 20px;"></p>
+      <canvas id="realtime5">{{ rep_grafica_oxigeno  }}</canvas>
 
         <div class="card-content">
           <h3>Estadísticas</h3>
@@ -139,7 +139,8 @@
     </mat-card-header>
     <mat-card-content>
       <div>
-
+        <p class="card-date" style="margin-top: 20px;"></p>
+        <canvas id="realtime4">{{ rep_grafica_temperatura  }}</canvas>
         <div class="card-content">
           <h3>Estadísticas </h3>
           <p> Míninmo: 10  C°</p>
