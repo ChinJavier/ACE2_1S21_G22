@@ -83,10 +83,6 @@
 
       </p>
     </mat-card-content>
-    <mat-card-actions>
-      <button mat-button [routerLink]="['/reports']">Reportes</button>
-      <a mat-button [routerLink]="['/rhythm']">Info</a>
-    </mat-card-actions>
   </mat-card>
   <mat-card class="card card2 animate__animated animate__backInDown">
     <mat-card-header>
@@ -114,11 +110,8 @@
 
       </p>
     </mat-card-content>
-    <mat-card-actions>
-      <button mat-button [routerLink]="['/report-oxigen']">Reportes</button>
-      <button mat-button [routerLink]="['/oxygen']">Info</button>
-    </mat-card-actions>
   </mat-card>
+
   <mat-card class="card card3 animate__animated animate__backInRight">
     <mat-card-header>
       <div fxFlex="100" fxLayout="column">
@@ -140,14 +133,88 @@
       <p>
         La temperatura normal del cuerpo humano (normotermia, eutermia) es el rango de temperatura típico que se encuentra en los humanos. El rango de temperatura normal del cuerpo humano se establece típicamente entre 36.5–37.5 °C (97.7–99.5 °F).
 
-
       </p>
     </mat-card-content>
-    <mat-card-actions>
-      <button mat-button [routerLink]="['/report-temp']">Reportes</button>
-      <button mat-button [routerLink]="['/temperature']">Info</button>
-    </mat-card-actions>
   </mat-card>
+</div>
+
+<div class="stats-container" fxLayout.sm="column" fxLayout.md="column" fxLayout.xs="column"
+  fxLayoutAlign="center center">
+  <mat-card class="card card1 animate__animated animate__backInLeft">
+    <mat-card-header>
+      <div fxFlex="100" fxLayout="column">
+        <h2 class="card-title">Reportes Ritmo Cardiaco</h2>
+        <hr>
+      </div>
+    </mat-card-header>
+    <mat-card-content>
+        <div class="card-content">
+          <h3>Estadísticas</h3>
+          <p> Míninmo: 10 </p>
+          <p> Máximo: 34 </p>
+          <p> Promedio: 17 </p>
+        </div>
+
+    </mat-card-content>
+  </mat-card>
+  <mat-card class="card card2 animate__animated animate__backInDown">
+    <mat-card-header>
+      <div fxFlex="100" fxLayout="column">
+        <h2 class="card-title">Reportes Oxigeno en la Sangre</h2>
+
+      </div>
+    </mat-card-header>
+    <hr>
+    <mat-card-content>
+
+        <div class="card-content">
+          <h3>Estadísticas</h3>
+          <p> Míninmo: 10 </p>
+          <p> Máximo: 34 </p>
+          <p> Promedio: 17 </p>
+        </div>
+
+    </mat-card-content>
+  </mat-card>
+  <mat-card class="card card3 animate__animated animate__backInRight">
+    <mat-card-header>
+      <div fxFlex="100" fxLayout="column">
+        <h2 class="card-title">Reportes Temperatura</h2>
+        <hr>
+      </div>
+
+    </mat-card-header>
+    <mat-card-content>
+      <div>
+
+        <div class="card-content">
+          <h3>Estadísticas</h3>
+          <p> Míninmo: 10 </p>
+          <p> Máximo: 34 </p>
+          <p> Promedio: 17 </p>
+      </div>
+
+    </div>
+    </mat-card-content>
+  </mat-card>
+</div>
+
+<div class="history_container">
+  <table class="table-light">
+    <thead>
+      <tr class="table-dark">
+        <th scope="col">Oxigeno</th>
+        <th scope="col">Ritmo</th>
+        <th scope="col">Remperatura</th>
+        <th scope="col">Fecha</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="table-light">
+
+      </tr>
+    </tbody>
+  </table>
 </div>
 
 

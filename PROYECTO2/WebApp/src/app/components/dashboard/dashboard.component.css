@@ -103,3 +103,16 @@
 .h-list {
     padding: 100px;
 }
+
+
+.history_container {
+    padding: 50px;
+}
+
+table {
+    width: 100%;
+}
+
+th {
+    color: rgb(34, 29, 29);
+}
