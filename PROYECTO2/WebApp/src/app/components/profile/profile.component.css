@@ -5,7 +5,7 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    
+
 }
 
 
@@ -33,7 +33,8 @@ mat-card-actions {
 
 mat-card-header {
     width: 100%;
-    background: #ccc;
+    background: black;
+    color: white;
     height: 50px;
     font-size: 20px;
     font-weight: bold;
@@ -55,7 +56,8 @@ mat-toolbar {
 }
 
 button {
-    background-color: #ccc;
+    background-color: black;
+    color: white;
     width: 100%;
 }
 

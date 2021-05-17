@@ -2,21 +2,40 @@ import { Component, OnInit } from '@angular/core';
 import { Chart } from 'chart.js';
 import { AuthService } from 'src/app/services/auth.service';
 import {MedicionesService} from './../../services/mediciones.service';
+import Swal from 'sweetalert2';
+import { TOUCH_BUFFER_MS } from '@angular/cdk/a11y';
+
+
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
-  username: string | null = '' ;
-  uid: string | null = '';
-  time = new Date();
-  history:any = [];
-  hours = new Date().getHours();
-  msg: string = "";
+	minutes: any = '00';
+	seconds: any = '00';
+
+	pauseTime: boolean = false;
 
 
-  // --------------------------------------------------------  GRAFICA DE TEMPERATURA 
+	// Estado
+	estados = [
+		"/assets/parado.png",
+		"/assets/caminando.png",
+		"/assets/corriendo.png"
+	]
+	imagen = ""
+	username: string | null = '' ;
+	uid: string | null = '';
+	time = new Date();
+	history:any = [];
+	hours = new Date().getHours();
+	msg: string = "";
+
+	hiloTimer: any;
+
+
+  // --------------------------------------------------------  GRAFICA DE TEMPERATURA
   public hilo_temperatura: any = null;
 	public char_grafica_temperatura: any = null;
 	public valorActual_temperatura = 0;
@@ -46,7 +65,8 @@ export class DashboardComponent implements OnInit {
     this.uid = localStorage.getItem('uid');
     //this.getMediciones();
     this.getDate();
-    
+
+	this.imagen = this.estados[0];
 
 
     this.char_grafica_temperatura = new Chart('realtime', {
@@ -139,9 +159,9 @@ export class DashboardComponent implements OnInit {
 				}
 			  }
 		});
-		
+
 		this.showGraphic_ritmo();
-		
+
 		this.hilo_ritmo = setInterval(() =>{this.showGraphic_ritmo();},1000);
 
 
@@ -175,7 +195,7 @@ export class DashboardComponent implements OnInit {
 				},
 				scales: {
 				  yAxes: [{
-					  
+
 					  stacked: true,
 					  ticks: {
 						  fontColor: "black",
@@ -194,9 +214,9 @@ export class DashboardComponent implements OnInit {
 				}
 			  }
 		});
-		
+
 		this.showGraphic_Oxigeno();
-		
+
 		this.hilo_oxigeno = setInterval(() =>{this.showGraphic_Oxigeno();},1000);
 
   }
@@ -252,7 +272,7 @@ export class DashboardComponent implements OnInit {
 
   displayMsg() {
     this.hours = new Date().getHours();
-    
+
     if(this.hours < 10) {
       this.msg = "Good Morning!"
     } else if(this.hours < 16) {
@@ -321,6 +341,62 @@ export class DashboardComponent implements OnInit {
 			console.log('error' , err);
 		});
 	}
+
+	start() {
+		this.pauseTime = false;
+		this.takeTime();
+	}
+
+
+	stop() {
+		this.pauseTime = true;
+		this.minutes = '00';
+		this.seconds = '00';
+		clearInterval(this.hiloTimer);
+	}
+
+
+	takeTime() {
+
+		this.hiloTimer = setInterval(() => {
+		  if(!this.pauseTime){
+			let second = Number(this.seconds);
+			let minute = Number(this.minutes);
+			second += 1;
+			if(second > 59) {
+			  second = 0;
+			  (this.seconds) = '00';
+			  minute += 1;
+
+			  if (minute == 5){// MINUTO 5
+
+
+				this.minutes = '00';
+				this.seconds = '00';
+				clearInterval(this.hiloTimer);
+				Swal.fire('Test Terminado!!');
+				return;
+			  }
+			}
+			if(second < 10) {
+
+			  this.seconds = `0${String(second)}`
+			} else {
+			  this.seconds = String(second);
+			}
+			this.minutes = `0${String(minute)}`
+		  }
+		}, 1000)
+
+	  }
+
+	  pause() {
+		this.pauseTime = !this.pauseTime;
+	  }
+
+	  reset() {
+		this.pauseTime = true;
+	  }
 
 
 
