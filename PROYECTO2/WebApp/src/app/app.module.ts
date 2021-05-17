@@ -4,6 +4,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material/material.module';
 import { RouterModule, Routes} from '@angular/router';
+import {MatTabsModule} from '@angular/material/tabs';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
@@ -32,6 +33,7 @@ import { ReportTempComponent } from './components/report-temp/report-temp.compon
 import { ReportOxigenoComponent } from './components/report-oxigeno/report-oxigeno.component';
 import { SuccessComponent } from './components/dialogs/success/success.component';
 import { ShowtimeComponent } from './components/showtime/showtime.component';
+import { BandejaComponent } from './components/bandeja/bandeja.component';
 
 
 
@@ -59,6 +61,7 @@ import { ShowtimeComponent } from './components/showtime/showtime.component';
     HeaderComponent,
     SuccessComponent,
     ShowtimeComponent,
+    BandejaComponent,
   ],
   imports: [
     BrowserModule,
@@ -69,7 +72,8 @@ import { ShowtimeComponent } from './components/showtime/showtime.component';
     ReactiveFormsModule,
     HttpClientModule,
     FlexLayoutModule,
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes),
+    MatTabsModule
   ],
   providers: [
     AuthGuard,

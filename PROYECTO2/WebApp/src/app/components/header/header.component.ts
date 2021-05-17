@@ -57,6 +57,10 @@ export class HeaderComponent implements OnInit {
     this.router.navigate(['/profile/' , this.username]);
   }
 
+  goto_bandeja(): void{
+    this.router.navigate(['/bandeja/', this.uid]);
+  }
+
   getDate(){
     setInterval(() => {
       this.time = new Date();
@@ -65,7 +69,7 @@ export class HeaderComponent implements OnInit {
 
   displayMsg() {
     this.hours = new Date().getHours();
-    
+
     if(this.hours < 10) {
       this.msg = "Good Morning!"
     } else if(this.hours < 16) {

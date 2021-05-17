@@ -3,6 +3,8 @@ const routerQueries = Router();
 const { getUSER , getUsersAvailable , getMyUsers,asignarUser } = require('../controllers/userController');
 const { save_medition , get_all_meditions , get_num_test } = require('../controllers/meditions');
 
+const { createMail, getMyMails } = require('../controllers/bandeja')
+
 // http://localhost:3000/logic
 
 // GET USER SIRVE PARA EL PERFIL
@@ -17,6 +19,11 @@ routerQueries.get('/allMeditions/:id',get_all_meditions); // http://localhost:30
 routerQueries.post('/saveMedition',save_medition); // http://localhost:3000/logic/saveMedition
 routerQueries.get('/getNumTest/:id',get_num_test); // http://localhost:3000/logic/getNumTest/id_mongo
 
+
+// ==========================================================================
+// =============================================================      CORREOS
+routerQueries.post('/saveCorreo', createMail) // http://localhost:3000/logic/saveCorreo
+routerQueries.get('/getCorreos/:id', getMyMails) // http://localhost:3000/logic/getCorreos
 
 module.exports = {
     routerQueries,
