@@ -15,7 +15,6 @@ import { numbers } from '@material/banner';
 })
 export class DashboardComponent implements OnInit {
 	MEDICION_TEST_ACTUAL: Medition={id_user:"",test:0,valores:[]};
-	NUM_TEST_ACTUAL: Number= 0;
 	minutes: any = '00';
 	seconds: any = '00';
 
@@ -64,7 +63,12 @@ export class DashboardComponent implements OnInit {
 		this.getDate();
 		if (this.uid != null){
 			this.MEDICION_TEST_ACTUAL.id_user = this.uid;
-			this.service.getNumUltimeTest(this.uid).subscribe(res => {this.NUM_TEST_ACTUAL = Number(res.num)+ 1 ;   } , err =>console.log("ERROR ULTIMO TEST"));
+			
+			this.service.getNumUltimeTest(this.uid).subscribe(res => {
+	
+				this.MEDICION_TEST_ACTUAL.test = Number(res.num)+ 1 ;
+				console.log("TEST: " + this.MEDICION_TEST_ACTUAL.test);
+			} , err =>console.log("ERROR ULTIMO TEST"));
 		}
 		this.imagen = this.estados[0];
 
