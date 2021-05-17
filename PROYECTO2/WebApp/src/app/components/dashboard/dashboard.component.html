@@ -2,9 +2,6 @@
 
 
 
-
-
-
 <div class="stats-container" fxLayout.sm="column" fxLayout.md="column" fxLayout.xs="column"
   fxLayoutAlign="center center">
   <mat-card class="card card1 animate__animated animate__backInLeft">
@@ -179,12 +176,13 @@
 
   
   <mat-card class="card card4 animate__animated animate__backInDown">
+    <p style="text-align:center; margin-bottom: 30px;">cronometro</p>
 
-          <div class="time__container">
+          <div class="time__container" style="text-align:center;">
               {{minutes}}:{{seconds}}
           </div>
 
-          <div class="timer__actions">
+          <div class="timer__actions" style="align-items: center; text-align: center;">
 
               <br>
               <br>
@@ -203,7 +201,20 @@
               </button>
 
           </div>
-
+          <mat-form-field style="margin-top: 20px;">
+            <mat-select placeholder="id tests" [(ngModel)]="NUMERO_DE_TEST_REPORTE" name="operacion">
+              <mat-option *ngFor="let valor of OPCIONES_NUM_TESTS" [value]="valor">
+                <p *ngIf="valor!=0">{{valor}}</p>
+                <p *ngIf="valor==0">todos los test</p>
+              </mat-option>
+            </mat-select>
+            </mat-form-field>
+            <button
+            class="btn btn-warning"
+            (click)="ChageCombobox()"
+        >
+            Buscar test
+        </button>
   </mat-card>
 
   

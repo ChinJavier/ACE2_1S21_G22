@@ -14,6 +14,9 @@ import { numbers } from '@material/banner';
 	styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
+	NUMERO_DE_TEST_REPORTE = 0 ;
+	OPCIONES_NUM_TESTS:any = [];
+
 	MEDICION_TEST_ACTUAL: Medition = { id_user: "", test: 0, valores: [] };
 	minutes: any = '00';
 	seconds: any = '00';
@@ -73,7 +76,7 @@ export class DashboardComponent implements OnInit {
 	ngOnInit(): void {
 		this.username = localStorage.getItem('username');
 		this.uid = localStorage.getItem('uid');
-		this.reportesGenerales();
+
 		this.getDate();
 		if (this.uid != null) {
 			this.MEDICION_TEST_ACTUAL.id_user = this.uid;
@@ -82,6 +85,9 @@ export class DashboardComponent implements OnInit {
 
 				this.MEDICION_TEST_ACTUAL.test = Number(res.num) + 1;
 				console.log("TEST: " + this.MEDICION_TEST_ACTUAL.test);
+				for(let x = 0 ; x < res.num ; x++){
+					this.OPCIONES_NUM_TESTS.push(x);
+				}
 			}, err => console.log("ERROR ULTIMO TEST"));
 		}
 		this.imagen = this.estados[0];
@@ -497,6 +503,40 @@ export class DashboardComponent implements OnInit {
 	this.estadisticas_oxigeno.max = this.getMaximo(this.rep_temperaturas);
 	}
 
+	public ChageCombobox(){
+		if (this.NUMERO_DE_TEST_REPORTE == 0){// MANDAR UN 0 SI QUIERO EL REPORTE GENERAL
+			this.reportesGenerales();
+		}else{
+			this.getReportesPorTest(this.NUMERO_DE_TEST_REPORTE);
+		}
+	}
+
+	public getReportesPorTest(numTest: any):void{
+
+	this.service.getTest(this.uid , numTest).subscribe(
+		res=>{
+			console.log("POR TEST: ", res);
+			let vectorAll = res[0].valores;
+			this.rep_oxigenos=[];
+			this.rep_ritmos=[];
+			this.rep_temperaturas=[];
+			for(let i = 0; i < vectorAll.length; i++){
+				this.rep_oxigenos.push({valor: vectorAll[i].oxygen , fecha: vectorAll[i].fecha});
+				this.rep_ritmos.push({ valor: vectorAll[i].rhythm ,  fecha: vectorAll[i].fecha});
+				this.rep_temperaturas.push({valor: vectorAll[i].temperature , fecha: vectorAll[i].fecha});
+			}
+			this.showReportOxigeno();
+			this.show_rep_ritmo();
+			this.showReportTemperatura();
+		},
+		err=>{
+			console.log(err)
+		}
+	)
+		
+
+	}
+
 	public reportesGenerales(): void {
 		this.service.getHistorialMediciones(this.uid).subscribe(
 			res =>{
@@ -593,7 +633,6 @@ export class DashboardComponent implements OnInit {
 		  suma += arreglo[i].valor;
 		}
 		if (arreglo.length == 0){
-		  alert('por el momento no tienes registros');
 		  return -777
 		}
 		return suma/arreglo.length;

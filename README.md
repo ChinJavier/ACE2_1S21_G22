@@ -1,9 +1,9 @@
 # ACE2, USAC, grupo 22.
 ## INTEGRANTES
-|   201801370                    |   201800464                        |   201801434                    |   201800634                  |   201602935                        |
-|:------------------------------:|:----------------------------------:|:------------------------------:|:----------------------------:|:----------------------------------:|
-|   Javier Antonio Chin Flores   |   Pablo Andres Argueta Hernandez   |   Carlos Ojani NG Valladares   |   Anthony Fernando Son Mux   |   Lourdes Mishel Lorenzana Ochoa   |
-|  [![](https://github.com/ChinJavier.png?size=120)](https://github.com/ChinJavier) |   [![](https://github.com/PabloAndresArg.png?size=120)](https://github.com/PabloAndresArg)   |   [![](https://github.com/carlosngv.png?size=120)](https://github.com/carlosngv)   |   [![](https://github.com/LinkSon-PC.png?size=120)](https://github.com/LinkSon-PC)   |   [![](https://github.com/loumisha96.png?size=120)](https://github.com/loumisha96)   |
+|   201801370                    |   201800464                        |    201800634                 |   201602935                        |
+|:------------------------------:|:----------------------------------:|:----------------------------:|:----------------------------------:|
+|   Javier Antonio Chin Flores   |   Pablo Andres Argueta Hernandez   |    Anthony Fernando Son Mux  |   Lourdes Mishel Lorenzana Ochoa   |
+|  [![](https://github.com/ChinJavier.png?size=120)](https://github.com/ChinJavier) |   [![](https://github.com/PabloAndresArg.png?size=120)](https://github.com/PabloAndresArg)    |   [![](https://github.com/LinkSon-PC.png?size=120)](https://github.com/LinkSon-PC)   |   [![](https://github.com/loumisha96.png?size=120)](https://github.com/loumisha96)   |
 |   <a href="https://github.com/ChinJavier" target="_blank">`github.com/ChinJavier`</a>   | <a href="https://github.com/PabloAndresArg" target="_blank">`github.com/PabloAndresArg`</a>|   <a href="https://github.com/carlosngv" target="_blank">`github.com/carlosngv`</a>   |   <a href="https://github.com/LinkSon-PC" target="_blank">`github.com/LinkSon-PC`</a>   |   <a href="https://github.com/loumisha96" target="_blank">`github.com/loumisha96`</a>   |
 
 ***
