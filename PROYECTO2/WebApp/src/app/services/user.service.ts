@@ -6,7 +6,7 @@ import {server} from './../shared/URL';
   providedIn: 'root'
 })
 export class UserService {
-  
+
   private url_api: string = server+"/logic/";
   constructor(private http: HttpClient) {}
 
@@ -26,6 +26,16 @@ export class UserService {
     let cuerpo = {coach: coachNew };
     console.log();
     return this.http.put(`${this.url_api}${_idUserMongo}`, cuerpo);
+  }
+
+  public getCorreos(_idUserMongo: any): Observable<any>{
+    return this.http.get(`http://localhost:3000/logic/getCorreos/${_idUserMongo}`);
+  }
+
+  public registroCorreo(_idUserMongo: any , correo:any): Observable<any>{
+    let cuerpo = { encabezado: correo.encabezado, mensaje: correo.mensaje, user: _idUserMongo}
+    console.log(cuerpo)
+    return this.http.post(`http://localhost:3000/logic/saveCorreo`, cuerpo);
   }
 
 }
