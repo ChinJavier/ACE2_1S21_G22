@@ -1,7 +1,7 @@
 const { Router } = require('express'); // ** estrenando router :v
 const routerQueries = Router();
 const { getUSER , getUsersAvailable , getMyUsers,asignarUser } = require('../controllers/userController');
-const { save_medition , get_all_meditions , get_num_test } = require('../controllers/meditions');
+const { save_medition , get_all_meditions , get_num_test , get_all_meditions_of_test } = require('../controllers/meditions');
 
 const { createMail, getMyMails } = require('../controllers/bandeja')
 
@@ -16,6 +16,7 @@ routerQueries.route('/search/getMyUsers/:user').get(getMyUsers);
 
 // GUARDADO DE DATOS Y RECUPERACION DE LOS MISMOS PARA LOS REPORTES
 routerQueries.get('/allMeditions/:id',get_all_meditions); // http://localhost:3000/logic/allMeditions/id_mongo
+routerQueries.get('/getTest/:id/:test',get_all_meditions_of_test); // http://localhost:3000/logic/allMeditions/id_mongo
 routerQueries.post('/saveMedition',save_medition); // http://localhost:3000/logic/saveMedition
 routerQueries.get('/getNumTest/:id',get_num_test); // http://localhost:3000/logic/getNumTest/id_mongo
 

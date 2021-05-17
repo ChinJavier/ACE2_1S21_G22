@@ -22,6 +22,14 @@ ctrl.get_all_meditions = async(req,res) =>{
         res.send('error al recuperar todos los registros de las mediciones');
     }
 }
+ctrl.get_all_meditions_of_test = async(req,res) =>{
+    try {
+        const registros =  await Medition.find({id_user: req.params.id , test: req.params.test});// id de mongo del usuario
+        res.send(registros);
+    } catch (error) {
+        res.send('error al recuperar todos los registros de las mediciones de un TEST');
+    }
+}
 
 ctrl.get_num_test = async(req,res) =>{
     try {// le sumo +1 en el front

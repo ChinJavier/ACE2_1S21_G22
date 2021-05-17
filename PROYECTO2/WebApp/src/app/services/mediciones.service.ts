@@ -38,6 +38,12 @@ export class MedicionesService {
     // http://localhost:3000/logic/allMeditions/id_mongo
     return this.http.get<Medition[]>(`${server}/logic/allMeditions/${idMongo}`);
   }
+  public getTest(idMongo: string | null , numTest: any): Observable<Medition[]>{// general
+     //http://localhost:3000/logic/getTest/60a18e76592d010b1ce59025/1
+    return this.http.get<Medition[]>(`${server}/logic/getTest/${idMongo}/${numTest}`);
+  }
+
+
 
   public getNumUltimeTest(idMongo: string |null){
     // http://localhost:3000/logic/getNumTest/id_mongo
