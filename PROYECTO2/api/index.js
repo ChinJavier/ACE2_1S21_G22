@@ -3,7 +3,7 @@ const express = require('express');
 require('dotenv').config();
 const { dbConnection } = require('./db/config');
 const { router } = require('./routes/routes');
-const {routerTest} = require('./routes/routesMux.js');
+const {routerMux} = require('./routes/routesMux.js');
 const {routerQueries} = require('./routes/queries');
 const path = require('path');
 const morgan = require('morgan');
@@ -23,7 +23,7 @@ app.use(morgan('dev'));
 
 
 app.use('/api/v1/auth', router);
-app.use('/',routerTest);
+app.use('/',routerMux);
 app.use('/logic' , routerQueries);
 
 

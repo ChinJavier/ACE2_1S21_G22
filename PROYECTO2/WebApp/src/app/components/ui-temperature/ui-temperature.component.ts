@@ -80,21 +80,21 @@ export class UiTemperatureComponent implements OnInit {
 	}
 
 	private showGraphic(): void {
-		this.service.getTemperatura().subscribe(res => {
-			let char_graficaTime: any = new Date();
-			// PONE EL TIEMPO Y SI ES MAYOR A 15 DATOS DA UN SHIFT
-			char_graficaTime = char_graficaTime.getHours() + ':' + ((char_graficaTime.getMinutes() < 10) ? '0' + char_graficaTime.getMinutes() : char_graficaTime.getMinutes()) + ':' + ((char_graficaTime.getSeconds() < 10) ? '0' + char_graficaTime.getSeconds() : char_graficaTime.getSeconds());
-			if (this.char_grafica.data.labels.length > 7) {
-				this.char_grafica.data.labels.shift();
-				this.char_grafica.data.datasets[0].data.shift();
-			}
-			this.char_grafica.data.labels.push(char_graficaTime);
-			this.char_grafica.data.datasets[0].data.push(res); // PONE EL VALOR EN Y , ACA VAN LOS DATOS QUE VIENEN DE MONGO
-			this.char_grafica.update();
-			this.valorActual = res;
-		}, err => {
-			console.log('error', err);
-		});
+		// this.service.getTemperatura().subscribe(res => {
+		// 	let char_graficaTime: any = new Date();
+		// 	// PONE EL TIEMPO Y SI ES MAYOR A 15 DATOS DA UN SHIFT
+		// 	char_graficaTime = char_graficaTime.getHours() + ':' + ((char_graficaTime.getMinutes() < 10) ? '0' + char_graficaTime.getMinutes() : char_graficaTime.getMinutes()) + ':' + ((char_graficaTime.getSeconds() < 10) ? '0' + char_graficaTime.getSeconds() : char_graficaTime.getSeconds());
+		// 	if (this.char_grafica.data.labels.length > 7) {
+		// 		this.char_grafica.data.labels.shift();
+		// 		this.char_grafica.data.datasets[0].data.shift();
+		// 	}
+		// 	this.char_grafica.data.labels.push(char_graficaTime);
+		// 	this.char_grafica.data.datasets[0].data.push(res); // PONE EL VALOR EN Y , ACA VAN LOS DATOS QUE VIENEN DE MONGO
+		// 	this.char_grafica.update();
+		// 	this.valorActual = res;
+		// }, err => {
+		// 	console.log('error', err);
+		// });
 	}
 
 }
