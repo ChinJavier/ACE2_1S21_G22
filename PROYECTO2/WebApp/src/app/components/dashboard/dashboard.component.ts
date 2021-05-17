@@ -3,7 +3,7 @@ import { Chart } from 'chart.js';
 
 import { MedicionesService } from './../../services/mediciones.service';
 import Swal from 'sweetalert2';
-import { Medition } from 'src/app/interfaces/interfaces';
+import { Medition, Valor } from 'src/app/interfaces/interfaces';
 import { numbers } from '@material/banner';
 
 
@@ -59,12 +59,21 @@ export class DashboardComponent implements OnInit {
 	public rep_grafica_temperatura: any = null;
 	public rep_grafica_oxigeno: any = null;
 	public rep_grafica_ritmo: any = null;
+
+	// --------------- HISTORIALES
+	public rep_temperaturas:any = [];
+	public estadisticas_temp = {promedio: 0 ,max: 0 , min:0}
+	public estadisticas_ritmo =  {promedio: 0 ,max: 0 , min:0}
+	public estadisticas_oxigeno=  {promedio: 0 ,max: 0 , min:0}
+
+	public rep_ritmos:any = [];
+	public rep_oxigenos:any = [];
 	constructor(private service: MedicionesService,) { }
 
 	ngOnInit(): void {
 		this.username = localStorage.getItem('username');
 		this.uid = localStorage.getItem('uid');
-		//this.getMediciones();
+		this.reportesGenerales();
 		this.getDate();
 		if (this.uid != null) {
 			this.MEDICION_TEST_ACTUAL.id_user = this.uid;
@@ -457,45 +466,62 @@ export class DashboardComponent implements OnInit {
 	//------------------------------------------------------------------------------------- REPORTES
 
 	private showReportTemperatura(): void {
-		// PONE EL TIEMPO Y SI ES MAYOR A 15 DATOS DA UN SHIFT
-		for (let i = 0; i < this.history.length; i++) {
-			let rep_grafica_temperaturaTime = new Date(this.history[i].fecha).toLocaleDateString() + "  " + new Date(this.history[i].fecha).toLocaleTimeString();
-			if (this.rep_grafica_temperatura.data.labels.length > this.history.length) {
-				this.rep_grafica_temperatura.data.labels.shift();
-				this.rep_grafica_temperatura.data.datasets[0].data.shift();
-			}
-			this.rep_grafica_temperatura.data.labels.push(rep_grafica_temperaturaTime);
-			this.rep_grafica_temperatura.data.datasets[0].data.push(this.history[i].valor); // PONE EL VALOR EN Y , ACA VAN LOS DATOS QUE VIENEN DE MONGO
-			this.rep_grafica_temperatura.update();
-		}
+	for (let i = 0; i < this.rep_temperaturas.length; i++) {
+		this.rep_grafica_temperatura.data.labels.push("x");
+		this.rep_grafica_temperatura.data.datasets[0].data.push(this.rep_temperaturas[i].valor); // PONE EL VALOR EN Y , ACA VAN LOS DATOS QUE VIENEN DE MONGO
+		this.rep_grafica_temperatura.update();
+	}
+	this.estadisticas_temp.promedio =  Number(this.calcularPromedio(this.rep_temperaturas).toFixed(2));
+	this.estadisticas_temp.min = this.getMinimo(this.rep_temperaturas);
+	this.estadisticas_temp.max = this.getMaximo(this.rep_temperaturas);
 	}
 	private show_rep_ritmo(): void {
-	// PONE EL TIEMPO Y SI ES MAYOR A 15 DATOS DA UN SHIFT
-	for(let i = 0 ; i < this.history.length; i ++){
-	let rep_grafica_ritmoTime = new Date(this.history[i].fecha).toLocaleDateString() +"  "+new Date(this.history[i].fecha).toLocaleTimeString();
-	if(this.rep_grafica_ritmo.data.labels.length > this.history.length) {
-	this.rep_grafica_ritmo.data.labels.shift();
-	this.rep_grafica_ritmo.data.datasets[0].data.shift();
-	}
-	this.rep_grafica_ritmo.data.labels.push(rep_grafica_ritmoTime);
-	this.rep_grafica_ritmo.data.datasets[0].data.push(this.history[i].valor); // PONE EL VALOR EN Y , ACA VAN LOS DATOS QUE VIENEN DE MONGO
+	for(let i = 0 ; i < this.rep_ritmos.length; i ++){
+	this.rep_grafica_ritmo.data.labels.push("x");
+	this.rep_grafica_ritmo.data.datasets[0].data.push(this.rep_ritmos[i].valor); // PONE EL VALOR EN Y , ACA VAN LOS DATOS QUE VIENEN DE MONGO
 	this.rep_grafica_ritmo.update();
 	}
+	this.estadisticas_ritmo.promedio =   Number(this.calcularPromedio(this.rep_temperaturas).toFixed(2));
+	this.estadisticas_ritmo.min = this.getMinimo(this.rep_temperaturas);
+	this.estadisticas_ritmo.max = this.getMaximo(this.rep_temperaturas);
 	}
 
-	
 	private showReportOxigeno(): void {
-	// PONE EL TIEMPO Y SI ES MAYOR A 15 DATOS DA UN SHIFT
-	for(let i = 0 ; i < this.history.length; i ++){
-	let rep_grafica_oxigenoTime = new Date(this.history[i].fecha).toLocaleDateString() +"  "+new Date(this.history[i].fecha).toLocaleTimeString();
-	if(this.rep_grafica_oxigeno.data.labels.length > this.history.length) {
-	this.rep_grafica_oxigeno.data.labels.shift();
-	this.rep_grafica_oxigeno.data.datasets[0].data.shift();
-	}
-	this.rep_grafica_oxigeno.data.labels.push(rep_grafica_oxigenoTime);
-	this.rep_grafica_oxigeno.data.datasets[0].data.push(this.history[i].valor); // PONE EL VALOR EN Y , ACA VAN LOS DATOS QUE VIENEN DE MONGO
+	for(let i = 0 ; i < this.rep_oxigenos.length; i ++){
+	this.rep_grafica_oxigeno.data.labels.push("x");
+	this.rep_grafica_oxigeno.data.datasets[0].data.push( this.rep_oxigenos[i].valor); // PONE EL VALOR EN Y , ACA VAN LOS DATOS QUE VIENEN DE MONGO
 	this.rep_grafica_oxigeno.update();
 	}
+	this.estadisticas_oxigeno.promedio =  Number(this.calcularPromedio(this.rep_temperaturas).toFixed(2));
+	this.estadisticas_oxigeno.min = this.getMinimo(this.rep_temperaturas);
+	this.estadisticas_oxigeno.max = this.getMaximo(this.rep_temperaturas);
+	}
+
+	public reportesGenerales(): void {
+		this.service.getHistorialMediciones(this.uid).subscribe(
+			res =>{
+				console.log("HISTORIAL COMPLETO" , res);
+				let vectorAll:Valor[] = [];
+				for(let x = 0 ; x < res.length; x++){
+					vectorAll.push(...res[x].valores);
+				}
+				this.rep_oxigenos=[];
+				this.rep_ritmos=[];
+				this.rep_temperaturas=[];
+				for(let i = 0; i < vectorAll.length; i++){
+					this.rep_oxigenos.push({valor: vectorAll[i].oxygen , fecha: vectorAll[i].fecha});
+					this.rep_ritmos.push({ valor: vectorAll[i].rhythm ,  fecha: vectorAll[i].fecha});
+					this.rep_temperaturas.push({valor: vectorAll[i].temperature , fecha: vectorAll[i].fecha});
+				}
+
+				this.showReportOxigeno();
+				this.show_rep_ritmo();
+				this.showReportTemperatura();
+			},
+			err =>{
+				console.log("error historial compleeto", err)
+			}
+		)
 	}
 
 
@@ -559,6 +585,48 @@ export class DashboardComponent implements OnInit {
 		this.pauseTime = !this.pauseTime;
 	}
 
+
+
+	calcularPromedio(arreglo: any){
+		let suma= 0;
+		for(let i = 0 ; i < arreglo.length; i++){
+		  suma += arreglo[i].valor;
+		}
+		if (arreglo.length == 0){
+		  alert('por el momento no tienes registros');
+		  return -777
+		}
+		return suma/arreglo.length;
+	  }
+	  
+	  public getMinimo(arreglo: any):any{
+		let min= 1000*9999;
+		for(let i = 0 ; i < arreglo.length; i++){
+		if( Number(arreglo[i].valor) < min){
+		  min = arreglo[i].valor;
+		}
+		}
+		if (arreglo.length == 0){
+		  console.log('por el momento no tienes registros');
+		  min = 0 ;
+		}
+		return min;
+	  }
+	  
+	  public getMaximo(arreglo: any): any{
+		let max= -500;
+		for(let i = 0 ; i < arreglo.length; i++){
+		 if( arreglo[i].valor > max ){
+		  max = arreglo[i].valor;
+		 }
+		}
+		if (arreglo.length == 0){
+		  console.log('por el momento no tienes registros');
+		  max = 0 ;
+		}
+		return max;
+	  }
+	  
 
 
 
