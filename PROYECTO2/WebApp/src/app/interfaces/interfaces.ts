@@ -1,9 +1,9 @@
 export interface Valor {
-    _id: string;
+    _id?: string;
     oxygen: number;
     rhythm: number;
     temperature: number;
-    fecha: Date;
+    fecha?: Date;
 }
 
 export interface Medition{
@@ -14,4 +14,10 @@ export interface Medition{
     createdAt?: Date;
     updatedAt?: Date;
     __v?: number;
+}
+
+export interface DatosTimepoReal {
+    temperature: string;
+    rhythm: string;
+    oxygen: string;
 }

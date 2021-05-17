@@ -76,21 +76,21 @@ export class UiRhythmComponent implements OnInit {
 	}
 
 	private showGraphic_ritmo(): void {
-		this.service.getrhythm().subscribe(res => {
-			let chart_ritmoTime: any = new Date();
-			// PONE EL TIEMPO Y SI ES MAYOR A 15 DATOS DA UN SHIFT
-			chart_ritmoTime = chart_ritmoTime.getHours() + ':' + ((chart_ritmoTime.getMinutes() < 10) ? '0' + chart_ritmoTime.getMinutes() : chart_ritmoTime.getMinutes()) + ':' + ((chart_ritmoTime.getSeconds() < 10) ? '0' + chart_ritmoTime.getSeconds() : chart_ritmoTime.getSeconds());
-			if(this.chart_ritmo.data.labels.length > 15) {
-					this.chart_ritmo.data.labels.shift();
-					this.chart_ritmo.data.datasets[0].data.shift();
-			}
-			this.chart_ritmo.data.labels.push(chart_ritmoTime);
-			this.chart_ritmo.data.datasets[0].data.push(res); // PONE EL VALOR EN Y , ACA VAN LOS DATOS QUE VIENEN DE MONGO
-			this.chart_ritmo.update();
-			this.ritmoActual = res;
-		} , err => {
-			console.log('error' , err);
-		});
+		// this.service.getrhythm().subscribe(res => {
+		// 	let chart_ritmoTime: any = new Date();
+		// 	// PONE EL TIEMPO Y SI ES MAYOR A 15 DATOS DA UN SHIFT
+		// 	chart_ritmoTime = chart_ritmoTime.getHours() + ':' + ((chart_ritmoTime.getMinutes() < 10) ? '0' + chart_ritmoTime.getMinutes() : chart_ritmoTime.getMinutes()) + ':' + ((chart_ritmoTime.getSeconds() < 10) ? '0' + chart_ritmoTime.getSeconds() : chart_ritmoTime.getSeconds());
+		// 	if(this.chart_ritmo.data.labels.length > 15) {
+		// 			this.chart_ritmo.data.labels.shift();
+		// 			this.chart_ritmo.data.datasets[0].data.shift();
+		// 	}
+		// 	this.chart_ritmo.data.labels.push(chart_ritmoTime);
+		// 	this.chart_ritmo.data.datasets[0].data.push(res); // PONE EL VALOR EN Y , ACA VAN LOS DATOS QUE VIENEN DE MONGO
+		// 	this.chart_ritmo.update();
+		// 	this.ritmoActual = res;
+		// } , err => {
+		// 	console.log('error' , err);
+		// });
 	}
 	openDialog() {
 		this.dialog.open(SuccessComponent, {

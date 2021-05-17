@@ -1,10 +1,10 @@
 const { Router } = require('express');
-const routerTest = Router();
+const routerMux = Router();
 
 var OXYGEN =0 , TEMPERATURE = 0 , RHYTHM= 0;
 
 // SUPONGO QUE ESTE USAREMOS
-routerTest.route('/sensores/:temperatura/:oxigeno/:ritmo').post(
+routerMux.route('/sensores/:temperatura/:oxigeno/:ritmo').post(
     async(req,res) => {
     const {ritmo , temperatura , oxigeno} = req.params;
     RHYTHM = ritmo;
@@ -17,13 +17,13 @@ routerTest.route('/sensores/:temperatura/:oxigeno/:ritmo').post(
 });
 
 // para probar la conexion
-routerTest.route('/sensores/').get(
+routerMux.route('/sensores/').get(
     async(req,res) => {
         res.send({text:'EL SERVER PARA LOS SENSORES ESTA A LA ESCUCHA'});
 });
 
 
-routerTest.route('/sensores/datos').get(
+routerMux.route('/sensores/datos').get(
     async(req, res) => {
         try {
             // filtros desde el front
@@ -36,7 +36,7 @@ routerTest.route('/sensores/datos').get(
 
 
 // DEVOLUCION DE DATOS
-routerTest.route('/sensores/oxygen').get(
+routerMux.route('/sensores/oxygen').get(
     async(req, res) => {
         try {
             if (OXYGEN > 0 ){
@@ -48,7 +48,7 @@ routerTest.route('/sensores/oxygen').get(
     }
 );
 
-routerTest.route('/sensores/temperature').get(
+routerMux.route('/sensores/temperature').get(
     async(req, res) => {
             try {
                 res.status(200).send(TEMPERATURE);
@@ -58,7 +58,7 @@ routerTest.route('/sensores/temperature').get(
         }
 );
 
-routerTest.route('/sensores/rhythm').get(
+routerMux.route('/sensores/rhythm').get(
     async(req, res) => {
         try {
             if(RHYTHM >= 0 ){
@@ -72,5 +72,5 @@ routerTest.route('/sensores/rhythm').get(
 
 
 module.exports = {
-    routerTest,
+    routerMux,
 };
