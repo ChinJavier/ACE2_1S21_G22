@@ -1,6 +1,157 @@
 <app-header></app-header>
 
 
+
+
+
+
+<div class="stats-container" fxLayout.sm="column" fxLayout.md="column" fxLayout.xs="column"
+  fxLayoutAlign="center center">
+  <mat-card class="card card1 animate__animated animate__backInLeft">
+    <mat-card-header>
+      <div fxFlex="100" fxLayout="column">
+        <h2 class="card-title">Ritmo Cardiaco</h2>
+
+      </div>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="">
+        <p class="card-date" style="margin-top: 20px;"></p>
+        <canvas id="realtime3">{{ chart_ritmo }}</canvas>
+
+        <div class="card-content" style="margin-top:8px; text-align: center;">
+          <h2>Valor actual: {{ritmoActual}} lat/seg </h2>
+        </div>
+
+    </div>
+      <p>
+        La frecuencia cardíaca es uno de los “signos vitales” o los indicadores importantes de la salud en el cuerpo humano. Mide la cantidad de veces por minuto que el corazón se contrae o late.
+
+
+      </p>
+    </mat-card-content>
+  </mat-card>
+  <mat-card class="card card2 animate__animated animate__backInDown">
+    <mat-card-header>
+      <div fxFlex="100" fxLayout="column">
+        <h2 class="card-title">Oxigeno</h2>
+        <p>Valor actual: {{valorActualOxigeno}} %</p>
+
+      </div>
+    </mat-card-header>
+    <mat-card-content>
+
+      <div class="">
+        <p class="card-date" style="margin-top: 20px;"></p>
+        <canvas id="realtime2">{{ char_grafica_oxigeno }}</canvas>
+
+        
+        
+        <div class="card-content" style="margin-top:8px; text-align: center;">
+          <h2>Valor actual: {{valorActualOxigeno}} % </h2>
+        </div>
+
+    </div>
+
+      <p>
+        El nivel de oxígeno en la sangre es la cantidad de oxígeno que circula en la sangre. La mayor parte del oxígeno es transportado por los glóbulos rojos, los cuales recolectan oxígeno de los pulmones y lo envían a todas las partes del cuerpo.
+
+
+      </p>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card class="card card3 animate__animated animate__backInRight">
+    <mat-card-header>
+      <div fxFlex="100" fxLayout="column">
+        <h2 class="card-title">Temperatura</h2>
+        <p>Valor actual: {{valorActual_temperatura}} C° </p>
+      </div>
+
+    </mat-card-header>
+    <mat-card-content>
+      <div>
+        <p class="card-date" style="margin-top: 20px;"></p>
+        <canvas id="realtime">{{ char_grafica_temperatura }}</canvas>
+
+        <div class="card-content">
+      </div>
+
+    </div>
+    <div class="card-content" style="margin-top:8px; text-align: center;">
+      <h2>Valor actual: {{valorActualOxigeno}} % </h2>
+    </div>
+
+      <p>
+        La temperatura normal del cuerpo humano (normotermia, eutermia) es el rango de temperatura típico que se encuentra en los humanos. El rango de temperatura normal del cuerpo humano se establece típicamente entre 36.5–37.5 °C (97.7–99.5 °F).
+
+      </p>
+    </mat-card-content>
+
+  </mat-card>
+</div>
+
+<div class="stats-container" fxLayout.sm="column" fxLayout.md="column" fxLayout.xs="column"
+  fxLayoutAlign="center center">
+  <mat-card class="card card1 animate__animated animate__backInLeft">
+    <mat-card-header>
+      <div fxFlex="100" fxLayout="column">
+        <h2 class="card-title">Reportes Ritmo Cardiaco</h2>
+        <hr>
+      </div>
+    </mat-card-header>
+    <mat-card-content>
+        <div class="card-content">
+          <h3>Estadísticas</h3>
+          <p> Míninmo: 10  lat/seg </p>
+          <p> Máximo: 34   lat/seg</p>
+          <p> Promedio: 17  lat/seg </p>
+        </div>
+
+    </mat-card-content>
+  </mat-card>
+  <mat-card class="card card2 animate__animated animate__backInDown">
+    <mat-card-header>
+      <div fxFlex="100" fxLayout="column">
+        <h2 class="card-title">Reportes Oxigeno en la Sangre</h2>
+
+      </div>
+    </mat-card-header>
+    <hr>
+    <mat-card-content>
+
+        <div class="card-content">
+          <h3>Estadísticas</h3>
+          <p> Míninmo: 10 % </p>
+          <p> Máximo: 34 %</p>
+          <p> Promedio: 17 %</p>
+        </div>
+
+    </mat-card-content>
+  </mat-card>
+  <mat-card class="card card3 animate__animated animate__backInRight">
+    <mat-card-header>
+      <div fxFlex="100" fxLayout="column">
+        <h2 class="card-title">Reportes Temperatura</h2>
+        <hr>
+      </div>
+
+    </mat-card-header>
+    <mat-card-content>
+      <div>
+
+        <div class="card-content">
+          <h3>Estadísticas </h3>
+          <p> Míninmo: 10  C°</p>
+          <p> Máximo: 34  C°</p>
+          <p> Promedio: 17 C° </p>
+      </div>
+
+    </div>
+    </mat-card-content>
+  </mat-card>
+</div>
+
 <div class="stats-container" fxLayout.sm="column" fxLayout.md="column" fxLayout.xs="column"
   fxLayoutAlign="center center">
 
@@ -24,6 +175,8 @@
     </mat-card-content>
 
   </mat-card>
+
+  
   <mat-card class="card card4 animate__animated animate__backInDown">
 
           <div class="time__container">
@@ -52,174 +205,10 @@
 
   </mat-card>
 
+  
+
 
 </div>
-
-
-
-<div class="stats-container" fxLayout.sm="column" fxLayout.md="column" fxLayout.xs="column"
-  fxLayoutAlign="center center">
-  <mat-card class="card card1 animate__animated animate__backInLeft">
-    <mat-card-header>
-      <div fxFlex="100" fxLayout="column">
-        <h2 class="card-title">Ritmo Cardiaco</h2>
-        <p>Valor actual: {{ritmoActual}} </p>
-      </div>
-    </mat-card-header>
-    <mat-card-content>
-      <div class="">
-        <p class="card-date" style="margin-top: 20px;"></p>
-        <canvas id="realtime3">{{ chart_ritmo }}</canvas>
-
-        <div class="card-content">
-         <h3>Realtime</h3>
-         <p>Esta grafica muestra el ritmo cardiaco en tiempo real
-         </p>
-        </div>
-
-    </div>
-      <p>
-        La frecuencia cardíaca es uno de los “signos vitales” o los indicadores importantes de la salud en el cuerpo humano. Mide la cantidad de veces por minuto que el corazón se contrae o late.
-
-
-      </p>
-    </mat-card-content>
-  </mat-card>
-  <mat-card class="card card2 animate__animated animate__backInDown">
-    <mat-card-header>
-      <div fxFlex="100" fxLayout="column">
-        <h2 class="card-title">Oxigeno en la Sangre</h2>
-        <p>Valor actual: {{valorActualOxigeno}} </p>
-
-      </div>
-    </mat-card-header>
-    <mat-card-content>
-
-      <div class="">
-        <p class="card-date" style="margin-top: 20px;"></p>
-        <canvas id="realtime2">{{ char_grafica_oxigeno }}</canvas>
-
-        <div class="card-content">
-            <h3>Realtime</h3>
-            <p>Esta grafica muestra el oxigeno en tiempo real</p>
-        </div>
-
-    </div>
-
-      <p>
-        El nivel de oxígeno en la sangre es la cantidad de oxígeno que circula en la sangre. La mayor parte del oxígeno es transportado por los glóbulos rojos, los cuales recolectan oxígeno de los pulmones y lo envían a todas las partes del cuerpo.
-
-
-      </p>
-    </mat-card-content>
-  </mat-card>
-
-  <mat-card class="card card3 animate__animated animate__backInRight">
-    <mat-card-header>
-      <div fxFlex="100" fxLayout="column">
-        <h2 class="card-title">Temperatura</h2>
-        <p>Valor actual: {{valorActual_temperatura}} </p>
-      </div>
-
-    </mat-card-header>
-    <mat-card-content>
-      <div>
-        <p class="card-date" style="margin-top: 20px;"></p>
-        <canvas id="realtime">{{ char_grafica_temperatura }}</canvas>
-
-        <div class="card-content">
-      </div>
-
-    </div>
-    <h3>Realtime Temperatura</h3>
-      <p>
-        La temperatura normal del cuerpo humano (normotermia, eutermia) es el rango de temperatura típico que se encuentra en los humanos. El rango de temperatura normal del cuerpo humano se establece típicamente entre 36.5–37.5 °C (97.7–99.5 °F).
-
-      </p>
-    </mat-card-content>
-
-  </mat-card>
-</div>
-
-<div class="stats-container" fxLayout.sm="column" fxLayout.md="column" fxLayout.xs="column"
-  fxLayoutAlign="center center">
-  <mat-card class="card card1 animate__animated animate__backInLeft">
-    <mat-card-header>
-      <div fxFlex="100" fxLayout="column">
-        <h2 class="card-title">Reportes Ritmo Cardiaco</h2>
-        <hr>
-      </div>
-    </mat-card-header>
-    <mat-card-content>
-        <div class="card-content">
-          <h3>Estadísticas</h3>
-          <p> Míninmo: 10 </p>
-          <p> Máximo: 34 </p>
-          <p> Promedio: 17 </p>
-        </div>
-
-    </mat-card-content>
-  </mat-card>
-  <mat-card class="card card2 animate__animated animate__backInDown">
-    <mat-card-header>
-      <div fxFlex="100" fxLayout="column">
-        <h2 class="card-title">Reportes Oxigeno en la Sangre</h2>
-
-      </div>
-    </mat-card-header>
-    <hr>
-    <mat-card-content>
-
-        <div class="card-content">
-          <h3>Estadísticas</h3>
-          <p> Míninmo: 10 </p>
-          <p> Máximo: 34 </p>
-          <p> Promedio: 17 </p>
-        </div>
-
-    </mat-card-content>
-  </mat-card>
-  <mat-card class="card card3 animate__animated animate__backInRight">
-    <mat-card-header>
-      <div fxFlex="100" fxLayout="column">
-        <h2 class="card-title">Reportes Temperatura</h2>
-        <hr>
-      </div>
-
-    </mat-card-header>
-    <mat-card-content>
-      <div>
-
-        <div class="card-content">
-          <h3>Estadísticas</h3>
-          <p> Míninmo: 10 </p>
-          <p> Máximo: 34 </p>
-          <p> Promedio: 17 </p>
-      </div>
-
-    </div>
-    </mat-card-content>
-  </mat-card>
-</div>
-
-<div class="history_container">
-  <table class="table-light">
-    <thead>
-      <tr class="table-dark">
-        <th scope="col">Oxigeno</th>
-        <th scope="col">Ritmo</th>
-        <th scope="col">Remperatura</th>
-        <th scope="col">Fecha</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr class="table-light">
-
-      </tr>
-    </tbody>
-  </table>
-</div>
-
 
 
 
