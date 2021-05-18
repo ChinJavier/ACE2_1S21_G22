@@ -25,7 +25,7 @@ export class SignupComponent implements OnInit {
     age: new FormControl('', [Validators.required]),
     height: new FormControl('', [Validators.required]),
     weight: new FormControl('', [Validators.required]),
-
+    email: new FormControl('', [Validators.required]),
   }); 
 
   

@@ -4,7 +4,7 @@ import { Chart } from 'chart.js';
 import { MedicionesService } from './../../services/mediciones.service';
 import Swal from 'sweetalert2';
 import { Medition, Valor } from 'src/app/interfaces/interfaces';
-import { numbers } from '@material/banner';
+
 
 
 
@@ -26,11 +26,12 @@ export class DashboardComponent implements OnInit {
 
 	// Estado
 	estados = [
-		"/assets/parado.png",
-		"/assets/caminando.png",
-		"/assets/corriendo.png"
+		{imagen: "/assets/parado.png" , text: "Parado" },
+		{imagen: "/assets/caminando.png" , text: "caminando"},
+		{imagen: "/assets/corriendo.png", text: "corriendo"}
 	]
-	imagen = ""
+	imagen: any = ""
+	texto: any =""
 	username: string | null = '';
 	uid: string | null = '';
 	time = new Date();
@@ -74,6 +75,7 @@ export class DashboardComponent implements OnInit {
 	constructor(private service: MedicionesService,) { }
 
 	ngOnInit(): void {
+		this.pauseTime = true;
 		this.username = localStorage.getItem('username');
 		this.uid = localStorage.getItem('uid');
 
@@ -90,7 +92,8 @@ export class DashboardComponent implements OnInit {
 				}
 			}, err => console.log("ERROR ULTIMO TEST"));
 		}
-		this.imagen = this.estados[0];
+		this.imagen = this.estados[1].imagen;
+		this.texto = this.estados[1].text;
 
 		this.char_grafica_temperatura = new Chart('realtime', {
 			type: 'line',
@@ -371,7 +374,7 @@ export class DashboardComponent implements OnInit {
 					  ticks: {
 						  fontColor: "black",
 							suggestedMin: 0,
-							suggestedMax: 250
+							suggestedMax: 200
 					  }
 				  }],
 				  xAxes: [{
@@ -388,20 +391,20 @@ export class DashboardComponent implements OnInit {
 		});
 
 		this.hilo_oxigeno = setInterval(() => { this.showGraphic_Oxigeno(); }, 1100);
-		this.hilo_save = setInterval(() => { this.saveMedition() }, 5000);
+		this.hilo_save = setInterval(() => { this.saveMedition() }, 3000);
 		this.hilo_datos_tiempo_real = setInterval(() => { this.getDatosTiempoReal() }, 1000);
 	}
 
 	public getDatosTiempoReal() {
 		this.service.getMedicionesTiempoReal().subscribe(
 			res => {
-				if (Number(res.temperature) > 0 && Number(res.temperature) < 41) {
+				if (Number(res.temperature) > 0 && Number(res.temperature) < 41 && this.pauseTime == false) {
 					this.valorActual_temperatura = Number(res.temperature);
 				}
-				if (Number(res.rhythm) > 0 && Number(res.rhythm) < 201) {
+				if (Number(res.rhythm) > 0 && Number(res.rhythm) < 201 && this.pauseTime == false) {
 					this.ritmoActual = Number(res.rhythm);
 				}
-				if (Number(res.oxygen) > 0 && Number(res.oxygen) < 101) {
+				if (Number(res.oxygen) > 0 && Number(res.oxygen) < 101 && this.pauseTime == false) {
 					this.valorActualOxigeno = Number(res.oxygen);
 				}
 			}, err => {
@@ -419,18 +422,21 @@ export class DashboardComponent implements OnInit {
 
 
 	ngOnDestroy(): void {
+		if(this.pauseTime == false){
+			this.saveInMongoDB();
+		}
 		clearInterval(this.hilo_temperatura);
 		clearInterval(this.hilo_ritmo);
 		clearInterval(this.hilo_oxigeno);
 		clearInterval(this.hiloTimer);
 		clearInterval(this.hilo_save);
 		clearInterval(this.hilo_datos_tiempo_real);
-		this.saveInMongoDB();
 	}
 
 
 	//-------------------------------------------------------------------- SHOW GRAPHICS
 	private showGraphic_temperatura(): void {
+	if(this.pauseTime == false){
 		let char_grafica_temperaturaTime: any = new Date();
 		// PONE EL TIEMPO Y SI ES MAYOR A 15 DATOS DA UN SHIFT
 		char_grafica_temperaturaTime = char_grafica_temperaturaTime.getHours() + ':' + ((char_grafica_temperaturaTime.getMinutes() < 10) ? '0' + char_grafica_temperaturaTime.getMinutes() : char_grafica_temperaturaTime.getMinutes()) + ':' + ((char_grafica_temperaturaTime.getSeconds() < 10) ? '0' + char_grafica_temperaturaTime.getSeconds() : char_grafica_temperaturaTime.getSeconds());
@@ -443,7 +449,11 @@ export class DashboardComponent implements OnInit {
 		this.char_grafica_temperatura.update();
 	}
 
+	}
+
 	private showGraphic_ritmo(): void {
+		if(this.pauseTime == false){
+		this.changeState();
 		let chart_ritmoTime: any = new Date();
 		// PONE EL TIEMPO Y SI ES MAYOR A 15 DATOS DA UN SHIFT
 		chart_ritmoTime = chart_ritmoTime.getHours() + ':' + ((chart_ritmoTime.getMinutes() < 10) ? '0' + chart_ritmoTime.getMinutes() : chart_ritmoTime.getMinutes()) + ':' + ((chart_ritmoTime.getSeconds() < 10) ? '0' + chart_ritmoTime.getSeconds() : chart_ritmoTime.getSeconds());
@@ -455,8 +465,10 @@ export class DashboardComponent implements OnInit {
 		this.chart_ritmo.data.datasets[0].data.push(this.ritmoActual); // PONE EL VALOR EN Y , ACA VAN LOS DATOS QUE VIENEN DE MONGO
 		this.chart_ritmo.update();
 	}
+	}
 
 	private showGraphic_Oxigeno(): void {
+		if(this.pauseTime == false){
 		let char_grafica_oxigenoTime: any = new Date();
 		// PONE EL TIEMPO Y SI ES MAYOR A 15 DATOS DA UN SHIFT
 		char_grafica_oxigenoTime = char_grafica_oxigenoTime.getHours() + ':' + ((char_grafica_oxigenoTime.getMinutes() < 10) ? '0' + char_grafica_oxigenoTime.getMinutes() : char_grafica_oxigenoTime.getMinutes()) + ':' + ((char_grafica_oxigenoTime.getSeconds() < 10) ? '0' + char_grafica_oxigenoTime.getSeconds() : char_grafica_oxigenoTime.getSeconds());
@@ -467,6 +479,7 @@ export class DashboardComponent implements OnInit {
 		this.char_grafica_oxigeno.data.labels.push(char_grafica_oxigenoTime);
 		this.char_grafica_oxigeno.data.datasets[0].data.push(this.valorActualOxigeno); // PONE EL VALOR EN Y , ACA VAN LOS DATOS QUE VIENEN DE MONGO
 		this.char_grafica_oxigeno.update();
+	}
 	}
 
 	//------------------------------------------------------------------------------------- REPORTES
@@ -487,9 +500,9 @@ export class DashboardComponent implements OnInit {
 	this.rep_grafica_ritmo.data.datasets[0].data.push(this.rep_ritmos[i].valor); // PONE EL VALOR EN Y , ACA VAN LOS DATOS QUE VIENEN DE MONGO
 	this.rep_grafica_ritmo.update();
 	}
-	this.estadisticas_ritmo.promedio =   Number(this.calcularPromedio(this.rep_temperaturas).toFixed(2));
-	this.estadisticas_ritmo.min = this.getMinimo(this.rep_temperaturas);
-	this.estadisticas_ritmo.max = this.getMaximo(this.rep_temperaturas);
+	this.estadisticas_ritmo.promedio =   Number(this.calcularPromedio(this.rep_ritmos).toFixed(2));
+	this.estadisticas_ritmo.min = this.getMinimo(this.rep_ritmos);
+	this.estadisticas_ritmo.max = this.getMaximo(this.rep_ritmos);
 	}
 
 	private showReportOxigeno(): void {
@@ -498,9 +511,9 @@ export class DashboardComponent implements OnInit {
 	this.rep_grafica_oxigeno.data.datasets[0].data.push( this.rep_oxigenos[i].valor); // PONE EL VALOR EN Y , ACA VAN LOS DATOS QUE VIENEN DE MONGO
 	this.rep_grafica_oxigeno.update();
 	}
-	this.estadisticas_oxigeno.promedio =  Number(this.calcularPromedio(this.rep_temperaturas).toFixed(2));
-	this.estadisticas_oxigeno.min = this.getMinimo(this.rep_temperaturas);
-	this.estadisticas_oxigeno.max = this.getMaximo(this.rep_temperaturas);
+	this.estadisticas_oxigeno.promedio =  Number(this.calcularPromedio(this.rep_oxigenos).toFixed(2));
+	this.estadisticas_oxigeno.min = this.getMinimo(this.rep_oxigenos);
+	this.estadisticas_oxigeno.max = this.getMaximo(this.rep_oxigenos);
 	}
 
 	public ChageCombobox(){
@@ -533,8 +546,6 @@ export class DashboardComponent implements OnInit {
 			console.log(err)
 		}
 	)
-		
-
 	}
 
 	public reportesGenerales(): void {
@@ -568,7 +579,11 @@ export class DashboardComponent implements OnInit {
 
 	public saveMedition() {
 		// acumulador al objeto de medicion :v
-		this.MEDICION_TEST_ACTUAL.valores.push({ temperature: this.valorActual_temperatura, oxygen: this.valorActualOxigeno, rhythm: this.ritmoActual });
+		if(this.pauseTime == false){
+			if( this.valorActual_temperatura != 0 ){
+				this.MEDICION_TEST_ACTUAL.valores.push({ temperature: this.valorActual_temperatura, oxygen: this.valorActualOxigeno, rhythm: this.ritmoActual });
+			}
+		}
 	}
 
 	public saveInMongoDB() {
@@ -576,6 +591,74 @@ export class DashboardComponent implements OnInit {
 		this.service.saveMedicion(this.MEDICION_TEST_ACTUAL).subscribe(
 			res => {
 				console.log("REGISTROS ALAMACENADOS EN MONGODB", res);
+				let vectorAll = this.MEDICION_TEST_ACTUAL.valores;
+				for(let i = 0; i < vectorAll.length; i++){
+					if(vectorAll[i].oxygen != 0 ){
+						this.rep_oxigenos.push({valor: vectorAll[i].oxygen});
+					}
+					if(vectorAll[i].rhythm != 0){
+
+						this.rep_ritmos.push({ valor: vectorAll[i].rhythm});
+					}
+					if(vectorAll[i].temperature != 0 ){
+						this.rep_temperaturas.push({valor: vectorAll[i].temperature});
+					}
+				}
+
+
+				this.rep_oxigenos.sort((a:any , b:any) => a.valor > b.valor ? 1 : b.valor > a.valor ? -1 : 0);
+				this.rep_ritmos.sort((a:any , b:any) => a.valor > b.valor ? 1 : b.valor > a.valor ? -1 : 0);
+				this.rep_temperaturas.sort((a:any , b:any) => a.valor > b.valor ? 1 : b.valor > a.valor ? -1 : 0);
+
+
+				let diez_ritmos= [];
+				for(let i = 0 ; i < this.rep_ritmos.length && i < 10; i ++){
+					diez_ritmos.push({valor: this.rep_ritmos[i]});
+				}
+
+				let promedioRitmoReposo = this.calcularPromedio(diez_ritmos);
+				let promedioTemperatura = this.calcularPromedio(this.rep_temperaturas);
+				let promedioOxigeno = this.calcularPromedio(this.rep_oxigenos);
+				console.log("Promedio en reposo: " , promedioRitmoReposo);
+				console.log("promedioTemperatura: " , promedioTemperatura);
+				console.log("promedioOxigeno: " , promedioOxigeno);
+				let edad:any = localStorage.getItem('age');
+				if (edad >= 20 && edad <=29 ){
+					if(promedioRitmoReposo > 150){
+						
+					}
+				}else if(edad >=30 && edad <= 34){
+
+				}else if(edad >= 35 &&  edad <= 39){
+
+				}else if(edad >= 40 && edad <= 44){
+
+				}else if(edad >= 45 && edad <= 49){
+
+				}else if(edad >= 50 && edad <= 54){
+
+				}else if(edad >= 55 && edad <= 59){
+
+				}else if(edad >= 60 && edad <= 64){
+
+				}else if(edad >= 65 && edad <= 69){
+
+				}else if(edad >= 70 && edad <= 100){
+
+				}else{
+					//niños
+				}
+				let msg = `Los datos de la sesion se guardaron automaticamente
+				Promedio del ritmo  en Reposo: ${promedioRitmoReposo}
+				Promedio de Temperatura: ${promedioTemperatura}
+				Promedio de Oxigeno: ${promedioOxigeno}`;
+				Swal.fire({
+					icon:'info',
+					text: msg,
+					showConfirmButton: true,
+				});
+				this.MEDICION_TEST_ACTUAL.valores = [];
+				this.MEDICION_TEST_ACTUAL.test++;
 			}, err => {
 				console.log(err);
 			}
@@ -593,7 +676,7 @@ export class DashboardComponent implements OnInit {
 		this.minutes = '00';
 		this.seconds = '00';
 		clearInterval(this.hiloTimer);
-		Swal.fire('Test Terminado!!');
+		this.saveInMongoDB();
 	}
 
 
@@ -665,7 +748,20 @@ export class DashboardComponent implements OnInit {
 		}
 		return max;
 	  }
-	  
+
+
+	  public changeState(){
+		if(this.ritmoActual > 100){
+			this.texto = this.estados[2].text;
+			this.imagen = this.estados[2].imagen;
+		}else if(this.ritmoActual >59){
+			this.texto = this.estados[1].text;
+			this.imagen = this.estados[1].imagen;
+		}else{
+			this.texto = this.estados[0].text;
+			this.imagen = this.estados[0].imagen;
+		}
+	  }
 
 
 

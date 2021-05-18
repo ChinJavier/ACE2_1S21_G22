@@ -44,7 +44,6 @@ export class LoginComponent implements OnInit {
       localStorage.setItem('x-token', res['token']);
       localStorage.setItem('username', res['username']);
       localStorage.setItem('uid', res['uid']);
-;
       // revisar los nombres que puse en RES :v no se si asi estan en el backend
       localStorage.setItem('sex' , res['sex']);
       localStorage.setItem('height' , res['height']);
@@ -52,7 +51,7 @@ export class LoginComponent implements OnInit {
       localStorage.setItem('name' , res['name']);
       localStorage.setItem('lastname' , res['name']);
       localStorage.setItem('age' , res['age']);
-
+      localStorage.setItem('email' , res['email']);
       this.router.navigate(['/dashboard']);
     }, err => {console.log(err['error']);
     Swal.fire({
