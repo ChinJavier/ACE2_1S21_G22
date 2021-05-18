@@ -3,7 +3,7 @@ const routerQueries = Router();
 const { getUSER , getUsersAvailable , getMyUsers,asignarUser } = require('../controllers/userController');
 const { save_medition , get_all_meditions , get_num_test , get_all_meditions_of_test } = require('../controllers/meditions');
 
-const { createMail, getMyMails } = require('../controllers/bandeja')
+const { createMail, getMyMails, sendMail } = require('../controllers/bandeja')
 
 // http://localhost:3000/logic
 
@@ -25,6 +25,9 @@ routerQueries.get('/getNumTest/:id',get_num_test); // http://localhost:3000/logi
 // =============================================================      CORREOS
 routerQueries.post('/saveCorreo', createMail) // http://localhost:3000/logic/saveCorreo
 routerQueries.get('/getCorreos/:id', getMyMails) // http://localhost:3000/logic/getCorreos
+routerQueries.post('/sendEmail', sendMail) // http://localhost:3000/logic/sendEmail
+
+
 
 module.exports = {
     routerQueries,
