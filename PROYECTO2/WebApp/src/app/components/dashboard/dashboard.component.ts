@@ -606,36 +606,47 @@ export class DashboardComponent implements OnInit {
 				}
 
 
-				this.rep_oxigenos.sort((a:any , b:any) => a.valor > b.valor ? 1 : b.valor > a.valor ? -1 : 0);
-				this.rep_ritmos.sort((a:any , b:any) => a.valor > b.valor ? 1 : b.valor > a.valor ? -1 : 0);
-				this.rep_temperaturas.sort((a:any , b:any) => a.valor > b.valor ? 1 : b.valor > a.valor ? -1 : 0);
+				// this.rep_oxigenos.sort((a:any , b:any) => a.valor > b.valor ? 1 : b.valor > a.valor ? -1 : 0);
+				// this.rep_ritmos.sort((a:any , b:any) => a.valor > b.valor ? 1 : b.valor > a.valor ? -1 : 0);
+				// this.rep_temperaturas.sort((a:any , b:any) => a.valor > b.valor ? 1 : b.valor > a.valor ? -1 : 0);
 
 
-				let diez_ritmos= [];
-				for(let i = 0 ; i < this.rep_ritmos.length && i < 10; i ++){
-					diez_ritmos.push({valor: this.rep_ritmos[i]});
-				}
-
-				let promedioRitmoReposo = this.calcularPromedio(diez_ritmos);
+				let promedioRitmoReposo = this.calcularPromedio(this.rep_ritmos);
 				let promedioTemperatura = this.calcularPromedio(this.rep_temperaturas);
 				let promedioOxigeno = this.calcularPromedio(this.rep_oxigenos);
-				console.log("Promedio en reposo: " , promedioRitmoReposo);
-				console.log("promedioTemperatura: " , promedioTemperatura);
-				console.log("promedioOxigeno: " , promedioOxigeno);
+				console.log("Promedio de Ritmo : " , promedioRitmoReposo);
+				console.log("promedio de Temperatura: " , promedioTemperatura);
+				console.log("promedio de Oxigeno: " , promedioOxigeno);
 				let edad:any = localStorage.getItem('age');
 				if (edad >= 20 && edad <=29 ){
-					if(promedioRitmoReposo > 150){
-						
+					if(promedioRitmoReposo > 170){
+
 					}
 				}else if(edad >=30 && edad <= 34){
+					if(promedioRitmoReposo > 162){
+						
+					}
 
 				}else if(edad >= 35 &&  edad <= 39){
+					if(promedioRitmoReposo > 157){
+						
+					}
 
 				}else if(edad >= 40 && edad <= 44){
+					if(promedioRitmoReposo > 153){
+						
+					}
 
 				}else if(edad >= 45 && edad <= 49){
+					if(promedioRitmoReposo > 149){
+						
+					}
 
 				}else if(edad >= 50 && edad <= 54){
+					if(promedioRitmoReposo > 145){
+						
+					}
+					
 
 				}else if(edad >= 55 && edad <= 59){
 
@@ -649,7 +660,7 @@ export class DashboardComponent implements OnInit {
 					//niños
 				}
 				let msg = `Los datos de la sesion se guardaron automaticamente
-				Promedio del ritmo  en Reposo: ${promedioRitmoReposo}
+				Promedio del Ritmo: ${promedioRitmoReposo}
 				Promedio de Temperatura: ${promedioTemperatura}
 				Promedio de Oxigeno: ${promedioOxigeno}`;
 				Swal.fire({
