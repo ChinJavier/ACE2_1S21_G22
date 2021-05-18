@@ -71,7 +71,7 @@
     </div>
 
     <div class="card-content" style="margin-top:8px; text-align: center;">
-      <h2>Valor actual: {{valorActualOxigeno}} % </h2>
+      <h2>Valor actual: {{valorActual_temperatura}} % </h2>
     </div>
 
       <p>
@@ -157,20 +157,22 @@
   <mat-card class="card card4 animate__animated animate__backInDown">
     <mat-card-header>
       <div fxFlex="100" fxLayout="column">
-        <p class="card-title">Estado</p>
-
+        <p class="card-title" style="text-align: center;padding-right: 20px;">{{this.texto}}</p>
+  
       </div>
     </mat-card-header>
     <mat-card-content>
 
       <div >
         <div class="card-content">
-            <img [src]="imagen" alt="">
+            <img [src]="imagen" alt="" style="min-height: 250px;">
         </div>
-
     </div>
 
+
     </mat-card-content>
+
+
 
   </mat-card>
 

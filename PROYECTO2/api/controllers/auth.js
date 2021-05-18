@@ -89,7 +89,8 @@ const logUser = async (req, res) => {
             ok: true,
             uid: user.id,
             username: user.username,
-            isCoach: user.isCoach,// solo para redirigir a otro lado en el front
+            email: user.email,// solo para redirigir a otro lado en el front
+            age: user.age,
             token,
         });
 
